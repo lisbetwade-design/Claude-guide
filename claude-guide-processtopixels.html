@@ -1,0 +1,2211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Claude for Designers — A Guide by Process to Pixels</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&display=swap" rel="stylesheet" />
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@300,400,500,700&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Process to Pixels Brand Palette */
+  --bg: #FAFAFA;
+  --surface: #FFFFFF;
+  --surface2: #F5F5F0;
+  --surface3: #EBEBEB;
+  --border: #EBEBEB;
+  --border-light: #F0E0D6;
+  --text: #18170F;
+  --text-muted: #7a796e;
+  --text-dim: #b0afa5;
+  --green: #296832;
+  --green-hover: #3d8f4a;
+  --green-pale: #d4ebd7;
+  --green-dim: rgba(41,104,50,0.12);
+  --green-glow: rgba(41,104,50,0.06);
+  --blush: #F0E0D6;
+  --red: #9b2c1e;
+  --red-dim: rgba(155,44,30,0.10);
+  --blue: #1a4f8a;
+  --blue-dim: rgba(26,79,138,0.10);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Cabinet Grotesk', 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* ─────────── STICKY NAV ─────────── */
+.sticky-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(250,250,250,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.sticky-nav::-webkit-scrollbar { display: none; }
+
+.nav-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.82rem;
+  color: var(--text);
+  letter-spacing: 0.01em;
+  padding: 1rem 0;
+  margin-right: 2rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-style: italic;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0;
+}
+
+.nav-link {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 1rem 1rem;
+  white-space: nowrap;
+  transition: color 0.15s;
+  border-left: 1px solid var(--border);
+  font-weight: 500;
+}
+.nav-link:hover { color: var(--green); }
+
+/* ─────────── HERO ─────────── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 7rem 3rem 3rem;
+  position: relative;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.orb1 {
+  width: 55vw; height: 55vw;
+  top: -15%; right: -10%;
+  background: radial-gradient(circle, rgba(212,235,215,0.55) 0%, transparent 65%);
+}
+.orb2 {
+  width: 40vw; height: 40vw;
+  bottom: -10%; left: -8%;
+  background: radial-gradient(circle, rgba(240,224,214,0.4) 0%, transparent 65%);
+}
+
+.hero-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 0 3rem;
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+
+.eyebrow {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--green);
+  margin-bottom: 1.8rem;
+  font-weight: 500;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.1s both;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 9vw, 7.5rem);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.2s both;
+}
+h1 .italic { font-style: italic; color: var(--green); }
+
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 52ch;
+  line-height: 1.75;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.35s both;
+}
+
+.hero-pills {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+}
+.pill {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 0.3rem 0.85rem;
+  border-radius: 2rem;
+}
+
+/* ─────────── SECTION WRAPPERS ─────────── */
+.section {
+  padding: 5.5rem 3rem;
+  border-bottom: 1px solid var(--border);
+  max-width: 980px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.section-wide {
+  padding: 5.5rem 3rem;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.section-wide .inner { max-width: 980px; margin: 0 auto; }
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--text-dim);
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+.section-num {
+  background: var(--green);
+  color: #fff;
+  font-size: 0.58rem;
+  padding: 0.12rem 0.42rem;
+  border-radius: 0.2rem;
+  font-weight: 700;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  letter-spacing: 0.05em;
+}
+
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+}
+h2 .italic { font-style: italic; color: var(--green); }
+
+h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-top: 2.8rem;
+  margin-bottom: 0.7rem;
+  color: var(--text);
+}
+
+p {
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  max-width: 66ch;
+}
+strong { color: var(--text); font-weight: 700; }
+em { font-style: italic; color: var(--text-muted); }
+
+/* ─────────── CARD GRID ─────────── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin: 2.5rem 0;
+}
+.card {
+  background: var(--surface);
+  padding: 1.7rem;
+  transition: background 0.2s;
+}
+.card:hover { background: var(--green-pale); }
+.card-icon {
+  width: 2rem; height: 2rem;
+  border-radius: 0.35rem;
+  background: var(--green-dim);
+  border: 1px solid rgba(41,104,50,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+.card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 0.45rem;
+}
+.card p { font-size: 0.85rem; color: var(--text-muted); max-width: none; margin: 0; line-height: 1.6; }
+
+/* ─────────── ACCESS GRID ─────────── */
+.access-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin: 2.5rem 0;
+}
+.access-card { background: var(--surface); padding: 2rem; }
+.access-card.featured { background: var(--green-pale); position: relative; }
+.access-card.featured::after {
+  content: 'START HERE';
+  position: absolute;
+  top: 0.9rem; right: 0.9rem;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.52rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--green);
+  background: rgba(41,104,50,0.1);
+  border: 1px solid rgba(41,104,50,0.25);
+  padding: 0.15rem 0.5rem;
+  border-radius: 2rem;
+  font-weight: 700;
+}
+.access-label {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+.access-card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: 0.8rem;
+  color: var(--text);
+}
+.access-card p { font-size: 0.85rem; color: var(--text-muted); max-width: none; margin-bottom: 1.2rem; line-height: 1.65; }
+.url-pill {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--green);
+  background: var(--green-dim);
+  border: 1px solid rgba(41,104,50,0.2);
+  padding: 0.35rem 0.8rem;
+  border-radius: 0.3rem;
+  display: inline-block;
+}
+.feat-list { list-style: none; margin-top: 1rem; }
+.feat-list li {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 0.28rem 0 0.28rem 1.1rem;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.feat-list li:last-child { border-bottom: none; }
+.feat-list li::before { content: '·'; color: var(--green); position: absolute; left: 0; font-weight: 700; }
+
+/* ─────────── TABLE ─────────── */
+.table-wrap {
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin: 2rem 0;
+}
+table { width: 100%; border-collapse: collapse; }
+th {
+  background: var(--surface3);
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  padding: 0.85rem 1.2rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  font-weight: 700;
+}
+td {
+  background: var(--surface);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  padding: 0.85rem 1.2rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+tr:last-child td { border-bottom: none; }
+td:first-child { color: var(--text); font-weight: 500; font-size: 0.82rem; }
+.chk { color: var(--green); font-weight: 700; }
+.dash { color: var(--text-dim); }
+
+/* ─────────── PROMPT BLOCK ─────────── */
+.prompt {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--green);
+  border-radius: 0 0.4rem 0.4rem 0;
+  padding: 1.2rem 1.5rem;
+  margin: 1.2rem 0;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  position: relative;
+}
+.prompt-label {
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  color: var(--green);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  opacity: 0.8;
+}
+.hi { color: var(--green); font-weight: 600; }
+.comment { color: var(--text-dim); font-style: italic; }
+
+/* ─────────── USE CASE ROWS ─────────── */
+.use-case {
+  padding: 2.5rem 0;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 15rem 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+.use-case:last-child { border-bottom: none; }
+.uc-label { position: sticky; top: 4rem; }
+.uc-label h3 { margin: 0 0 0.5rem; font-size: 1.05rem; }
+.uc-label p { font-size: 0.8rem; color: var(--text-dim); margin: 0; max-width: none; }
+.badge {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 2rem;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+.badge-green { color: var(--green); background: var(--green-dim); border: 1px solid rgba(41,104,50,0.2); }
+.badge-amber { color: #8a5a00; background: rgba(180,120,20,0.1); border: 1px solid rgba(180,120,20,0.25); }
+.badge-blue { color: var(--blue); background: var(--blue-dim); border: 1px solid rgba(26,79,138,0.2); }
+.uc-body p { max-width: none; }
+
+/* ─────────── INSTALL STEPS ─────────── */
+.install-steps { margin: 2.5rem 0; }
+.install-step {
+  display: grid;
+  grid-template-columns: 2.2rem 1fr;
+  gap: 1.5rem;
+  padding: 1.8rem 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+.install-step:last-child { border-bottom: none; }
+.i-num {
+  width: 1.9rem; height: 1.9rem;
+  border-radius: 50%;
+  background: var(--green-dim);
+  border: 1px solid rgba(41,104,50,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.72rem;
+  color: var(--green);
+  flex-shrink: 0;
+  margin-top: 0.05rem;
+  font-weight: 700;
+}
+.i-body h4 { font-weight: 700; font-size: 0.95rem; color: var(--text); margin-bottom: 0.3rem; font-family: 'Cabinet Grotesk', sans-serif; }
+.i-body p { font-size: 0.85rem; color: var(--text-muted); margin: 0; max-width: none; }
+.chip {
+  display: inline-block;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--green);
+  background: var(--green-dim);
+  border: 1px solid rgba(41,104,50,0.2);
+  padding: 0.18rem 0.55rem;
+  border-radius: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+/* ─────────── CALLOUT ─────────── */
+.callout {
+  background: var(--green-pale);
+  border: 1px solid rgba(41,104,50,0.25);
+  border-radius: 0.5rem;
+  padding: 1.2rem 1.5rem;
+  margin: 2rem 0;
+}
+.callout p { font-size: 0.88rem; color: var(--text); margin: 0; max-width: none; }
+
+.callout-red {
+  background: var(--red-dim);
+  border: 1px solid rgba(155,44,30,0.25);
+}
+.callout-red p { color: #6b1a10; }
+
+.callout-blue {
+  background: var(--blue-dim);
+  border: 1px solid rgba(26,79,138,0.25);
+}
+.callout-blue p { color: #0f2d5a; }
+
+/* ─────────── MINDSET CARDS ─────────── */
+.mindset-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin: 2.5rem 0;
+}
+.mindset-card { background: var(--surface); padding: 1.8rem; }
+.mindset-card.wrong { background: rgba(155,44,30,0.04); }
+.mindset-card.right { background: rgba(41,104,50,0.04); }
+.mindset-head {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--border);
+}
+.mindset-card.wrong .mindset-head { color: var(--red); }
+.mindset-card.right .mindset-head { color: var(--green); }
+.mindset-card h4 { font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; font-family: 'Cabinet Grotesk', sans-serif; }
+.mindset-card p { font-size: 0.85rem; color: var(--text-muted); margin: 0; max-width: none; }
+
+/* ─────────── FIRST SESSION ─────────── */
+.session-steps { margin: 2rem 0; }
+.session-step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.5rem 1.8rem;
+  position: relative;
+}
+.session-step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 1.1rem;
+  top: 2.2rem;
+  bottom: -1rem;
+  width: 1px;
+  background: var(--border);
+}
+.session-num {
+  width: 2.2rem; height: 2.2rem;
+  border-radius: 50%;
+  background: var(--green-dim);
+  border: 1px solid rgba(41,104,50,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.72rem;
+  color: var(--green);
+  flex-shrink: 0;
+  z-index: 1;
+  font-weight: 700;
+}
+.session-content { padding-bottom: 2.5rem; }
+.session-content h4 { font-weight: 700; color: var(--text); margin-bottom: 0.4rem; font-family: 'Cabinet Grotesk', sans-serif; }
+.session-content p { font-size: 0.875rem; color: var(--text-muted); max-width: none; margin-bottom: 0.5rem; }
+.time-badge {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  background: var(--surface3);
+  border: 1px solid var(--border);
+  padding: 0.15rem 0.5rem;
+  border-radius: 2rem;
+  display: inline-block;
+  margin-bottom: 0.8rem;
+}
+
+/* ─────────── MISTAKE CARDS ─────────── */
+.mistake { 
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin: 1.2rem 0;
+}
+.mistake-head {
+  background: var(--surface3);
+  padding: 0.9rem 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  border-bottom: 1px solid var(--border);
+}
+.mistake-icon { font-size: 0.9rem; }
+.mistake-head h4 { font-weight: 700; font-size: 0.88rem; color: var(--text); font-family: 'Cabinet Grotesk', sans-serif; }
+.mistake-body { padding: 1.1rem 1.3rem; background: var(--surface); }
+.mistake-body p { font-size: 0.85rem; max-width: none; margin: 0 0 0.7rem; }
+.fix {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--green);
+  background: var(--green-pale);
+  border: 1px solid rgba(41,104,50,0.2);
+  padding: 0.7rem 1rem;
+  border-radius: 0.3rem;
+  line-height: 1.6;
+}
+.fix::before { content: 'FIX → '; opacity: 0.65; font-weight: 700; }
+
+/* ─────────── PROMPT LIBRARY ─────────── */
+.prompt-library { margin: 2rem 0; }
+.pl-category {
+  margin-bottom: 2.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+.pl-header {
+  background: var(--surface3);
+  padding: 1rem 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  border-bottom: 1px solid var(--border);
+}
+.pl-icon { font-size: 1rem; }
+.pl-header h4 {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text);
+}
+.pl-prompts { background: var(--surface); }
+.pl-prompt {
+  padding: 0.95rem 1.4rem;
+  border-bottom: 1px solid var(--border);
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  position: relative;
+}
+.pl-prompt:last-child { border-bottom: none; }
+.pl-prompt:hover { background: var(--green-pale); color: var(--text); }
+.pl-prompt .var { color: var(--green); font-weight: 600; }
+.copy-hint {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  opacity: 0;
+  transition: opacity 0.15s;
+  font-weight: 700;
+}
+.pl-prompt:hover .copy-hint { opacity: 1; }
+
+/* ─────────── LIMITS SECTION ─────────── */
+.limits-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.limit-card {
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 1.4rem;
+  background: var(--surface);
+}
+.limit-card h4 { font-weight: 700; font-size: 0.88rem; color: var(--text); margin-bottom: 0.4rem; font-family: 'Cabinet Grotesk', sans-serif; }
+.limit-card p { font-size: 0.82rem; color: var(--text-muted); max-width: none; margin: 0; line-height: 1.65; }
+
+/* ─────────── WORKFLOW DIAGRAM ─────────── */
+.workflow {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  margin: 2.5rem 0;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+.wf-step {
+  flex: 1;
+  padding: 1.6rem 1.3rem;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+.wf-step:last-child { border-right: none; }
+.wf-step::after {
+  content: '→';
+  position: absolute;
+  right: -0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.7rem;
+  color: var(--green);
+  z-index: 1;
+  background: var(--bg);
+  padding: 0 0.1rem;
+}
+.wf-step:last-child::after { display: none; }
+.wf-num {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--green);
+  margin-bottom: 0.5rem;
+}
+.wf-step h4 { font-size: 0.85rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; font-family: 'Cabinet Grotesk', sans-serif; }
+.wf-step p { font-size: 0.78rem; color: var(--text-muted); max-width: none; margin: 0; line-height: 1.55; }
+
+/* ─────────── ANIMATIONS ─────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─────────── TERMINAL BLOCK ─────────── */
+.terminal {
+  background: #18170F;
+  border: 1px solid #2e2d22;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin: 1.5rem 0;
+  font-family: 'Cabinet Grotesk', monospace;
+}
+.terminal-bar {
+  background: #222118;
+  padding: 0.6rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid #2e2d22;
+}
+.dot { width: 0.55rem; height: 0.55rem; border-radius: 50%; }
+.dot-r { background: #b03a2e; }
+.dot-y { background: #a07010; }
+.dot-g { background: #3d8f4a; }
+.terminal-label {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #5a5945;
+  margin-left: auto;
+  font-weight: 700;
+}
+.terminal-body {
+  padding: 1.2rem 1.4rem;
+  font-size: 0.82rem;
+  line-height: 1.8;
+  color: #c8c6b0;
+}
+.terminal-body .cmd { color: #6db87a; }
+.terminal-body .comment { color: #5a5945; font-style: italic; }
+.terminal-body .out { color: #3d8f4a; }
+.terminal-body .dim { color: #5a5945; }
+
+/* ─────────── TIER LADDER ─────────── */
+.tier-ladder { margin: 2.5rem 0; }
+.tier {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 1.5rem 2rem;
+  padding: 1.6rem 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+.tier:last-child { border-bottom: none; }
+.tier-badge {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.25rem;
+  text-align: center;
+  margin-top: 0.2rem;
+  font-weight: 700;
+}
+.tier-1 { background: var(--green-dim); color: var(--green); border: 1px solid rgba(41,104,50,0.25); }
+.tier-2 { background: rgba(180,120,20,0.1); color: #7a5000; border: 1px solid rgba(180,120,20,0.25); }
+.tier-3 { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(26,79,138,0.25); }
+.tier-content h4 { font-weight: 700; font-size: 0.95rem; color: var(--text); margin-bottom: 0.3rem; font-family: 'Cabinet Grotesk', sans-serif; }
+.tier-content p { font-size: 0.875rem; color: var(--text-muted); max-width: none; margin: 0 0 0.5rem; }
+.tier-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+}
+.tier-tool {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.67rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--surface3);
+  border: 1px solid var(--border);
+  padding: 0.18rem 0.5rem;
+  border-radius: 0.2rem;
+}
+
+/* ─────────── FIGMA LOOP DIAGRAM ─────────── */
+.loop-diagram {
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin: 2.5rem 0;
+}
+.loop-row {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr 1fr;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+}
+.loop-row:last-child { border-bottom: none; }
+.loop-row-header {
+  background: var(--surface3);
+  display: grid;
+  grid-template-columns: 2.5rem 1fr 1fr;
+  border-bottom: 1px solid var(--border);
+}
+.loop-icon {
+  background: var(--surface3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  padding: 1rem 0;
+  border-right: 1px solid var(--border);
+}
+.loop-cell {
+  padding: 1rem 1.2rem;
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  border-right: 1px solid var(--border);
+  line-height: 1.6;
+  background: var(--surface);
+}
+.loop-cell:last-child { border-right: none; }
+.loop-cell.head {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: var(--text-dim);
+  background: var(--surface3);
+  padding: 0.6rem 1.2rem;
+}
+.loop-cell strong { color: var(--text); font-weight: 700; }
+
+/* ─────────── FOOTER ─────────── */
+footer {
+  padding: 3.5rem 3rem;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  background: var(--surface3);
+}
+
+/* ─────────── RESPONSIVE ─────────── */
+@media (max-width: 820px) {
+  .sticky-nav { display: none; }
+  .hero, .section, .section-wide { padding: 3rem 1.5rem; }
+  .access-grid { grid-template-columns: 1fr; }
+  .use-case { grid-template-columns: 1fr; gap: 1rem; }
+  .mindset-grid { grid-template-columns: 1fr; }
+  .limits-grid { grid-template-columns: 1fr; }
+  .workflow { flex-direction: column; }
+  .wf-step { border-right: none; border-bottom: 1px solid var(--border); }
+  .wf-step:last-child { border-bottom: none; }
+  .wf-step::after { content: '↓'; right: auto; left: 50%; top: auto; bottom: -0.7rem; transform: translateX(-50%); }
+}
+</style>
+</head>
+<body>
+
+<!-- STICKY NAV -->
+<nav class="sticky-nav">
+  <span class="nav-brand">Process to Pixels.</span>
+  <div class="nav-links">
+    <a class="nav-link" href="#what">What is Claude</a>
+    <a class="nav-link" href="#mindset">The Mindset</a>
+    <a class="nav-link" href="#access">Where to Use</a>
+    <a class="nav-link" href="#plans">Plans</a>
+    <a class="nav-link" href="#first30">First 30 Min</a>
+    <a class="nav-link" href="#usecases">Use Cases</a>
+    <a class="nav-link" href="#prompts">Prompt Library</a>
+    <a class="nav-link" href="#mistakes">Mistakes</a>
+    <a class="nav-link" href="#limits">Limitations</a>
+    <a class="nav-link" href="#workflow">Workflow</a>
+    <a class="nav-link" href="#install">Setup</a>
+    <a class="nav-link" href="#claudecode">Claude Code</a>
+    <a class="nav-link" href="#planfirst">Plan First</a>
+    <a class="nav-link" href="#claudemd">CLAUDE.md</a>
+    <a class="nav-link" href="#figmaloop">Figma Loop</a>
+    <a class="nav-link" href="#deploy">Deploy</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-orb orb1"></div>
+  <div class="hero-orb orb2"></div>
+  <div class="hero-body">
+    <div class="eyebrow">Process to Pixels · A Guide for Designers · 2026</div>
+    <h1>The complete guide to <span class="italic">Claude</span></h1>
+    <p class="hero-sub">What it is, how to think about it, where to access it, what you can build with it, and exactly what to install. Written for designers who've never used AI before.</p>
+  </div>
+  <div class="hero-pills">
+    <span class="pill">No coding required</span>
+    <span class="pill">Free to start</span>
+    <span class="pill">Works in your browser</span>
+    <span class="pill">~25 min read</span>
+  </div>
+</header>
+
+
+<!-- ══════════════════════════════════════
+     01 — WHAT IS CLAUDE
+══════════════════════════════════════ -->
+<section class="section" id="what">
+  <div class="section-label"><span class="section-num">01</span> Foundations</div>
+  <h2>What is <span class="italic">Claude?</span></h2>
+  <p>Claude is an AI assistant made by a company called Anthropic. You type to it. It writes back. That's the whole interface — a conversation.</p>
+  <p>But what makes Claude different from a chatbot or a search engine is that it actually <strong>understands what you're asking</strong> and responds with real thought. It reads context, holds a conversation, builds on what you've said, and can tackle almost any creative or analytical task.</p>
+  <p>For designers, it's the collaborator you never had: one who can critique your work honestly, draft copy instantly, explain technical things in plain language, write working code, and never get tired of your revisions.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">💬</div>
+      <h4>Conversational</h4>
+      <p>Type like you're messaging a colleague. No commands, no syntax. Just describe what you need.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🧠</div>
+      <h4>Contextual</h4>
+      <p>Remembers everything in your conversation. Builds on previous answers, picks up on nuance.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔁</div>
+      <h4>Iterative</h4>
+      <p>Revise endlessly. Push back, change direction, ask for three more versions. It won't get frustrated.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">👁️</div>
+      <h4>Visual</h4>
+      <p>Upload screenshots, mockups, wireframes. Claude can look at them and give you real, specific feedback.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h4>Fast</h4>
+      <p>What takes you an hour to research and draft, Claude does in seconds. The speed is genuinely shocking at first.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏗️</div>
+      <h4>Generative</h4>
+      <p>Doesn't just answer — it creates. Copy, code, strategy, documentation, briefs. Full outputs, not just ideas.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     02 — THE MINDSET SHIFT
+══════════════════════════════════════ -->
+<section class="section" id="mindset">
+  <div class="section-label"><span class="section-num">02</span> The Mindset Shift</div>
+  <h2>How to <span class="italic">think about</span> Claude</h2>
+  <p>Most beginners get mediocre results from Claude not because they ask the wrong things — but because they have the wrong mental model. They treat it like a vending machine: put in a request, get out an answer.</p>
+  <p>The designers who get incredible results treat Claude like a <strong>thinking partner</strong>. The conversation itself is the design process. You give context, Claude responds, you refine, it builds, you redirect. Back and forth until you have something real.</p>
+
+  <div class="mindset-grid">
+    <div class="mindset-card wrong">
+      <div class="mindset-head">❌ Wrong mental model</div>
+      <h4>"Give me a design for a login screen."</h4>
+      <p>Treating Claude like a one-shot generator. You get generic output, feel disappointed, and assume AI is overhyped.</p>
+    </div>
+    <div class="mindset-card right">
+      <div class="mindset-head">✓ Right mental model</div>
+      <h4>"Let's figure out this login screen together."</h4>
+      <p>You give context. Claude responds. You push back, redirect, refine. The output gets better with every exchange.</p>
+    </div>
+    <div class="mindset-card wrong">
+      <div class="mindset-head">❌ Wrong mental model</div>
+      <h4>Treating the first response as final.</h4>
+      <p>Taking whatever Claude gives first and moving on. You'll miss 80% of its value by not iterating.</p>
+    </div>
+    <div class="mindset-card right">
+      <div class="mindset-head">✓ Right mental model</div>
+      <h4>The first response is a draft.</h4>
+      <p>The first output shows you what's possible. The real work is the 3–5 messages that follow, shaping it into something great.</p>
+    </div>
+    <div class="mindset-card wrong">
+      <div class="mindset-head">❌ Wrong mental model</div>
+      <h4>Asking vague questions, getting vague answers.</h4>
+      <p>"What should I do with this design?" gives you nothing useful. Claude needs context to give useful output.</p>
+    </div>
+    <div class="mindset-card right">
+      <div class="mindset-head">✓ Right mental model</div>
+      <h4>Brief Claude like you'd brief a designer.</h4>
+      <p>Who is the user? What's the problem? What have you tried? What tone? What constraints? More context = better output.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><strong>The most important thing to internalize:</strong> Claude is not a replacement for your judgment — it's an amplifier of it. Your taste, your experience, your design instinct is still driving. Claude just removes all the friction around execution.</p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     03 — WHERE TO ACCESS
+══════════════════════════════════════ -->
+<section class="section-wide" id="access">
+  <div class="inner">
+  <div class="section-label"><span class="section-num">03</span> Where to Use Claude</div>
+  <h2>Five ways to <span class="italic">access Claude</span></h2>
+  <p>Claude is available across web, desktop, mobile, browser, and terminal. As a designer starting out, you only need one. Start with the web app — the others stack on top as your workflow evolves.</p>
+
+  <div class="access-grid">
+    <div class="access-card featured">
+      <div class="access-label">Start here</div>
+      <h4>Claude.ai</h4>
+      <p>The main web app. Open a browser, go to claude.ai, create an account, start chatting. Nothing to install. This is where most designers spend the majority of their time with Claude — Artifacts let you preview live HTML/code right in the chat.</p>
+      <span class="url-pill">claude.ai</span>
+      <ul class="feat-list">
+        <li>Free tier available</li>
+        <li>Works in any browser, any OS</li>
+        <li>Upload images & files</li>
+        <li>Artifacts — live interactive code preview</li>
+        <li>Projects for persistent context (Pro)</li>
+        <li>Figma connector available</li>
+      </ul>
+    </div>
+
+    <div class="access-card">
+      <div class="access-label">On your desktop</div>
+      <h4>Desktop App</h4>
+      <p>The native Mac and Windows app. Same as the web app but faster to open, works better with keyboard shortcuts, and lets Claude see your screen so it can give feedback on any app you have open — Figma, Notion, your browser, anything.</p>
+      <span class="url-pill">claude.ai/download</span>
+      <ul class="feat-list">
+        <li>Mac + Windows</li>
+        <li>Screen sharing — Claude sees your screen</li>
+        <li>Global keyboard shortcut to open</li>
+        <li>Faster than switching browser tabs</li>
+        <li>Offline access to recent conversations</li>
+      </ul>
+    </div>
+
+    <div class="access-card">
+      <div class="access-label">In your browser</div>
+      <h4>Chrome Extension</h4>
+      <p>Highlight any text on any webpage and ask Claude about it — without leaving the page. Summarize articles, critique competitor copy, get explanations of design patterns, or ask questions about what you're reading, all from a sidebar.</p>
+      <span class="url-pill">Chrome Web Store → "Claude"</span>
+      <ul class="feat-list">
+        <li>Works on any website</li>
+        <li>Highlight text → ask Claude instantly</li>
+        <li>Summarize any article or page</li>
+        <li>Great for competitive research</li>
+        <li>No tab switching needed</li>
+      </ul>
+    </div>
+
+    <div class="access-card">
+      <div class="access-label">On mobile</div>
+      <h4>Mobile App</h4>
+      <p>iOS and Android apps. Full Claude in your pocket — voice input, photo capture, and the same conversation history as the web app. Great for quick questions, taking screenshots of designs in the wild, and thinking through problems on the go.</p>
+      <span class="url-pill">App Store / Google Play → "Claude"</span>
+      <ul class="feat-list">
+        <li>iOS + Android, free</li>
+        <li>Voice input — speak your prompts</li>
+        <li>Camera — photograph anything and ask Claude</li>
+        <li>Synced history with web app</li>
+        <li>Notification support</li>
+      </ul>
+    </div>
+
+    <div class="access-card">
+      <div class="access-label">For building projects</div>
+      <h4>Claude Code</h4>
+      <p>Claude in your terminal. Reads and writes your actual project files, connects to Figma via MCP, deploys to Vercel, and commits to GitHub. This is how designers ship real products — no developer needed. See section 12 for the full guide.</p>
+      <span class="url-pill">Terminal — npm install -g @anthropic-ai/claude-code</span>
+      <ul class="feat-list">
+        <li>Direct file system access</li>
+        <li>Figma MCP integration</li>
+        <li>GitHub + Vercel deployment</li>
+        <li>CLAUDE.md project memory</li>
+        <li>Plan Mode for architect-first workflow</li>
+      </ul>
+    </div>
+
+    <div class="access-card" style="background: var(--surface); display:flex; flex-direction:column; justify-content: center; padding: 2rem;">
+      <div class="access-label" style="margin-bottom:0.8rem;">For builders</div>
+      <h4 style="font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:400; margin-bottom:0.6rem; color:var(--text);">Claude API</h4>
+      <p style="font-size:0.82rem;">The way developers embed Claude into their own products. How Cursor, Notion AI, and others use Claude under the hood. Not relevant for everyday design use — but good to know it exists.</p>
+      <span class="url-pill" style="margin-top:0.8rem;">api.anthropic.com</span>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><strong>Recommended order:</strong> Start with <strong>claude.ai</strong> today. Download the <strong>Desktop App</strong> this week — the screen-sharing feature alone is worth it for design feedback. Add the <strong>Chrome Extension</strong> for research. The mobile app, Claude Code, and Figma MCP follow naturally from there.</p>
+  </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     04 — PLANS
+══════════════════════════════════════ -->
+<section class="section" id="plans">
+  <div class="section-label"><span class="section-num">04</span> Plans & Pricing</div>
+  <h2>What do you <span class="italic">actually need?</span></h2>
+  <p>Claude.ai has a free tier and paid plans. Here's what actually matters for designers.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Free</th>
+          <th>Pro — $20/mo</th>
+          <th>Team — $30/user/mo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Chat with Claude</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td></tr>
+        <tr><td>Upload images & files</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td></tr>
+        <tr><td>Artifacts (live code preview)</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td></tr>
+        <tr><td>Daily message limit</td><td>Limited</td><td>5× more</td><td>Team pool</td></tr>
+        <tr><td>Access to best models</td><td>Standard</td><td><span class="chk">✓ Priority</span></td><td><span class="chk">✓ Priority</span></td></tr>
+        <tr><td>Projects (persistent context)</td><td><span class="dash">—</span></td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td></tr>
+        <tr><td>Extended thinking mode</td><td><span class="dash">—</span></td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <p><strong>Honest take:</strong> Start free. You'll feel the limits within a week of daily use. Upgrade to Pro when you hit message limits or want extended thinking for complex problems. For most designers, Pro is the right long-term tier.</p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     05 — YOUR FIRST 30 MINUTES
+══════════════════════════════════════ -->
+<section class="section" id="first30">
+  <div class="section-label"><span class="section-num">05</span> First Session</div>
+  <h2>Your first <span class="italic">30 minutes</span> with Claude</h2>
+  <p>Don't read about Claude. Do this. Open claude.ai in another tab right now and follow these five exercises in order. Each one reveals a different dimension of what's possible.</p>
+
+  <div class="session-steps">
+
+    <div class="session-step">
+      <div class="session-num">1</div>
+      <div class="session-content">
+        <span class="time-badge">2 minutes</span>
+        <h4>Ask it to explain something you've always been fuzzy on</h4>
+        <p>Pick a technical concept that's come up in your work but you've never fully understood — CSS variables, REST APIs, component tokens, whatever. Ask Claude to explain it like you're a designer who doesn't code.</p>
+        <div class="prompt">
+          <span class="prompt-label">Try this</span>
+          Explain what <span class="hi">CSS variables</span> are, why developers use them, and how I should think about them when I'm designing a token system in Figma. Assume I understand design systems but have never written code.
+        </div>
+      </div>
+    </div>
+
+    <div class="session-step">
+      <div class="session-num">2</div>
+      <div class="session-content">
+        <span class="time-badge">5 minutes</span>
+        <h4>Upload a screenshot of something you're working on</h4>
+        <p>Take a screenshot of any UI — your own work, something you're redesigning, a competitor's app. Upload it to Claude. Ask for honest critique.</p>
+        <div class="prompt">
+          <span class="prompt-label">Try this</span>
+          <span class="hi">[attach screenshot]</span><br>
+          Be honest. What are the three most significant problems with this design? Give me specific, actionable feedback — not generic best practices.
+        </div>
+        <p>Then push: ask it to go deeper on one of the issues it raised. Ask what it would do differently. Ask it to compare this to how a company you admire might solve the same problem.</p>
+      </div>
+    </div>
+
+    <div class="session-step">
+      <div class="session-num">3</div>
+      <div class="session-content">
+        <span class="time-badge">5 minutes</span>
+        <h4>Ask it to write copy — then rewrite it three different ways</h4>
+        <p>Give Claude a real UX writing task from a project you're working on. An empty state, an onboarding headline, a button label, an error message — anything.</p>
+        <div class="prompt">
+          <span class="prompt-label">Try this</span>
+          I'm working on a <span class="hi">[type of app]</span> for <span class="hi">[type of user]</span>. Write 5 variations of the headline for the first onboarding screen. The tone should feel <span class="hi">[adjective]</span>, not corporate. Each under 10 words.
+        </div>
+        <p>Once you have 5 options, pick the one that's closest to what you want and say: <em>"I like option 3 but it feels too [x]. Rewrite it with [y]."</em> This iteration loop is where Claude really shines.</p>
+      </div>
+    </div>
+
+    <div class="session-step">
+      <div class="session-num">4</div>
+      <div class="session-content">
+        <span class="time-badge">10 minutes</span>
+        <h4>Ask it to build you something in code</h4>
+        <p>This one will surprise you. Ask Claude to build a simple interactive UI component — and watch it generate working HTML, CSS, and JavaScript in under a minute. You don't need to understand the code.</p>
+        <div class="prompt">
+          <span class="prompt-label">Try this</span>
+          Build a <span class="hi">card component</span> for a mobile app. It should show: a user avatar (placeholder), a name, a short status message, and an "Follow" button that toggles to "Following" when clicked. Clean, modern style. Dark background. Just HTML and CSS.
+        </div>
+        <p>Claude will give you code in its Artifacts panel — a live preview you can interact with right there. Click the follow button. See it work. Then ask it to change the colors, add an animation, make it wider. Watch how fast it responds to your direction.</p>
+      </div>
+    </div>
+
+    <div class="session-step">
+      <div class="session-num">5</div>
+      <div class="session-content">
+        <span class="time-badge">5 minutes</span>
+        <h4>Use it to challenge your own thinking</h4>
+        <p>This is the most underused capability. Claude is a rigorous thinking partner — use it to stress-test your ideas before you're in a client meeting or design review.</p>
+        <div class="prompt">
+          <span class="prompt-label">Try this</span>
+          I'm designing <span class="hi">[describe your current project briefly]</span>. I've decided to <span class="hi">[describe your design decision]</span>. What are the strongest arguments against this decision? Don't hold back.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="callout">
+    <p>After these five exercises, you'll have a real feel for what Claude can do. The rest of this guide gives you the vocabulary, prompts, and patterns to go further.</p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     06 — USE CASES
+══════════════════════════════════════ -->
+<section class="section-wide" id="usecases">
+  <div class="inner">
+  <div class="section-label"><span class="section-num">06</span> What You Can Do</div>
+  <h2>Claude as a <span class="italic">design partner</span></h2>
+  <p>The real ways designers use Claude daily — with prompts you can copy directly.</p>
+
+  <div class="use-case">
+    <div class="uc-label">
+      <span class="badge badge-green">Daily use</span>
+      <h3>UX Writing & Copy</h3>
+      <p>Button labels, empty states, error messages, onboarding copy, tooltips, notifications.</p>
+    </div>
+    <div class="uc-body">
+      <p>Claude understands voice and tone deeply. Give it a brief with the user type and emotional context, and it will generate options that actually sound human — not like marketing copy written by committee.</p>
+      <div class="prompt">
+        <span class="prompt-label">Empty state</span>
+        Write 5 versions of an empty state for a task management app. The user just completed all their tasks. Tone: <span class="hi">warm and motivating</span>, not corporate. Each version max 18 words. No exclamation marks.
+      </div>
+      <div class="prompt">
+        <span class="prompt-label">Error message rewrite</span>
+        Rewrite this error message so it: doesn't blame the user, explains what happened in plain language, and tells them exactly one thing to do next:<br>
+        <span class="hi">"Error 403: Access denied. Contact your administrator."</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="use-case">
+    <div class="uc-label">
+      <span class="badge badge-green">Daily use</span>
+      <h3>Design Feedback</h3>
+      <p>Visual critique, hierarchy, accessibility, consistency, user flow analysis.</p>
+    </div>
+    <div class="uc-body">
+      <p>Upload any screen and ask for honest critique. Claude will flag hierarchy issues, accessibility problems, and inconsistencies — and give you specific, actionable fixes rather than generic design advice.</p>
+      <div class="prompt">
+        <span class="prompt-label">Visual critique</span>
+        <span class="hi">[attach screenshot]</span><br>
+        What are the three biggest visual hierarchy problems in this screen? For each one: tell me what the problem is, why it's a problem, and specifically what to change.
+      </div>
+      <div class="prompt">
+        <span class="prompt-label">Emotional tone check</span>
+        <span class="hi">[attach form screenshot]</span><br>
+        Does this form feel approachable or intimidating to fill out? What specifically creates that feeling, and what would you change?
+      </div>
+    </div>
+  </div>
+
+  <div class="use-case">
+    <div class="uc-label">
+      <span class="badge badge-amber">Weekly use</span>
+      <h3>Research & Strategy</h3>
+      <p>Patterns, competitor analysis, user interview questions, design briefs.</p>
+    </div>
+    <div class="uc-body">
+      <p>Claude has absorbed enormous amounts of design knowledge. Use it to quickly synthesize patterns, understand what's been done in your space, and generate sharp research artifacts.</p>
+      <div class="prompt">
+        <span class="prompt-label">Pattern research</span>
+        I'm designing a checkout flow for a mobile commerce app targeting women 35–55. What are the most common drop-off points in mobile checkout, and what specific design patterns does research show reduce abandonment at each point?
+      </div>
+      <div class="prompt">
+        <span class="prompt-label">Interview questions</span>
+        Write 8 user interview questions to understand how freelance designers currently manage client feedback. Focus on revealing pain points and workarounds — not validating features. Each question should be open-ended and non-leading.
+      </div>
+    </div>
+  </div>
+
+  <div class="use-case">
+    <div class="uc-label">
+      <span class="badge badge-amber">Weekly use</span>
+      <h3>Design System Docs</h3>
+      <p>Component guidelines, usage rules, do/don't examples, accessibility notes.</p>
+    </div>
+    <div class="uc-body">
+      <p>Writing documentation is the part designers dread. Claude can draft complete component guidelines in minutes — then you shape them to match your team's voice.</p>
+      <div class="prompt">
+        <span class="prompt-label">Component documentation</span>
+        Write usage guidelines for a <span class="hi">primary button</span> component in our design system. Cover: when to use it, when NOT to use it, do/don't examples (3 each), WCAG 2.1 accessibility requirements, and the 3 most common mistakes designers make with it.
+      </div>
+    </div>
+  </div>
+
+  <div class="use-case">
+    <div class="uc-label">
+      <span class="badge badge-blue">High impact</span>
+      <h3>Prototyping in Code</h3>
+      <p>Real HTML/CSS/JS components, interactive demos, live previews.</p>
+    </div>
+    <div class="uc-body">
+      <p>This is the one that changes designers' careers. Claude can build working, interactive prototypes from a plain English description. You don't need to understand the code — you direct the output like a creative director.</p>
+      <p>In claude.ai, generated code appears in the <strong>Artifacts panel</strong> as a live, interactive preview. You can click buttons, fill forms, see animations — right there in the chat.</p>
+      <div class="prompt">
+        <span class="prompt-label">Pricing page</span>
+        Build a pricing page with three tiers: Free, Pro ($15/mo), Team ($40/mo). Each card: 5 feature bullets, CTA button. Make Pro visually stand out. Dark background, clean modern style. Fully responsive.
+      </div>
+      <div class="prompt">
+        <span class="prompt-label">Interactive component</span>
+        Create a toggle that switches between monthly and annual pricing. When annual is active, show a "Save 20%" badge and update all prices. Smooth animation on the switch. HTML + CSS + vanilla JS only.
+      </div>
+    </div>
+  </div>
+
+  <div class="use-case">
+    <div class="uc-label">
+      <span class="badge badge-blue">Always useful</span>
+      <h3>Bridge to Engineering</h3>
+      <p>Translate between design decisions and technical implementation.</p>
+    </div>
+    <div class="uc-body">
+      <p>One of the most underrated uses: understanding technical constraints so you can design better and have more credible conversations with engineers.</p>
+      <div class="prompt">
+        <span class="prompt-label">Technical translation</span>
+        I'm designing a dashboard that shows real-time data. My developer mentioned API rate limiting might be a problem. Explain what rate limiting is, why it affects real-time UIs, and what design patterns help work around it — without requiring me to understand the code.
+      </div>
+      <div class="prompt">
+        <span class="prompt-label">Dev handoff clarity</span>
+        I'm handing off this interaction spec to a developer. <span class="hi">[describe your animation or interaction]</span>. Help me write a technically precise description that a developer could implement without asking me follow-up questions.
+      </div>
+    </div>
+  </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     07 — PROMPT LIBRARY
+══════════════════════════════════════ -->
+<section class="section" id="prompts">
+  <div class="section-label"><span class="section-num">07</span> Prompt Library</div>
+  <h2>Ready-to-use <span class="italic">prompts</span></h2>
+  <p>Copy any of these directly into Claude. Replace the <span style="color:var(--green)">highlighted parts</span> with your specifics.</p>
+
+  <div class="prompt-library">
+
+    <div class="pl-category">
+      <div class="pl-header">
+        <span class="pl-icon">✍️</span>
+        <h4>UX Writing</h4>
+      </div>
+      <div class="pl-prompts">
+        <div class="pl-prompt">Write 5 variations of the headline for a <span class="var">[type of app]</span> onboarding screen. Tone: <span class="var">[adjective]</span>. Under 10 words each. No exclamation marks.<span class="copy-hint">hover to copy</span></div>
+        <div class="pl-prompt">Rewrite this error message to be human and actionable: "<span class="var">[paste error message]</span>"<span class="copy-hint">hover to copy</span></div>
+        <div class="pl-prompt">Write an empty state for when a <span class="var">[type of user]</span> has no <span class="var">[items]</span> yet. Tone: encouraging but not patronizing.<span class="copy-hint">hover to copy</span></div>
+        <div class="pl-prompt">Our app tone is <span class="var">[describe tone]</span>. Rewrite these 5 button labels to match: <span class="var">[list labels]</span><span class="copy-hint">hover to copy</span></div>
+        <div class="pl-prompt">Write a tooltip for a <span class="var">[feature name]</span> that explains what it does and why it matters. Under 20 words.<span class="copy-hint">hover to copy</span></div>
+      </div>
+    </div>
+
+    <div class="pl-category">
+      <div class="pl-header">
+        <span class="pl-icon">🔍</span>
+        <h4>Design Critique</h4>
+      </div>
+      <div class="pl-prompts">
+        <div class="pl-prompt">[attach image] What are the 3 biggest problems with this design? Be specific. Tell me what to change, not just what's wrong.<span class="copy-hint">hover to copy</span></div>
+        <div class="pl-prompt">[attach image] Review this for accessibility issues. Focus on contrast, touch targets, and screen reader considerations.<span class="copy-hint">hover to copy</span></div>
+        <div class="pl-prompt">[attach image] What would a senior designer at <span class="var">[company you admire]</span> think of this design? Be honest.<span class="copy-hint">hover to copy</span></div>
+        <div class="pl-prompt">[attach image] Is the visual hierarchy clear? What does the user's eye land on first, second, third? Is that the right order?<span class="copy-hint">hover to copy</span></div>
+      </div>
+    </div>
+
+    <div class="pl-category">
+      <div class="pl-header">
+        <span class="pl-icon">🧩</span>
+        <h4>Prototyping</h4>
+      </div>
+      <div class="pl-prompts">
+        <div class="pl-prompt">Build a <span class="var">[component name]</span> component. It should <span class="var">[describe behavior]</span>. Style: <span class="var">[describe aesthetic]</span>. HTML, CSS, vanilla JS only.<span class="copy-hint">hover to copy</span></div>
+        <div class="pl-prompt">Create a <span class="var">[page type]</span> page with <span class="var">[sections]</span>. Dark background, modern style, fully responsive.<span class="copy-hint">hover to copy</span></div>
+        <div class="pl-prompt">Build a micro-interaction: when a user clicks <span class="var">[element]</span>, it should <span class="var">[behavior]</span>. Add a smooth animation.<span class="copy-hint">hover to copy</span></div>
+        <div class="pl-prompt">I have this code: [paste code]. Make it look more <span class="var">[adjective]</span>. Keep the same structure, only change the visual design.<span class="copy-hint">hover to copy</span></div>
+      </div>
+    </div>
+
+    <div class="pl-category">
+      <div class="pl-header">
+        <span class="pl-icon">🧠</span>
+        <h4>Strategy & Thinking</h4>
+      </div>
+      <div class="pl-prompts">
+        <div class="pl-prompt">I'm about to propose <span class="var">[design decision]</span> to my client. What are the 3 strongest objections they might raise, and how should I respond to each?<span class="copy-hint">hover to copy</span></div>
+        <div class="pl-prompt">I'm stuck between two design directions: <span class="var">[option A]</span> vs <span class="var">[option B]</span>. Help me think through the tradeoffs for our specific user: <span class="var">[describe user]</span>.<span class="copy-hint">hover to copy</span></div>
+        <div class="pl-prompt">Play devil's advocate on this design decision: <span class="var">[describe decision]</span>. What are the strongest arguments against it?<span class="copy-hint">hover to copy</span></div>
+        <div class="pl-prompt">What am I not thinking about? I'm designing <span class="var">[describe project]</span> for <span class="var">[describe users]</span>. What blind spots should I watch out for?<span class="copy-hint">hover to copy</span></div>
+      </div>
+    </div>
+
+    <div class="pl-category">
+      <div class="pl-header">
+        <span class="pl-icon">📋</span>
+        <h4>Documentation</h4>
+      </div>
+      <div class="pl-prompts">
+        <div class="pl-prompt">Write component documentation for a <span class="var">[component name]</span>. Include: purpose, when to use, when NOT to use, props/variants, do/don't examples, accessibility notes.<span class="copy-hint">hover to copy</span></div>
+        <div class="pl-prompt">Write a one-page design brief for <span class="var">[project name]</span>. Business goal: <span class="var">[goal]</span>. Target user: <span class="var">[user]</span>. Key constraint: <span class="var">[constraint]</span>.<span class="copy-hint">hover to copy</span></div>
+        <div class="pl-prompt">Summarize this design in a way a non-designer stakeholder would understand and care about: <span class="var">[paste your design notes]</span><span class="copy-hint">hover to copy</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     08 — COMMON MISTAKES
+══════════════════════════════════════ -->
+<section class="section" id="mistakes">
+  <div class="section-label"><span class="section-num">08</span> Common Mistakes</div>
+  <h2>Why beginners get <span class="italic">bad results</span></h2>
+  <p>Most people who try Claude and feel underwhelmed are making one of these five mistakes. Recognizing them is the shortcut to getting great output.</p>
+
+  <div class="mistake">
+    <div class="mistake-head">
+      <span class="mistake-icon">🌫️</span>
+      <h4>Prompts that are too vague</h4>
+    </div>
+    <div class="mistake-body">
+      <p>The most common mistake. "Design me a landing page" or "help me with my app" gives Claude nothing to work with. Claude can only be as specific as the context you give it.</p>
+      <div class="fix">"Build a landing page for a <strong>B2B invoicing tool</strong> targeting <strong>freelance designers</strong>. Sections: hero with one-line value prop, 3 key features, social proof, and CTA. Tone: professional but not corporate. Dark background."</div>
+    </div>
+  </div>
+
+  <div class="mistake">
+    <div class="mistake-head">
+      <span class="mistake-icon">🛑</span>
+      <h4>Stopping at the first response</h4>
+    </div>
+    <div class="mistake-body">
+      <p>The first response is a starting point. Treating it as the final answer is like accepting the first sketch from a designer without any feedback. The real quality comes through iteration.</p>
+      <div class="fix">After any response: "Good start. Now make option 2 more [quality]. Also try a version that takes a completely different angle." Always push for at least one round of refinement.</div>
+    </div>
+  </div>
+
+  <div class="mistake">
+    <div class="mistake-head">
+      <span class="mistake-icon">🔄</span>
+      <h4>Starting a new chat instead of continuing</h4>
+    </div>
+    <div class="mistake-body">
+      <p>Every new chat starts fresh — Claude forgets all previous context. Beginners start new chats for every question. Instead, keep related work in one long conversation. Claude builds on everything you've shared.</p>
+      <div class="fix">Keep a single long conversation for each project or task. At the start, set context once: "I'm working on X for Y users. Let me share my thinking first before we start generating..."</div>
+    </div>
+  </div>
+
+  <div class="mistake">
+    <div class="mistake-head">
+      <span class="mistake-icon">📋</span>
+      <h4>Copying output without editing</h4>
+    </div>
+    <div class="mistake-body">
+      <p>Claude's output is raw material — not finished product. Especially for copy and documentation, the first pass needs your editorial voice applied. Claude removes 80% of the work; you do the last 20% that makes it distinctly yours.</p>
+      <div class="fix">Treat everything Claude writes as a first draft. Read it, edit it, make it sound like you. The goal is to use Claude to get to a great draft 10× faster — not to bypass your judgment entirely.</div>
+    </div>
+  </div>
+
+  <div class="mistake">
+    <div class="mistake-head">
+      <span class="mistake-icon">🔮</span>
+      <h4>Asking Claude what to build instead of how to build it</h4>
+    </div>
+    <div class="mistake-body">
+      <p>"What should I design for my portfolio?" or "What features should my app have?" — Claude will answer, but these are the wrong questions. You're the designer. Strategy and direction come from you. Claude executes and enhances.</p>
+      <div class="fix">Bring Claude a decision you've already made, not a blank slate. "I've decided to build X for Y users. Help me [write copy / review this design / build this component]." Your judgment drives; Claude accelerates.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     09 — LIMITATIONS
+══════════════════════════════════════ -->
+<section class="section" id="limits">
+  <div class="section-label"><span class="section-num">09</span> Honest Expectations</div>
+  <h2>What Claude <span class="italic">can't do</span></h2>
+  <p>Using Claude well means knowing where it falls short. These aren't reasons to avoid it — they're reasons to keep your judgment engaged.</p>
+
+  <div class="limits-grid">
+    <div class="limit-card">
+      <h4>It doesn't know your users</h4>
+      <p>Claude's design advice is based on general patterns. It hasn't done research on your specific users. Always pressure-test its suggestions against your actual research and context.</p>
+    </div>
+    <div class="limit-card">
+      <h4>It will sometimes be confidently wrong</h4>
+      <p>Claude can "hallucinate" — stating incorrect information with confidence. For facts, statistics, or technical specifics, verify from a primary source before using them.</p>
+    </div>
+    <div class="limit-card">
+      <h4>Its code can have bugs</h4>
+      <p>Generated code usually works but sometimes has issues — especially in complex interactions. Test everything. Ask Claude to fix errors by pasting them back in. It's good at self-correcting.</p>
+    </div>
+    <div class="limit-card">
+      <h4>It doesn't remember past conversations</h4>
+      <p>Each new chat is a blank slate. Projects (Pro feature) give you some persistence, but in general, you need to re-establish context each session.</p>
+    </div>
+    <div class="limit-card">
+      <h4>Its taste isn't always your taste</h4>
+      <p>Claude's design sensibility leans toward safe, modern, and conventional. Push it explicitly toward the aesthetic you want. It responds well to specific references: "more like Linear, less like Salesforce."</p>
+    </div>
+    <div class="limit-card">
+      <h4>It can't browse the internet (without tools)</h4>
+      <p>By default, Claude doesn't know about current events, new design releases, or anything after its training cutoff. Use it for thinking and creating, not for researching what launched last week.</p>
+    </div>
+  </div>
+
+  <div class="callout callout-red">
+    <p><strong>The golden rule:</strong> Never publish copy, ship code, or present findings from Claude without reading and editing them yourself first. Claude removes the grunt work — it doesn't replace your professional judgment.</p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     10 — THE FULL WORKFLOW
+══════════════════════════════════════ -->
+<section class="section" id="workflow">
+  <div class="section-label"><span class="section-num">10</span> The Full Picture</div>
+  <h2>How Claude fits into your <span class="italic">design workflow</span></h2>
+  <p>Claude isn't a standalone tool — it's most powerful when it's woven into how you already work. Here's the full loop, from brief to delivery.</p>
+
+  <div class="workflow">
+    <div class="wf-step">
+      <div class="wf-num">01</div>
+      <h4>Brief & Research</h4>
+      <p>Use Claude to generate interview questions, synthesize competitor patterns, and write the first draft of your design brief.</p>
+    </div>
+    <div class="wf-step">
+      <div class="wf-num">02</div>
+      <h4>Exploration</h4>
+      <p>Ask Claude to describe 3–5 fundamentally different design directions. Use these as jumping-off points for your Figma explorations.</p>
+    </div>
+    <div class="wf-step">
+      <div class="wf-num">03</div>
+      <h4>Iteration</h4>
+      <p>Screenshot your designs and feed them back to Claude for critique. Let it point out what you're too close to see yourself.</p>
+    </div>
+    <div class="wf-step">
+      <div class="wf-num">04</div>
+      <h4>Prototype</h4>
+      <p>Ask Claude to build interactive versions of key interactions — things Figma can't do natively. Test them with real users.</p>
+    </div>
+    <div class="wf-step">
+      <div class="wf-num">05</div>
+      <h4>Deliver</h4>
+      <p>Use Claude to write dev handoff notes, component docs, and stakeholder presentations. Share, ship, iterate.</p>
+    </div>
+  </div>
+
+  <div class="callout callout-blue">
+    <p><strong>The deeper unlock:</strong> Once you start using Claude throughout your process — not just for one-off tasks — your output quality goes up and your turnaround time drops dramatically. The loop above takes weeks with a traditional workflow. With Claude integrated, it takes days.</p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     11 — SETUP & INSTALL
+══════════════════════════════════════ -->
+<section class="section" id="install">
+  <div class="section-label"><span class="section-num">11</span> Setup</div>
+  <h2>What to <span class="italic">install</span></h2>
+  <p>Here's exactly what to set up, in the right order — with honest notes on what's essential vs. optional.</p>
+
+  <div class="install-steps">
+
+    <div class="install-step">
+      <span class="i-num">1</span>
+      <div class="i-body">
+        <h4>Create a Claude account <em style="color:var(--green); font-style:normal; font-size:0.8rem;">— required, free</em></h4>
+        <p>Go to claude.ai in any modern browser. Sign up with your email or Google account. This is the only thing you <em>must</em> do today. Everything else can wait.</p>
+        <span class="chip">claude.ai → Sign up</span>
+      </div>
+    </div>
+
+    <div class="install-step">
+      <span class="i-num">2</span>
+      <div class="i-body">
+        <h4>Download the mobile app <em style="color:var(--text-muted); font-style:normal; font-size:0.8rem;">— optional, free</em></h4>
+        <p>Claude has iOS and Android apps. Great for quick questions, voice input, and thinking-on-the-go. Your conversations sync between web and mobile automatically.</p>
+        <span class="chip">App Store / Google Play → "Claude by Anthropic"</span>
+      </div>
+    </div>
+
+    <div class="install-step">
+      <span class="i-num">3</span>
+      <div class="i-body">
+        <h4>Install the Claude Chrome extension <em style="color:var(--text-muted); font-style:normal; font-size:0.8rem;">— optional, useful</em></h4>
+        <p>Highlight any text on any webpage and ask Claude about it without switching tabs. Excellent for competitive research — highlight a competitor's copy and ask "how would I write this better for [your context]?"</p>
+        <span class="chip">Chrome Web Store → search "Claude"</span>
+      </div>
+    </div>
+
+    <div class="install-step">
+      <span class="i-num">4</span>
+      <div class="i-body">
+        <h4>Download Cursor <em style="color:var(--text-muted); font-style:normal; font-size:0.8rem;">— optional, for building</em></h4>
+        <p>Cursor is a code editor with Claude built in. When you're ready to build real projects — portfolio sites, internal design tools, interactive prototypes — this is where you do it. You describe what you want, Cursor writes and edits the files. Claude.ai's Artifacts panel handles simple one-file things; Cursor handles real multi-file projects.</p>
+        <span class="chip">cursor.com → Download free</span>
+      </div>
+    </div>
+
+    <div class="install-step">
+      <span class="i-num">5</span>
+      <div class="i-body">
+        <h4>Set up Claude Projects <em style="color:var(--green); font-style:normal; font-size:0.8rem;">— Pro feature, very useful</em></h4>
+        <p>Projects let you give Claude persistent context: your brand guidelines, design system documentation, tone of voice notes. Once set up, every conversation in that Project starts with Claude already knowing your context. This is a significant productivity unlock for ongoing client work.</p>
+        <span class="chip">claude.ai → Projects → New Project</span>
+      </div>
+    </div>
+
+    <div class="install-step">
+      <span class="i-num">6</span>
+      <div class="i-body">
+        <h4>Explore the Figma MCP <em style="color:var(--text-muted); font-style:normal; font-size:0.8rem;">— advanced, for later</em></h4>
+        <p>MCP (Model Context Protocol) is a way to connect Claude to external apps. The Figma MCP lets Claude read your actual Figma files — component names, design tokens, layer structure — so the code it generates matches your real design system. This is transformative, but save it for once you're comfortable with the basics.</p>
+        <span class="chip">Search: "Figma MCP Claude setup" when you're ready</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="callout">
+    <p><strong>Honest advice:</strong> Do step 1 today. Do step 2 this week. The rest can wait until the use case becomes obvious. The most powerful thing is not having the right setup — it's using Claude every single day until it becomes instinct.</p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     12 — CLAUDE CODE FOR DESIGNERS
+══════════════════════════════════════ -->
+<section class="section-wide" id="claudecode">
+  <div class="inner">
+  <div class="section-label"><span class="section-num">12</span> Going Deeper</div>
+  <h2>Claude Code — <span class="italic">the next level</span></h2>
+  <p>Claude.ai is where you start. Claude Code is where you build. It's a version of Claude that lives in your computer's terminal and has direct access to your files — it doesn't just suggest code, it writes it, edits it, runs it, and watches the result. All through a conversation in plain English.</p>
+  <p>As a designer, this is how you go from making <em>mockups</em> to shipping <em>things</em>. A working portfolio site. An internal design tool. A growth analyzer. A client-facing prototype with real interactions and real data. Felix Lee — a designer with no development background — built three apps and deployed them live within two weeks of using Claude Code.</p>
+
+  <div class="callout">
+    <p><strong>The key insight:</strong> You don't need to understand the code. You need to understand what you're building. That's what designers are already trained to do — understand users, goals, and outcomes. Claude Code handles the implementation. You direct the vision.</p>
+  </div>
+
+  <h3>What Claude Code can do that claude.ai can't</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">📁</div>
+      <h4>Lives in your project</h4>
+      <p>Claude Code reads and writes your actual files. It sees your whole project structure, not just what you paste into a chat box.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔗</div>
+      <h4>Connects to everything</h4>
+      <p>Via MCP, it can read your Figma files, query your database, browse the web, and run tests — all in one session.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🚀</div>
+      <h4>Ships real products</h4>
+      <p>Claude Code can commit to GitHub and deploy to Vercel. Your idea goes from terminal to live URL in minutes.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💾</div>
+      <h4>Remembers your project</h4>
+      <p>Via CLAUDE.md files, Claude Code carries project context across sessions — your design system, your preferences, your rules.</p>
+    </div>
+  </div>
+
+  <h3>How to install Claude Code (Mac)</h3>
+  <p>Claude Code runs in your Mac's Terminal app. Here are the four commands you need — total setup time: about 5 minutes.</p>
+
+  <div class="terminal">
+    <div class="terminal-bar">
+      <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+      <span class="terminal-label">Terminal — Mac</span>
+    </div>
+    <div class="terminal-body">
+      <span class="comment"># Step 1: Install Node.js first (if you don't have it)</span><br>
+      <span class="comment"># Go to nodejs.org and download the LTS version — no Terminal needed</span><br><br>
+      <span class="comment"># Step 2: Install Claude Code</span><br>
+      <span class="cmd">npm install -g @anthropic-ai/claude-code</span><br><br>
+      <span class="comment"># Step 3: Verify it worked</span><br>
+      <span class="cmd">claude --version</span><br>
+      <span class="out">Claude Code 1.x.x</span><br><br>
+      <span class="comment"># Step 4: Start Claude Code</span><br>
+      <span class="cmd">claude</span><br>
+      <span class="out">✓ Claude Code is ready. What would you like to build?</span>
+    </div>
+  </div>
+
+  <h3>The only terminal commands you need</h3>
+  <p>You don't need to know the command line. You only need these five commands to navigate and start Claude Code.</p>
+
+  <div class="terminal">
+    <div class="terminal-bar">
+      <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+      <span class="terminal-label">Terminal cheat sheet</span>
+    </div>
+    <div class="terminal-body">
+      <span class="cmd">claude</span>          <span class="dim">    # Start Claude Code in current folder</span><br>
+      <span class="cmd">cd folder-name</span>   <span class="dim">    # Go into a folder</span><br>
+      <span class="cmd">cd ..</span>            <span class="dim">    # Go back one folder</span><br>
+      <span class="cmd">ls</span>               <span class="dim">    # See what files are in this folder (Mac)</span><br>
+      <span class="cmd">mkdir my-project</span> <span class="dim">    # Create a new folder</span>
+    </div>
+  </div>
+
+  <h3>Your first Claude Code session</h3>
+  <div class="terminal">
+    <div class="terminal-bar">
+      <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+      <span class="terminal-label">Building a portfolio from scratch</span>
+    </div>
+    <div class="terminal-body">
+      <span class="comment"># Create a project folder and open Claude Code in it</span><br>
+      <span class="cmd">mkdir my-portfolio && cd my-portfolio && claude</span><br><br>
+      <span class="out">▶ Claude Code ready. Type your first instruction...</span><br><br>
+      <span class="comment"># Your very first prompt — always start with a plan</span><br>
+      <span class="dim">You: </span>I want to build a personal portfolio site. Before writing any code, create a plan.md file with: recommended tech stack, file structure, and step-by-step implementation plan. Research first.<br><br>
+      <span class="out">✓ Created plan.md — review it and reply "looks good" to proceed</span>
+    </div>
+  </div>
+
+  <div class="callout callout-blue">
+    <p><strong>Windows users:</strong> The process is identical — open Command Prompt or PowerShell and use the same commands. Use <code style="font-family:'Cabinet Grotesk',sans-serif; font-size:0.8em; color:var(--blue)">dir</code> instead of <code style="font-family:'Cabinet Grotesk',sans-serif; font-size:0.8em; color:var(--blue)">ls</code> to list files.</p>
+  </div>
+
+  <h3>Three tools — choose your level</h3>
+  <p>There are multiple ways to build with Claude as a designer. Pick the one that matches where you are right now.</p>
+
+  <div class="tier-ladder">
+    <div class="tier">
+      <span class="tier-badge tier-1">Level 1</span>
+      <div class="tier-content">
+        <h4>Claude.ai Artifacts</h4>
+        <p>Build single-file interactive components right in the browser. No installation. Works immediately. Great for quick prototypes, components, and landing pages you can share as a link. Best starting point.</p>
+        <div class="tier-tools">
+          <span class="tier-tool">claude.ai</span>
+          <span class="tier-tool">browser only</span>
+          <span class="tier-tool">HTML/CSS/JS</span>
+          <span class="tier-tool">no install</span>
+        </div>
+      </div>
+    </div>
+    <div class="tier">
+      <span class="tier-badge tier-2">Level 2</span>
+      <div class="tier-content">
+        <h4>Cursor</h4>
+        <p>A code editor with Claude built in. Great for multi-file projects in a familiar visual interface. More approachable than the terminal — you can see your files in a sidebar and get a visual IDE experience while Claude edits them.</p>
+        <div class="tier-tools">
+          <span class="tier-tool">cursor.com</span>
+          <span class="tier-tool">visual IDE</span>
+          <span class="tier-tool">multi-file</span>
+          <span class="tier-tool">free tier</span>
+        </div>
+      </div>
+    </div>
+    <div class="tier">
+      <span class="tier-badge tier-3">Level 3</span>
+      <div class="tier-content">
+        <h4>Claude Code</h4>
+        <p>The most powerful option. Lives in your terminal. Has full access to your file system, can run code, connect to external services via MCP, commit to GitHub, and deploy to Vercel. Described by designers who've used it as the highest-leverage skill available right now.</p>
+        <div class="tier-tools">
+          <span class="tier-tool">Terminal / CLI</span>
+          <span class="tier-tool">Node.js required</span>
+          <span class="tier-tool">Figma MCP</span>
+          <span class="tier-tool">GitHub + Vercel</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     13 — PLAN FIRST, ALWAYS
+══════════════════════════════════════ -->
+<section class="section" id="planfirst">
+  <div class="section-label"><span class="section-num">13</span> The Most Important Habit</div>
+  <h2>Always <span class="italic">plan before</span> you build</h2>
+  <p>This is the single most important thing experienced vibe designers have learned — and it's the thing beginners skip. <strong>Never ask Claude to start building immediately.</strong> Ask it to make a plan first.</p>
+  <p>Every source agrees on this. Design thinkers who've shipped real products describe it as the difference between a clean build and debugging spaghetti at 2am. When you give Claude a vague instruction and say "go", it will — but it might go in the wrong direction for a long time before you notice.</p>
+
+  <div class="mindset-grid">
+    <div class="mindset-card wrong">
+      <div class="mindset-head">❌ How beginners prompt</div>
+      <h4>"Build me a portfolio site with a hero, projects grid, and contact form."</h4>
+      <p>Claude immediately starts writing files. You have no idea what it chose or why. When it goes wrong, you don't know where to course-correct.</p>
+    </div>
+    <div class="mindset-card right">
+      <div class="mindset-head">✓ How experienced builders prompt</div>
+      <h4>"Research the best approach and write a plan.md. Don't write any code until I approve the plan."</h4>
+      <p>Claude thinks first. You review. You adjust. Then it executes — with shared understanding of the direction.</p>
+    </div>
+  </div>
+
+  <h3>The plan prompt (copy this exactly)</h3>
+  <div class="prompt">
+    <span class="prompt-label">Always use this first</span>
+    I want to build: <span class="hi">[describe your project in plain English]</span><br><br>
+    Before writing any code, research the best approach and create a <span class="hi">plan.md</span> file with:<br>
+    1. Recommended tech stack and why<br>
+    2. File structure<br>
+    3. Any external services needed<br>
+    4. Step-by-step implementation plan<br><br>
+    <span class="comment">Don't write any code until I've reviewed and approved the plan.</span>
+  </div>
+
+  <h3>Plan Mode in Claude Code</h3>
+  <p>Claude Code has a built-in "Plan Mode" — when active, Claude can read, analyze, and think, but <strong>cannot write or change any files</strong>. It's architect mode. You get the plan without any code being touched.</p>
+
+  <div class="terminal">
+    <div class="terminal-bar">
+      <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+      <span class="terminal-label">Activating Plan Mode</span>
+    </div>
+    <div class="terminal-body">
+      <span class="comment"># Press Shift + Tab twice to enter Plan Mode</span><br>
+      <span class="comment"># You'll see "Plan Mode" appear at the bottom of the prompt</span><br><br>
+      <span class="out">● Plan Mode active — Claude can analyze but cannot modify files</span><br><br>
+      <span class="dim">You: </span>Design an implementation strategy for a dashboard that shows my client's analytics data with charts and filters.<br><br>
+      <span class="out">✓ Plan complete. Review above. Press Shift+Tab to exit Plan Mode and begin implementation.</span>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><strong>Designer analogy:</strong> Plan Mode is your discovery phase. You're defining the brief before any pixels hit the canvas. The time spent planning saves ten times that in rework. Every experienced vibe designer says the same thing: the plan is the project.</p>
+  </div>
+
+  <h3>The iteration loop</h3>
+  <p>After the plan is approved, your job becomes creative direction. Each iteration is:</p>
+
+  <div class="workflow">
+    <div class="wf-step">
+      <div class="wf-num">01</div>
+      <h4>Prompt</h4>
+      <p>Describe the next feature or change in plain English.</p>
+    </div>
+    <div class="wf-step">
+      <div class="wf-num">02</div>
+      <h4>Review</h4>
+      <p>Open the browser preview. Does it look and behave right?</p>
+    </div>
+    <div class="wf-step">
+      <div class="wf-num">03</div>
+      <h4>Refine</h4>
+      <p>Give specific feedback. "The card padding feels tight. Add 8px more vertically."</p>
+    </div>
+    <div class="wf-step">
+      <div class="wf-num">04</div>
+      <h4>Commit</h4>
+      <p>Once a feature works, save it to git before moving on.</p>
+    </div>
+    <div class="wf-step">
+      <div class="wf-num">05</div>
+      <h4>Repeat</h4>
+      <p>Small loops beat big bangs. Build one thing at a time, confirm it works, move forward.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     14 — CLAUDE.MD — YOUR PROJECT MEMORY
+══════════════════════════════════════ -->
+<section class="section" id="claudemd">
+  <div class="section-label"><span class="section-num">14</span> Project Memory</div>
+  <h2>CLAUDE.md — <span class="italic">teach Claude your project</span></h2>
+  <p>By default, every Claude Code session starts fresh. It doesn't remember your project structure, your design decisions, or your preferences from last time. CLAUDE.md fixes this.</p>
+  <p>CLAUDE.md is a plain text file you put in your project folder. Claude Code reads it automatically at the start of every session — so it always arrives knowing your project, your rules, and your design principles. Think of it as onboarding a new team member, written down once and reused forever.</p>
+
+  <div class="callout">
+    <p><strong>For designers:</strong> This is where your design philosophy lives. Your color system, your spacing rules, your tone of voice, your brand constraints. Write it once, and every session Claude Code already knows how your project thinks.</p>
+  </div>
+
+  <h3>What to put in your CLAUDE.md</h3>
+
+  <div class="terminal">
+    <div class="terminal-bar">
+      <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+      <span class="terminal-label">CLAUDE.md — Designer template</span>
+    </div>
+    <div class="terminal-body">
+      <span class="out"># Project: [Your project name]</span><br><br>
+      <span class="out">## What this is</span><br>
+      <span class="dim">A [type of app] for [type of user]. The goal is [outcome].</span><br><br>
+      <span class="out">## Design principles</span><br>
+      <span class="dim">- Visual style: [minimal / bold / editorial / playful]</span><br>
+      <span class="dim">- Tone of voice: [describe it]</span><br>
+      <span class="dim">- Reference brands: [2-3 companies whose aesthetic we're aiming for]</span><br>
+      <span class="dim">- What we avoid: [gradients / Comic Sans / excessive animation / etc.]</span><br><br>
+      <span class="out">## Tech stack</span><br>
+      <span class="dim">- HTML + CSS + Vanilla JS (no frameworks unless asked)</span><br>
+      <span class="dim">- Tailwind for styling</span><br><br>
+      <span class="out">## Colors</span><br>
+      <span class="dim">Primary: #1a1a2e | Accent: #e94560 | Background: #0f0f1a | Text: #eaeaea</span><br><br>
+      <span class="out">## Rules</span><br>
+      <span class="dim">- Always plan before coding. Ask me to confirm the plan.</span><br>
+      <span class="dim">- Never use placeholder text. Write real copy.</span><br>
+      <span class="dim">- Mobile-first. Test responsive at 375px.</span><br>
+      <span class="dim">- Components use 8px spacing grid.</span>
+    </div>
+  </div>
+
+  <h3>How to create it automatically</h3>
+  <p>Claude Code can generate a starter CLAUDE.md for you based on your existing project. Run this command inside your project folder:</p>
+
+  <div class="terminal">
+    <div class="terminal-bar">
+      <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+      <span class="terminal-label">Auto-generate CLAUDE.md</span>
+    </div>
+    <div class="terminal-body">
+      <span class="dim">Inside Claude Code, type:</span><br><br>
+      <span class="cmd">/init</span><br><br>
+      <span class="out">✓ Analyzing project structure...</span><br>
+      <span class="out">✓ Created CLAUDE.md — review and edit it to add your design principles</span>
+    </div>
+  </div>
+
+  <div class="callout callout-blue">
+    <p><strong>Best practice:</strong> Start simple. A 10-line CLAUDE.md beats a 100-line one. Every line competes for Claude's attention — keep it short, specific, and add to it only when you hit a real friction point (like Claude ignoring your spacing rules or picking the wrong colors).</p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     15 — THE FIGMA ↔ CLAUDE LOOP
+══════════════════════════════════════ -->
+<section class="section-wide" id="figmaloop">
+  <div class="inner">
+  <div class="section-label"><span class="section-num">15</span> Design ↔ Code</div>
+  <h2>The Figma <span class="italic">↔ Claude</span> loop</h2>
+  <p>The old design workflow was linear: design in Figma → hand off to dev → wait for implementation → review → feedback loop for weeks. The new workflow is a closed loop where design and code inform each other in real time.</p>
+  <p>As of February 2026, Figma and Anthropic have built direct integrations that make this loop faster than ever. Here's how the pieces fit together.</p>
+
+  <div class="loop-diagram">
+    <div class="loop-row-header">
+      <div class="loop-cell head" style="border-right: 1px solid var(--border); padding: 0.6rem 0.7rem; font-size:0.55rem;"></div>
+      <div class="loop-cell head">What it does</div>
+      <div class="loop-cell head">How to use it</div>
+    </div>
+    <div class="loop-row">
+      <div class="loop-icon">🔌</div>
+      <div class="loop-cell"><strong>Figma MCP</strong><br>Claude Code connects to your Figma files and reads everything — components, tokens, variables, spacing, colors. The code it generates matches your design system exactly. No more translation loss.</div>
+      <div class="loop-cell">Install the Figma MCP server. In Claude Code, ask: <em>"Read my Figma file [paste link] and build this component matching my design tokens exactly."</em></div>
+    </div>
+    <div class="loop-row">
+      <div class="loop-icon">🖼️</div>
+      <div class="loop-cell"><strong>Figma in Claude.ai</strong><br>The official Figma connector for claude.ai. Paste a Figma frame URL and ask Claude to implement it as a website in HTML/CSS, generate code from your selection, or turn your chat into a FigJam diagram.</div>
+      <div class="loop-cell">In claude.ai, add the Figma connector. Then: <em>"Implement this Figma frame as HTML and CSS: [paste Figma link]"</em> — Claude reads the design and writes the code.</div>
+    </div>
+    <div class="loop-row">
+      <div class="loop-icon">↩️</div>
+      <div class="loop-cell"><strong>Code to Canvas (Claude Code → Figma)</strong><br>You've built something in Claude Code and want to bring it back into Figma for your team to annotate and explore. Type "Send this to Figma" and your live browser UI becomes editable Figma layers — not a screenshot, real layers.</div>
+      <div class="loop-cell">With Figma MCP installed, type in Claude Code: <em>"Send this to Figma"</em> — Claude captures the current browser state and sends it to your Figma canvas as a fully editable frame.</div>
+    </div>
+    <div class="loop-row">
+      <div class="loop-icon">💬</div>
+      <div class="loop-cell"><strong>FigJam in Claude.ai</strong><br>Turn Claude conversations into visual diagrams directly in FigJam. User flows, Gantt charts, system architecture maps — all generated from a prompt or a PRD and instantly editable on the FigJam canvas.</div>
+      <div class="loop-cell"><em>"Create a user flow diagram for the onboarding of our fintech app: [paste PRD context]"</em> — Claude generates it and it opens directly in FigJam.</div>
+    </div>
+  </div>
+
+  <h3>The full bidirectional workflow</h3>
+  <div class="workflow">
+    <div class="wf-step">
+      <div class="wf-num">01</div>
+      <h4>Design in Figma</h4>
+      <p>Your source of truth. Components, tokens, layout.</p>
+    </div>
+    <div class="wf-step">
+      <div class="wf-num">02</div>
+      <h4>Claude reads Figma</h4>
+      <p>Via MCP, Claude Code builds production code that matches your design exactly.</p>
+    </div>
+    <div class="wf-step">
+      <div class="wf-num">03</div>
+      <h4>Iterate in code</h4>
+      <p>Refine interactions, animations, real data. Things Figma can't prototype.</p>
+    </div>
+    <div class="wf-step">
+      <div class="wf-num">04</div>
+      <h4>Send back to Figma</h4>
+      <p>Type "Send this to Figma." Editable layers appear on your canvas.</p>
+    </div>
+    <div class="wf-step">
+      <div class="wf-num">05</div>
+      <h4>Explore on canvas</h4>
+      <p>Team annotates, compares alternatives, spots issues — in Figma's open canvas.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><strong>What this means for handoff:</strong> The traditional design spec → developer interpretation → feedback loop is collapsing. When Claude reads your Figma directly, there is no translation loss. The design tokens you set in Figma are the exact tokens in the code. This is the end of "that's not what I designed."</p>
+  </div>
+
+  <h3>Setting up Figma MCP (step by step)</h3>
+
+  <div class="install-steps">
+    <div class="install-step">
+      <span class="i-num">1</span>
+      <div class="i-body">
+        <h4>Get a Figma API key</h4>
+        <p>In Figma: click your profile icon → Settings → Security → Personal access tokens → Generate new token. Copy and save it.</p>
+        <span class="chip">Figma → Settings → Personal access tokens</span>
+      </div>
+    </div>
+    <div class="install-step">
+      <span class="i-num">2</span>
+      <div class="i-body">
+        <h4>Add Figma MCP to Claude Code</h4>
+        <p>In your Terminal, with Claude Code installed:</p>
+        <div class="terminal" style="margin-top:0.7rem">
+          <div class="terminal-bar"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>
+          <div class="terminal-body"><span class="cmd">claude mcp add figma</span><br><span class="out">✓ Figma MCP connected — paste your API key when prompted</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="install-step">
+      <span class="i-num">3</span>
+      <div class="i-body">
+        <h4>Connect via claude.ai (simpler alternative)</h4>
+        <p>In claude.ai, go to Settings → Connections → Add Connector → Figma. This gives you Figma access directly in your browser chat without any terminal setup.</p>
+        <span class="chip">claude.ai → Settings → Connections → Figma</span>
+      </div>
+    </div>
+    <div class="install-step">
+      <span class="i-num">4</span>
+      <div class="i-body">
+        <h4>Test it with a simple prompt</h4>
+        <p>Copy any Figma frame URL and paste it into Claude:</p>
+        <div class="prompt" style="margin-top:0.7rem">
+          <span class="prompt-label">First Figma prompt</span>
+          Read this Figma frame and describe the design system being used: colors, typography, spacing, component structure. <span class="hi">[paste Figma URL]</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     16 — DEPLOY YOUR WORK
+══════════════════════════════════════ -->
+<section class="section" id="deploy">
+  <div class="section-label"><span class="section-num">16</span> Going Live</div>
+  <h2>Deploy your work — <span class="italic">free, in minutes</span></h2>
+  <p>Building something is one thing. Having a live URL you can send to a client, put in your portfolio, or share on social media is another. The deployment stack used by virtually every designer who vibe codes is GitHub + Vercel — both free, both connect together in minutes.</p>
+
+  <div class="card-grid" style="margin-bottom: 2rem;">
+    <div class="card">
+      <div class="card-icon">🗂️</div>
+      <h4>GitHub</h4>
+      <p>Where your code lives and gets version-controlled. Like a cloud save + history for your project. Every time you "commit," it saves a snapshot you can revert to.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h4>Vercel</h4>
+      <p>Turns your GitHub project into a live website. Every push to GitHub auto-deploys. You get a free URL instantly. Custom domain in under 10 minutes.</p>
+    </div>
+  </div>
+
+  <h3>The full deployment flow</h3>
+
+  <div class="install-steps">
+    <div class="install-step">
+      <span class="i-num">1</span>
+      <div class="i-body">
+        <h4>Create a GitHub account</h4>
+        <p>Go to github.com, sign up for free. This is where your project will live.</p>
+        <span class="chip">github.com → Sign up free</span>
+      </div>
+    </div>
+    <div class="install-step">
+      <span class="i-num">2</span>
+      <div class="i-body">
+        <h4>Ask Claude Code to set up git and push your project</h4>
+        <p>Create a new repository on GitHub (click + → New repository), then tell Claude Code to connect and push:</p>
+        <div class="prompt" style="margin-top:0.7rem">
+          <span class="prompt-label">Deployment prompt</span>
+          Initialize git in this project, connect it to my GitHub repo at <span class="hi">https://github.com/[yourusername]/[repo-name].git</span>, and push everything. Also create a README.md and a CLAUDE.md describing this project.
+        </div>
+      </div>
+    </div>
+    <div class="install-step">
+      <span class="i-num">3</span>
+      <div class="i-body">
+        <h4>Deploy to Vercel</h4>
+        <p>Go to vercel.com, sign up with your GitHub account. Click "Add New Project," import your repository, click Deploy. You'll have a live URL in under 2 minutes.</p>
+        <span class="chip">vercel.com → Add New → Import from GitHub → Deploy</span>
+      </div>
+    </div>
+    <div class="install-step">
+      <span class="i-num">4</span>
+      <div class="i-body">
+        <h4>Every future update auto-deploys</h4>
+        <p>From now on, whenever Claude Code commits to GitHub, Vercel automatically picks it up and deploys the new version. Your live URL always reflects the latest build.</p>
+        <div class="terminal" style="margin-top:0.7rem">
+          <div class="terminal-bar"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>
+          <div class="terminal-body">
+            <span class="dim">You: </span>The hero button color is wrong, make it #e94560<br>
+            <span class="out">✓ Updated. Committing and pushing to GitHub...</span><br>
+            <span class="out">✓ Vercel deployment triggered automatically</span><br>
+            <span class="out">✓ Live at: https://your-project.vercel.app</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="install-step">
+      <span class="i-num">5</span>
+      <div class="i-body">
+        <h4>Add a custom domain (optional)</h4>
+        <p>In Vercel: Settings → Domains → Add your domain. Vercel shows you two DNS records to add at your domain registrar. Takes 5–30 minutes to propagate. Your site loads on yourname.com.</p>
+        <span class="chip">Vercel → Settings → Domains → Add domain</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><strong>One key safety rule:</strong> Never commit a file called <code style="font-family:'Cabinet Grotesk',sans-serif; font-size:0.82em;">.env</code> to GitHub. This file contains your API keys. Always ask Claude Code to create a <code style="font-family:'Cabinet Grotesk',sans-serif; font-size:0.82em;">.gitignore</code> file that excludes it — and it will handle this automatically if you ask.</p>
+  </div>
+</section>
+
+
+
+
+<!-- FOOTER -->
+<footer>
+  <p>Process to Pixels. — Claude for Designers · A Field Guide · 2026</p>
+  <p style="margin-top:0.5rem; opacity:0.5; font-size:0.75rem; font-family:'Cabinet Grotesk',sans-serif; font-style:normal; letter-spacing:0.06em; text-transform:uppercase;">processtopixels.studio · Lisa Demchenko</p>
+</footer>
+
+<script>
+// Copy prompts on click
+document.querySelectorAll('.pl-prompt').forEach(el => {
+  el.addEventListener('click', () => {
+    const text = el.innerText.replace('hover to copy', '').trim();
+    navigator.clipboard.writeText(text).then(() => {
+      const hint = el.querySelector('.copy-hint');
+      const orig = hint.textContent;
+      hint.textContent = 'copied!';
+      hint.style.opacity = '1';
+      hint.style.color = 'var(--green)';
+      setTimeout(() => {
+        hint.textContent = orig;
+        hint.style.color = '';
+      }, 1500);
+    });
+  });
+});
+</script>
+
+</body>
+</html>
