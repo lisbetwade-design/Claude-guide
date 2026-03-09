@@ -742,6 +742,93 @@ kbd {
   color: var(--text);
 }
 
+/* ─────────── GLOSSARY ─────────── */
+.glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 2rem;
+}
+.glossary-item {
+  background: var(--surface);
+  padding: 1.25rem 1.4rem;
+  transition: background 0.15s;
+}
+.glossary-item:hover { background: var(--surface2); }
+.glossary-term {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--green);
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.01em;
+}
+.glossary-def {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+.glossary-def code {
+  font-size: 0.85em;
+  background: var(--surface3);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+  color: var(--text);
+}
+
+/* ─────────── WHAT TO BUILD NEXT ─────────── */
+.whatnext-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+.whatnext-group-label {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+.whatnext-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+.whatnext-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.1rem 1.25rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.whatnext-item:hover {
+  border-color: rgba(41,104,50,0.3);
+  box-shadow: 0 0 0 3px rgba(41,104,50,0.05);
+}
+.whatnext-title {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.35rem;
+}
+.whatnext-desc {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
 /* ─────────── CALLOUT ─────────── */
 .callout {
   background: var(--green-pale);
@@ -1666,7 +1753,7 @@ body { overflow-x: hidden; }
       <div class="pc-emoji">🌱</div>
       <div class="pc-label">New to Claude</div>
       <div class="pc-desc">You've never used it seriously — or you've barely scratched the surface. Start here.</div>
-      <div class="pc-steps">5 sections · ~20 min</div>
+      <div class="pc-steps">6 sections · ~25 min</div>
       <div class="pc-cta">Start here →</div>
     </button>
     <button class="path-card" data-path="design" onclick="startPath('design')" aria-label="Start path: Design with Claude">
@@ -1680,7 +1767,7 @@ body { overflow-x: hidden; }
       <div class="pc-emoji">⚡</div>
       <div class="pc-label">Build with Claude</div>
       <div class="pc-desc">You're comfortable with Claude and ready to connect it to Figma, Notion, and your codebase.</div>
-      <div class="pc-steps">5 sections · ~30 min</div>
+      <div class="pc-steps">6 sections · ~35 min</div>
       <div class="pc-cta">Start building →</div>
     </button>
   </div>
@@ -1762,6 +1849,8 @@ body { overflow-x: hidden; }
       <a class="nav-link" href="#claudemd">CLAUDE.md</a>
       <a class="nav-link" href="#figmaloop">Figma Loop</a>
       <a class="nav-link" href="#deploy">Deploy</a>
+      <a class="nav-link" href="#glossary">Glossary</a>
+      <a class="nav-link" href="#whatnext">What to Build</a>
     </div>
   </nav>
   <div id="all-sections-content"></div>
@@ -3425,12 +3514,13 @@ const SECTIONS = {
     <div class="install-step">
       <span class="i-num">2</span>
       <div class="i-body">
-        <h4>Ask Claude Code to set up git and push your project</h4>
-        <p>Create a new repository on GitHub (click + → New repository), then tell Claude Code to connect and push:</p>
+        <h4>Ask Claude Code to connect and upload your project</h4>
+        <p>Create a new repository on GitHub (click <strong>+</strong> → <strong>New repository</strong>), copy the URL it gives you, then tell Claude Code:</p>
         <div class="prompt" style="margin-top:0.7rem">
           <span class="prompt-label">Deployment prompt</span>
-          Initialize git in this project, connect it to my GitHub repo at <span class="hi">https://github.com/[yourusername]/[repo-name].git</span>, and push everything. Also create a README.md and a CLAUDE.md describing this project.
+          Connect this project to my GitHub repository at <span class="hi">https://github.com/[yourusername]/[repo-name].git</span> and upload everything. Also create a README.md and a CLAUDE.md describing this project.
         </div>
+        <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--text-muted);">Claude Code handles all the technical setup — connecting git, creating the history, and uploading your files. You just paste the URL.</p>
       </div>
     </div>
     <div class="install-step">
@@ -3470,6 +3560,135 @@ const SECTIONS = {
   <div class="callout">
     <p><strong>One key safety rule:</strong> Never commit a file called <code style="font-family:'Cabinet Grotesk',sans-serif; font-size:0.82em;">.env</code> to GitHub. This file contains your API keys. Always ask Claude Code to create a <code style="font-family:'Cabinet Grotesk',sans-serif; font-size:0.82em;">.gitignore</code> file that excludes it — and it will handle this automatically if you ask.</p>
   </div>
+</section>`,
+
+  "glossary": `<!-- ══════════════════════════════════════
+     GLOSSARY — KEY TERMS EXPLAINED
+══════════════════════════════════════ -->
+<section class="section" id="glossary">
+  <div class="section-label"><span class="section-num">→</span> Reference</div>
+  <h2>Key terms, <span class="italic">plain English</span></h2>
+  <p>You'll encounter these words throughout the guide and across the internet. Here's what they actually mean — no assumptions.</p>
+
+  <div class="glossary-grid">
+    <div class="glossary-item">
+      <div class="glossary-term">Repository (repo)</div>
+      <div class="glossary-def">A folder for your project that GitHub keeps track of. Every change you make gets saved as history you can scroll back through. Think of it as a cloud folder with a time machine built in.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">Commit</div>
+      <div class="glossary-def">Saving a snapshot of your project at a specific moment. Like hitting Save in a game — you can revert to that exact point later. Claude Code does this automatically when you make changes.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">Push</div>
+      <div class="glossary-def">Uploading your saved snapshots to GitHub so they're stored online, not just on your computer. When you push, Vercel sees the update and republishes your live site automatically.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">Deploy</div>
+      <div class="glossary-def">Publishing your project so it's live on the internet and accessible via a URL. Before deploying, your project only exists on your computer. After deploying, anyone with the link can open it.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">Terminal / CLI</div>
+      <div class="glossary-def">A text-based window where you type short commands. It looks intimidating but you'll only type a handful of things into it — copied exactly from this guide. On Mac: search "Terminal" in Spotlight.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">npm</div>
+      <div class="glossary-def">A tool that installs software packages onto your computer via the terminal. You use it once to install Claude Code, then you don't need to think about it again.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">Node.js</div>
+      <div class="glossary-def">A free background tool that Claude Code runs on top of. You install it once from nodejs.org and forget it's there. You never interact with it directly.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">Environment variables (.env)</div>
+      <div class="glossary-def">A hidden file where you store secret keys like API passwords so they're not visible in your code. Never upload this file to GitHub — always ask Claude to add it to .gitignore.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">MCP (Model Context Protocol)</div>
+      <div class="glossary-def">A standard that lets Claude connect to other tools — Figma, Notion, GitHub, Slack. Once connected, Claude can read and write your actual files in those tools, not just chat about them.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">Vibe coding</div>
+      <div class="glossary-def">Building software through conversation — describing what you want in plain English and letting Claude write the code. You direct the vision; Claude handles the implementation. No coding knowledge required.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">Artifact</div>
+      <div class="glossary-def">An interactive element Claude builds live inside the chat window — a working prototype, a calculator, a form. You can click, type, and test it without leaving Claude.ai.</div>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">CLAUDE.md</div>
+      <div class="glossary-def">A plain text file in your project folder that teaches Claude your project's rules, design system, and preferences. Claude Code reads it automatically at the start of every session.</div>
+    </div>
+  </div>
+</section>`,
+
+  "whatnext": `<!-- ══════════════════════════════════════
+     WHAT TO BUILD NEXT
+══════════════════════════════════════ -->
+<section class="section" id="whatnext">
+  <div class="section-label"><span class="section-num">→</span> Inspiration</div>
+  <h2>What to <span class="italic">build next</span></h2>
+  <p>You've got the tools. Now you need a project. The best way to learn is to build something real — even if it's small. Here are ideas that work well for designers at every level.</p>
+
+  <div class="whatnext-grid">
+
+    <div class="whatnext-group">
+      <div class="whatnext-group-label">Start here — first weekend</div>
+      <div class="whatnext-items">
+        <div class="whatnext-item">
+          <div class="whatnext-title">Personal portfolio</div>
+          <div class="whatnext-desc">Your work, your aesthetic, no template compromises. The most motivated first project — you actually care how it turns out.</div>
+          <div class="prompt" style="margin-top:0.6rem; font-size:0.82rem;">Build a portfolio site for a UX designer. Dark background, editorial feel, 3 case study cards, a short about section, contact link. HTML, CSS, vanilla JS.</div>
+        </div>
+        <div class="whatnext-item">
+          <div class="whatnext-title">Landing page for a side project</div>
+          <div class="whatnext-desc">Got an idea you've been sitting on? Build the landing page first. It forces clarity and takes an afternoon.</div>
+          <div class="prompt" style="margin-top:0.6rem; font-size:0.82rem;">Build a landing page for <span class="hi">[your idea]</span>. Hero with one-line value prop, 3 key benefits, simple CTA. Minimal, modern style.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="whatnext-group">
+      <div class="whatnext-group-label">Build your design toolkit</div>
+      <div class="whatnext-items">
+        <div class="whatnext-item">
+          <div class="whatnext-title">Component playground</div>
+          <div class="whatnext-desc">A page of interactive UI components — buttons, cards, inputs, modals. Great for client presentations and design system documentation.</div>
+        </div>
+        <div class="whatnext-item">
+          <div class="whatnext-title">Design system docs site</div>
+          <div class="whatnext-desc">Turn your Figma tokens and component rules into a live reference site. Your developers will thank you.</div>
+        </div>
+        <div class="whatnext-item">
+          <div class="whatnext-title">Client presentation tool</div>
+          <div class="whatnext-desc">A custom web page for a specific client pitch — animated moodboard, interactive prototype, live brand preview. Something a PDF can't do.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="whatnext-group">
+      <div class="whatnext-group-label">Go further — micro products</div>
+      <div class="whatnext-items">
+        <div class="whatnext-item">
+          <div class="whatnext-title">Habit or mood tracker</div>
+          <div class="whatnext-desc">Simple data entry, local storage, a bit of data viz. A great second project — real state management without a complex back-end.</div>
+        </div>
+        <div class="whatnext-item">
+          <div class="whatnext-title">Internal design tool</div>
+          <div class="whatnext-desc">A brief generator, a contrast checker, a copy review tool. Small scope, real value — the best kind of first micro SaaS.</div>
+        </div>
+        <div class="whatnext-item">
+          <div class="whatnext-title">Dashboard UI</div>
+          <div class="whatnext-desc">Charts, filters, a data table. Harder than it looks, satisfying when it works. Pick a dataset you actually care about.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="callout" style="margin-top:2rem;">
+    <p><strong>The only rule:</strong> Pick something you actually want to exist. Motivation is the only prerequisite. Claude handles the rest.</p>
+  </div>
 </section>`
 };
 
@@ -3477,7 +3696,7 @@ const PATHS = {
   new: {
     label: 'New to Claude',
     badge: 'new',
-    sections: ['what','mindset','first30','access','plans'],
+    sections: ['what','mindset','first30','access','plans','glossary'],
     completion: {
       headline: "You've got the <em>foundation</em>.",
       sub: "You now know what Claude is, how to think about it, and how to set it up. The Design path is the natural next step — it's built for exactly where you are now.",
@@ -3497,7 +3716,7 @@ const PATHS = {
   build: {
     label: 'Build with Claude',
     badge: 'build',
-    sections: ['claudecode','planfirst','claudemd','figmaloop','deploy'],
+    sections: ['claudecode','planfirst','claudemd','figmaloop','deploy','whatnext'],
     completion: {
       headline: "You're ready to <em>ship</em>.",
       sub: "You have everything you need to go from Figma to a live URL with Claude Code and MCPs. The only thing left is to actually start a project.",
@@ -3522,7 +3741,9 @@ const SECTION_TITLES = {
   planfirst: 'Plan First',
   claudemd: 'CLAUDE.md',
   figmaloop: 'Figma Loop',
-  deploy: 'Deploy'
+  deploy: 'Deploy',
+  glossary: 'Glossary',
+  whatnext: 'What to Build'
 };
 
 let currentPath = null;
