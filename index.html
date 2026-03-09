@@ -1,16 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Claude for Designers — A Guide by Process to Pixels</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&display=swap" rel="stylesheet" />
-<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@300,400,500,700&display=swap" rel="stylesheet" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Complete Guide to Claude — Process to Pixels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Cabinet+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ─── ACCESSIBILITY ─── */
+/* Skip to content */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: var(--green);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0 0 8px 8px;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  z-index: 9999;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 0; }
+
+/* Focus ring — visible for keyboard nav */
+:focus-visible {
+  outline: 2.5px solid var(--green);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+/* Remove outline for mouse users only */
+:focus:not(:focus-visible) { outline: none; }
+
+/* Ensure interactive elements have min touch target */
+button, [role="button"], a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
 
 :root {
   /* Process to Pixels Brand Palette */
+  --ink: #18170F;
   --bg: #FAFAFA;
   --surface: #FFFFFF;
   --surface2: #F5F5F0;
@@ -19,17 +57,16 @@
   --border-light: #F0E0D6;
   --text: #18170F;
   --text-muted: #7a796e;
+  --stone: #7a796e;
   --text-dim: #b0afa5;
   --green: #296832;
   --green-hover: #3d8f4a;
+  --sage: #3d8f4a;
   --green-pale: #d4ebd7;
   --green-dim: rgba(41,104,50,0.12);
   --green-glow: rgba(41,104,50,0.06);
   --blush: #F0E0D6;
-  --red: #9b2c1e;
-  --red-dim: rgba(155,44,30,0.10);
-  --blue: #1a4f8a;
-  --blue-dim: rgba(26,79,138,0.10);
+  --wizard-nav-h: 56px;
 }
 
 html { scroll-behavior: smooth; }
@@ -38,8 +75,8 @@ body {
   font-family: 'Cabinet Grotesk', 'DM Sans', sans-serif;
   background: var(--bg);
   color: var(--text);
-  font-size: 15px;
-  line-height: 1.65;
+  font-size: 16px;
+  line-height: 1.7;
   overflow-x: hidden;
 }
 
@@ -80,7 +117,7 @@ body {
 
 .nav-link {
   font-family: 'Cabinet Grotesk', sans-serif;
-  font-size: 0.68rem;
+  font-size: 0.78rem;
   color: var(--text-muted);
   text-decoration: none;
   text-transform: uppercase;
@@ -134,7 +171,7 @@ body {
 
 .eyebrow {
   font-family: 'Cabinet Grotesk', sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.18em;
   color: var(--green);
@@ -177,7 +214,7 @@ h1 .italic { font-style: italic; color: var(--green); }
 }
 .pill {
   font-family: 'Cabinet Grotesk', sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -209,17 +246,17 @@ h1 .italic { font-style: italic; color: var(--green); }
   align-items: center;
   gap: 0.7rem;
   font-family: 'Cabinet Grotesk', sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: var(--text-dim);
+  color: var(--text-muted);
   margin-bottom: 1.5rem;
   font-weight: 700;
 }
 .section-num {
   background: var(--green);
   color: #fff;
-  font-size: 0.58rem;
+  font-size: 0.7rem;
   padding: 0.12rem 0.42rem;
   border-radius: 0.2rem;
   font-weight: 700;
@@ -310,7 +347,7 @@ em { font-style: italic; color: var(--text-muted); }
   position: absolute;
   top: 0.9rem; right: 0.9rem;
   font-family: 'Cabinet Grotesk', sans-serif;
-  font-size: 0.52rem;
+  font-size:0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--green);
@@ -322,10 +359,10 @@ em { font-style: italic; color: var(--text-muted); }
 }
 .access-label {
   font-family: 'Cabinet Grotesk', sans-serif;
-  font-size: 0.62rem;
+  font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--text-dim);
+  color: var(--text-muted);
   margin-bottom: 0.4rem;
   font-weight: 700;
 }
@@ -339,7 +376,7 @@ em { font-style: italic; color: var(--text-muted); }
 .access-card p { font-size: 0.85rem; color: var(--text-muted); max-width: none; margin-bottom: 1.2rem; line-height: 1.65; }
 .url-pill {
   font-family: 'Cabinet Grotesk', sans-serif;
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   font-weight: 500;
   color: var(--green);
   background: var(--green-dim);
@@ -370,7 +407,7 @@ table { width: 100%; border-collapse: collapse; }
 th {
   background: var(--surface3);
   font-family: 'Cabinet Grotesk', sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text-muted);
@@ -390,7 +427,7 @@ td {
 tr:last-child td { border-bottom: none; }
 td:first-child { color: var(--text); font-weight: 500; font-size: 0.82rem; }
 .chk { color: var(--green); font-weight: 700; }
-.dash { color: var(--text-dim); }
+.dash { color: var(--text-muted); }
 
 /* ─────────── PROMPT BLOCK ─────────── */
 .prompt {
@@ -407,7 +444,7 @@ td:first-child { color: var(--text); font-weight: 500; font-size: 0.82rem; }
   position: relative;
 }
 .prompt-label {
-  font-size: 0.58rem;
+  font-size: 0.75rem;
   letter-spacing: 0.14em;
   color: var(--green);
   text-transform: uppercase;
@@ -417,7 +454,7 @@ td:first-child { color: var(--text); font-weight: 500; font-size: 0.82rem; }
   opacity: 0.8;
 }
 .hi { color: var(--green); font-weight: 600; }
-.comment { color: var(--text-dim); font-style: italic; }
+.comment { color: var(--text-muted); font-style: italic; }
 
 /* ─────────── USE CASE ROWS ─────────── */
 .use-case {
@@ -431,10 +468,10 @@ td:first-child { color: var(--text); font-weight: 500; font-size: 0.82rem; }
 .use-case:last-child { border-bottom: none; }
 .uc-label { position: sticky; top: 4rem; }
 .uc-label h3 { margin: 0 0 0.5rem; font-size: 1.05rem; }
-.uc-label p { font-size: 0.8rem; color: var(--text-dim); margin: 0; max-width: none; }
+.uc-label p { font-size: 0.8rem; color: var(--text-muted); margin: 0; max-width: none; }
 .badge {
   font-family: 'Cabinet Grotesk', sans-serif;
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   padding: 0.2rem 0.6rem;
@@ -445,7 +482,7 @@ td:first-child { color: var(--text); font-weight: 500; font-size: 0.82rem; }
 }
 .badge-green { color: var(--green); background: var(--green-dim); border: 1px solid rgba(41,104,50,0.2); }
 .badge-amber { color: #8a5a00; background: rgba(180,120,20,0.1); border: 1px solid rgba(180,120,20,0.25); }
-.badge-blue { color: var(--blue); background: var(--blue-dim); border: 1px solid rgba(26,79,138,0.2); }
+.badge-blue { color: var(--green); background: var(--green-dim); border: 1px solid var(--green-dim); }
 .uc-body p { max-width: none; }
 
 /* ─────────── INSTALL STEPS ─────────── */
@@ -474,10 +511,201 @@ td:first-child { color: var(--text); font-weight: 500; font-size: 0.82rem; }
 }
 .i-body h4 { font-weight: 700; font-size: 0.95rem; color: var(--text); margin-bottom: 0.3rem; font-family: 'Cabinet Grotesk', sans-serif; }
 .i-body p { font-size: 0.85rem; color: var(--text-muted); margin: 0; max-width: none; }
+
+/* ── SETUP GUIDE (§05 step 5) ── */
+.setup-guide {
+  margin-top: 1.25rem;
+  background: var(--ink);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.setup-guide-header {
+  padding: 1.25rem 1.5rem 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.02);
+}
+.setup-guide-eyebrow {
+  display: inline-block;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--sage);
+  margin-bottom: 0.5rem;
+}
+.setup-guide-note {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.42);
+  line-height: 1.6;
+  margin: 0;
+}
+.setup-steps {
+  padding: 0.25rem 0;
+}
+.setup-step {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 0;
+  padding: 1.25rem 1.5rem 1.25rem 0;
+  position: relative;
+}
+.setup-step + .setup-step {
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.setup-step-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0.1rem;
+}
+.setup-step-num {
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background: rgba(61,143,74,0.15);
+  border: 1px solid rgba(61,143,74,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--sage);
+  flex-shrink: 0;
+}
+.setup-step-line {
+  width: 1px;
+  flex: 1;
+  background: rgba(255,255,255,0.07);
+  margin-top: 0.4rem;
+  min-height: 1.5rem;
+}
+.setup-step-content {
+  padding-bottom: 0.25rem;
+}
+.setup-step-title {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 0.35rem;
+}
+.setup-step-desc {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.81rem;
+  color: rgba(255,255,255,0.42);
+  line-height: 1.6;
+  margin: 0 0 0.75rem;
+}
+.setup-step-desc code {
+  background: rgba(255,255,255,0.08);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  font-size: 0.85em;
+  color: rgba(255,255,255,0.75);
+}
+.setup-step-desc kbd {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-bottom-width: 2px;
+  color: rgba(255,255,255,0.75);
+  font-size: 0.8em;
+}
+.setup-step-result {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.3);
+  margin: 0.6rem 0 0;
+  line-height: 1.6;
+}
+.setup-chip--link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--sage);
+  background: rgba(61,143,74,0.12);
+  border: 1px solid rgba(61,143,74,0.25);
+  border-radius: 6px;
+  padding: 0.3rem 0.7rem;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+.setup-chip--link:hover {
+  background: rgba(61,143,74,0.2);
+  border-color: rgba(61,143,74,0.4);
+}
+.terminal-mini {
+  background: #0e0e09;
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 0.1rem;
+}
+.terminal-mini-bar {
+  background: rgba(255,255,255,0.03);
+  padding: 0.45rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.terminal-mini-label {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.2);
+  margin-left: 0.4rem;
+}
+.terminal-mini-body {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0.85rem;
+}
+.terminal-mini-prompt {
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  color: var(--sage);
+  opacity: 0.6;
+  user-select: none;
+  flex-shrink: 0;
+}
+.terminal-mini-cmd {
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.82);
+  letter-spacing: 0.01em;
+  flex: 1;
+  user-select: all;
+}
+.terminal-mini-copy {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.25);
+  background: none;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 4px;
+  padding: 0.15rem 0.45rem;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+}
+.terminal-mini-copy:hover {
+  color: var(--sage);
+  border-color: rgba(61,143,74,0.4);
+}
 .chip {
   display: inline-block;
   font-family: 'Cabinet Grotesk', sans-serif;
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--green);
   background: var(--green-dim);
@@ -485,6 +713,33 @@ td:first-child { color: var(--text); font-weight: 500; font-size: 0.82rem; }
   padding: 0.18rem 0.55rem;
   border-radius: 0.25rem;
   margin-top: 0.5rem;
+}
+.code-block {
+  background: var(--ink);
+  border-radius: 0.4rem;
+  padding: 0.65rem 1rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: var(--sage);
+  letter-spacing: 0.02em;
+  user-select: all;
+}
+.code-block code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+kbd {
+  display: inline-block;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: var(--surface3);
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  padding: 0.1rem 0.4rem;
+  color: var(--text);
 }
 
 /* ─────────── CALLOUT ─────────── */
@@ -497,17 +752,18 @@ td:first-child { color: var(--text); font-weight: 500; font-size: 0.82rem; }
 }
 .callout p { font-size: 0.88rem; color: var(--text); margin: 0; max-width: none; }
 
-.callout-red {
-  background: var(--red-dim);
-  border: 1px solid rgba(155,44,30,0.25);
+.callout-stone {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--text-muted);
 }
-.callout-red p { color: #6b1a10; }
 
+/* callout-blue is deprecated — mapped to callout-green */
 .callout-blue {
-  background: var(--blue-dim);
-  border: 1px solid rgba(26,79,138,0.25);
+  background: var(--green-dim);
+  border: 1px solid rgba(41,104,50,0.2);
 }
-.callout-blue p { color: #0f2d5a; }
+.callout-blue p { color: var(--green); }
 
 /* ─────────── MINDSET CARDS ─────────── */
 .mindset-grid {
@@ -521,11 +777,11 @@ td:first-child { color: var(--text); font-weight: 500; font-size: 0.82rem; }
   margin: 2.5rem 0;
 }
 .mindset-card { background: var(--surface); padding: 1.8rem; }
-.mindset-card.wrong { background: rgba(155,44,30,0.04); }
+.mindset-card.wrong { background: var(--surface2); }
 .mindset-card.right { background: rgba(41,104,50,0.04); }
 .mindset-head {
   font-family: 'Cabinet Grotesk', sans-serif;
-  font-size: 0.62rem;
+  font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   font-weight: 700;
@@ -533,7 +789,7 @@ td:first-child { color: var(--text); font-weight: 500; font-size: 0.82rem; }
   padding-bottom: 0.7rem;
   border-bottom: 1px solid var(--border);
 }
-.mindset-card.wrong .mindset-head { color: var(--red); }
+.mindset-card.wrong .mindset-head { color: var(--text-muted); }
 .mindset-card.right .mindset-head { color: var(--green); }
 .mindset-card h4 { font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; font-family: 'Cabinet Grotesk', sans-serif; }
 .mindset-card p { font-size: 0.85rem; color: var(--text-muted); margin: 0; max-width: none; }
@@ -573,11 +829,11 @@ td:first-child { color: var(--text); font-weight: 500; font-size: 0.82rem; }
 .session-content p { font-size: 0.875rem; color: var(--text-muted); max-width: none; margin-bottom: 0.5rem; }
 .time-badge {
   font-family: 'Cabinet Grotesk', sans-serif;
-  font-size: 0.62rem;
+  font-size: 0.78rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--text-dim);
+  color: var(--text-muted);
   background: var(--surface3);
   border: 1px solid var(--border);
   padding: 0.15rem 0.5rem;
@@ -637,7 +893,7 @@ td:first-child { color: var(--text); font-weight: 500; font-size: 0.82rem; }
 .pl-icon { font-size: 1rem; }
 .pl-header h4 {
   font-family: 'Cabinet Grotesk', sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -663,10 +919,10 @@ td:first-child { color: var(--text); font-weight: 500; font-size: 0.82rem; }
   right: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 0.55rem;
+  font-size:0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--text-dim);
+  color: var(--text-muted);
   opacity: 0;
   transition: opacity 0.15s;
   font-weight: 700;
@@ -722,7 +978,7 @@ td:first-child { color: var(--text); font-weight: 500; font-size: 0.82rem; }
 .wf-step:last-child::after { display: none; }
 .wf-num {
   font-family: 'Cabinet Grotesk', sans-serif;
-  font-size: 0.62rem;
+  font-size: 0.78rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -730,7 +986,7 @@ td:first-child { color: var(--text); font-weight: 500; font-size: 0.82rem; }
   margin-bottom: 0.5rem;
 }
 .wf-step h4 { font-size: 0.85rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; font-family: 'Cabinet Grotesk', sans-serif; }
-.wf-step p { font-size: 0.78rem; color: var(--text-muted); max-width: none; margin: 0; line-height: 1.55; }
+.wf-step p { font-size: 0.88rem; color: var(--text-muted); max-width: none; margin: 0; line-height: 1.55; }
 
 /* ─────────── ANIMATIONS ─────────── */
 @keyframes fadeUp {
@@ -760,7 +1016,7 @@ td:first-child { color: var(--text); font-weight: 500; font-size: 0.82rem; }
 .dot-y { background: #a07010; }
 .dot-g { background: #3d8f4a; }
 .terminal-label {
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: #5a5945;
@@ -768,6 +1024,7 @@ td:first-child { color: var(--text); font-weight: 500; font-size: 0.82rem; }
   font-weight: 700;
 }
 .terminal-body {
+  line-height: 1.7;
   padding: 1.2rem 1.4rem;
   font-size: 0.82rem;
   line-height: 1.8;
@@ -791,7 +1048,7 @@ td:first-child { color: var(--text); font-weight: 500; font-size: 0.82rem; }
 .tier:last-child { border-bottom: none; }
 .tier-badge {
   font-family: 'Cabinet Grotesk', sans-serif;
-  font-size: 0.62rem;
+  font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   padding: 0.25rem 0.6rem;
@@ -802,7 +1059,7 @@ td:first-child { color: var(--text); font-weight: 500; font-size: 0.82rem; }
 }
 .tier-1 { background: var(--green-dim); color: var(--green); border: 1px solid rgba(41,104,50,0.25); }
 .tier-2 { background: rgba(180,120,20,0.1); color: #7a5000; border: 1px solid rgba(180,120,20,0.25); }
-.tier-3 { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(26,79,138,0.25); }
+.tier-3 { background: var(--green-dim); color: var(--green); border: 1px solid rgba(41,104,50,0.25); }
 .tier-content h4 { font-weight: 700; font-size: 0.95rem; color: var(--text); margin-bottom: 0.3rem; font-family: 'Cabinet Grotesk', sans-serif; }
 .tier-content p { font-size: 0.875rem; color: var(--text-muted); max-width: none; margin: 0 0 0.5rem; }
 .tier-tools {
@@ -813,7 +1070,7 @@ td:first-child { color: var(--text); font-weight: 500; font-size: 0.82rem; }
 }
 .tier-tool {
   font-family: 'Cabinet Grotesk', sans-serif;
-  font-size: 0.67rem;
+  font-size: 0.78rem;
   font-weight: 500;
   color: var(--text-muted);
   background: var(--surface3);
@@ -862,11 +1119,11 @@ td:first-child { color: var(--text); font-weight: 500; font-size: 0.82rem; }
 .loop-cell:last-child { border-right: none; }
 .loop-cell.head {
   font-family: 'Cabinet Grotesk', sans-serif;
-  font-size: 0.62rem;
+  font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-weight: 700;
-  color: var(--text-dim);
+  color: var(--text-muted);
   background: var(--surface3);
   padding: 0.6rem 1.2rem;
 }
@@ -897,52 +1154,631 @@ footer {
   .wf-step:last-child { border-bottom: none; }
   .wf-step::after { content: '↓'; right: auto; left: 50%; top: auto; bottom: -0.7rem; transform: translateX(-50%); }
 }
+
+
+/* ── WIZARD CHROME ── */
+:root {
+  --wizard-nav-h: 56px;
+  --wizard-prog-h: 3px;
+}
+
+body { overflow-x: hidden; }
+
+/* Path selector */
+#path-selector {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 6rem 2rem 6rem;
+  background: var(--ink);
+  position: relative;
+}
+#path-selector::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 30% 40%, rgba(41,104,50,0.18) 0%, transparent 70%),
+              radial-gradient(ellipse 50% 60% at 75% 65%, rgba(61,143,74,0.10) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.ps-brand {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 1rem;
+}
+.ps-tagline {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.06em;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.ps-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 0.75rem;
+  line-height: 1.15;
+}
+.ps-headline em {
+  font-style: italic;
+  color: var(--sage);
+}
+.ps-sub {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  margin-bottom: 3rem;
+  max-width: 480px;
+}
+
+.path-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 1100px;
+}
+.path-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 2rem 1.75rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  /* Reset button styles */
+  font-family: inherit;
+  color: inherit;
+  min-height: unset;
+}
+.path-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.path-card[data-path="new"]::before { background: radial-gradient(ellipse at top left, rgba(41,104,50,0.2), transparent 70%); }
+.path-card[data-path="design"]::before { background: radial-gradient(ellipse at top left, rgba(61,143,74,0.18), transparent 70%); }
+.path-card[data-path="build"]::before { background: radial-gradient(ellipse at top left, rgba(250,250,250,0.06), transparent 70%); }
+.path-card:hover { border-color: rgba(255,255,255,0.28); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+.path-card:hover::before { opacity: 1; }
+
+.pc-emoji { font-size: 2rem; line-height: 1; }
+.pc-label {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: #fff;
+}
+.pc-desc {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.55);
+  flex: 1;
+}
+.pc-steps {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.pc-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
+  transition: all 0.2s;
+  width: fit-content;
+  margin-top: 0.25rem;
+}
+.path-card[data-path="new"] .pc-cta { background: var(--green); color: white; }
+.path-card[data-path="design"] .pc-cta { background: var(--sage); color: white; }
+.path-card[data-path="build"] .pc-cta { background: rgba(255,255,255,0.12); color: white; border: 1px solid rgba(255,255,255,0.2); }
+.path-card:hover .pc-cta { filter: brightness(1.1); }
+
+.ps-footer {
+  margin-top: 2.5rem;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.45);
+  text-align: center;
+}
+.ps-footer a {
+  color: rgba(255,255,255,0.65);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.ps-meta {
+  margin-top: 4rem;
+  width: 100%;
+  max-width: 1100px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 3rem;
+  padding-bottom: 1rem;
+}
+.ps-meta-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+}
+.ps-meta-eyebrow-line {
+  flex: 1;
+  max-width: 80px;
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+}
+.ps-meta-label {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--sage);
+}
+.ps-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr 1px 1fr;
+  gap: 0;
+  margin-bottom: 2.5rem;
+}
+.ps-meta-stat {
+  text-align: center;
+  padding: 0 2rem;
+}
+.ps-meta-stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.85);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+  font-style: italic;
+}
+.ps-meta-stat-label {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.32);
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+.ps-meta-divider {
+  width: 1px;
+  background: rgba(255,255,255,0.08);
+  align-self: stretch;
+  margin: 0.5rem 0;
+}
+.ps-meta-text {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.28);
+  line-height: 1.75;
+  margin: 0 auto;
+  max-width: 580px;
+  text-align: center;
+}
+.ps-meta-text em {
+  color: rgba(255,255,255,0.5);
+  font-style: normal;
+}
+
+/* Wizard view */
+#wizard-view {
+  display: none;
+  min-height: 100vh;
+  flex-direction: column;
+  background: var(--ink);
+}
+
+/* Wizard top bar */
+.wiz-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(24,23,15,0.97);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  height: var(--wizard-nav-h);
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  gap: 1.5rem;
+}
+.wiz-back {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: color 0.2s;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  padding: 0;
+}
+.wiz-back:hover { color: rgba(255,255,255,0.8); }
+.wiz-path-label {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.wiz-path-label.new { background: rgba(41,104,50,0.25); color: var(--sage); }
+.wiz-path-label.design { background: rgba(61,143,74,0.2); color: #7ec87a; }
+.wiz-path-label.build { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.6); }
+
+.wiz-progress-track {
+  flex: 1;
+  height: 4px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.wiz-progress-fill {
+  height: 100%;
+  background: var(--green);
+  border-radius: 4px;
+  transition: width 0.4s cubic-bezier(.4,0,.2,1);
+}
+.wiz-step-count {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.6);
+  white-space: nowrap;
+}
+
+/* Wizard content pane */
+.wiz-content {
+  flex: 1;
+  animation: wizFadeIn 0.35s ease;
+  background: var(--bg);
+}
+@keyframes wizFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Wizard bottom nav */
+.wiz-bottom {
+  position: sticky;
+  bottom: 0;
+  background: rgba(24,23,15,0.97);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid var(--border);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  z-index: 100;
+}
+.wiz-section-title {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.6);
+  flex: 1;
+  text-align: center;
+}
+.wiz-btn {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.6rem 1.4rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 100px;
+  justify-content: center;
+}
+.wiz-btn-prev {
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.5);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.wiz-btn-prev:hover { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); }
+.wiz-btn-prev:disabled { opacity: 0.3; cursor: not-allowed; }
+.wiz-btn-next {
+  background: var(--green);
+  color: white;
+}
+.wiz-btn-next:hover { background: var(--sage); }
+.wiz-btn-next.is-finish { background: var(--ink); border: 1px solid var(--green); color: var(--green); }
+.wiz-btn-next.is-finish:hover { background: var(--green); color: white; }
+
+/* Completion screen */
+#completion-screen {
+  display: none;
+  min-height: 100vh;
+  background: var(--ink);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+.cs-check {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+.cs-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  color: #fff;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+.cs-headline em { font-style: italic; color: var(--sage); }
+.cs-sub {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.5);
+  max-width: 440px;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+.cs-paths {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+.cs-next-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.cs-next-label {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.35);
+}
+.cs-path-btn {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.7rem 1.4rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.7);
+}
+.cs-path-btn:hover { background: rgba(255,255,255,0.1); color: white; border-color: rgba(255,255,255,0.3); }
+.cs-path-btn.highlighted { background: var(--green); color: white; border-color: var(--green); }
+.cs-restart {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background: none;
+  border: none;
+  margin-top: 0.5rem;
+}
+.cs-restart:hover { color: rgba(255,255,255,0.8); }
+
+/* Dot nav */
+.wiz-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.wiz-dot {
+  width: 8px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  transition: all 0.2s;
+  cursor: pointer;
+  /* Button reset */
+  border: none;
+  padding: 0;
+  min-height: unset;
+  /* Larger hit target */
+  position: relative;
+}
+.wiz-dot::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+}
+.wiz-dot.active {
+  background: var(--green);
+  width: 18px;
+  border-radius: 3px;
+}
+.wiz-dot.done {
+  background: rgba(41,104,50,0.5);
+}
+
+/* Override section backgrounds for dark wizard chrome */
+#wizard-view .section,
+#wizard-view .section-wide {
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* hide hero when in wizard */
+.hero { display: block; }
+#wizard-view .hero { display: none; }
+
+/* Responsive */
+@media (max-width: 820px) {
+  .path-cards { grid-template-columns: 1fr; }
+  .wiz-bottom { padding: 0.75rem 1rem; }
+  .wiz-section-title { display: none; }
+}
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to content</a>
 
-<!-- STICKY NAV -->
-<nav class="sticky-nav">
-  <span class="nav-brand">Process to Pixels.</span>
-  <div class="nav-links">
-    <a class="nav-link" href="#what">What is Claude</a>
-    <a class="nav-link" href="#mindset">The Mindset</a>
-    <a class="nav-link" href="#access">Where to Use</a>
-    <a class="nav-link" href="#plans">Plans</a>
-    <a class="nav-link" href="#first30">First 30 Min</a>
-    <a class="nav-link" href="#usecases">Use Cases</a>
-    <a class="nav-link" href="#prompts">Prompt Library</a>
-    <a class="nav-link" href="#mistakes">Mistakes</a>
-    <a class="nav-link" href="#limits">Limitations</a>
-    <a class="nav-link" href="#workflow">Workflow</a>
-    <a class="nav-link" href="#install">Setup</a>
-    <a class="nav-link" href="#claudecode">Claude Code</a>
-    <a class="nav-link" href="#planfirst">Plan First</a>
-    <a class="nav-link" href="#claudemd">CLAUDE.md</a>
-    <a class="nav-link" href="#figmaloop">Figma Loop</a>
-    <a class="nav-link" href="#deploy">Deploy</a>
+<!-- ══ PATH SELECTOR ══ -->
+<div id="path-selector" id="main-content" role="main">
+  <div class="ps-brand">Process to Pixels. · A Guide for Designers · 2026</div>
+  <h1 class="ps-headline">The complete guide to <em>Claude</em></h1>
+  <p class="ps-sub">Where do you want to start?</p>
+
+  <div class="path-cards">
+    <button class="path-card" data-path="new" onclick="startPath('new')" aria-label="Start path: New to Claude">
+      <div class="pc-emoji">🌱</div>
+      <div class="pc-label">New to Claude</div>
+      <div class="pc-desc">You've never used it seriously — or you've barely scratched the surface. Start here.</div>
+      <div class="pc-steps">5 sections · ~20 min</div>
+      <div class="pc-cta">Start here →</div>
+    </button>
+    <button class="path-card" data-path="design" onclick="startPath('design')" aria-label="Start path: Design with Claude">
+      <div class="pc-emoji">✏️</div>
+      <div class="pc-label">Design with Claude</div>
+      <div class="pc-desc">You know the basics and want real, practical prompts and workflows for your daily design work.</div>
+      <div class="pc-steps">6 sections · ~25 min</div>
+      <div class="pc-cta">Go deeper →</div>
+    </button>
+    <button class="path-card" data-path="build" onclick="startPath('build')" aria-label="Start path: Build with Claude" role="button">
+      <div class="pc-emoji">⚡</div>
+      <div class="pc-label">Build with Claude</div>
+      <div class="pc-desc">You're comfortable with Claude and ready to connect it to Figma, Notion, and your codebase.</div>
+      <div class="pc-steps">5 sections · ~30 min</div>
+      <div class="pc-cta">Start building →</div>
+    </button>
   </div>
-</nav>
 
-<!-- HERO -->
-<header class="hero">
-  <div class="hero-orb orb1"></div>
-  <div class="hero-orb orb2"></div>
-  <div class="hero-body">
-    <div class="eyebrow">Process to Pixels · A Guide for Designers · 2026</div>
-    <h1>The complete guide to <span class="italic">Claude</span></h1>
-    <p class="hero-sub">What it is, how to think about it, where to access it, what you can build with it, and exactly what to install. Written for designers who've never used AI before.</p>
+  <p class="ps-footer">
+    Already know where you're going? <button onclick="showAllSections()" style="background:none;border:none;color:rgba(255,255,255,0.4);text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-family:'Cabinet Grotesk',sans-serif;font-size:0.82rem;padding:0;min-height:auto;">Browse everything →</button>
+  </p>
+
+  <div class="ps-meta">
+    <div class="ps-meta-eyebrow">
+      <div class="ps-meta-eyebrow-line"></div>
+      <span class="ps-meta-label">Built with Claude</span>
+      <div class="ps-meta-eyebrow-line"></div>
+    </div>
+
+    <div class="ps-meta-grid">
+      <div class="ps-meta-stat">
+        <div class="ps-meta-stat-num">1</div>
+        <div class="ps-meta-stat-label">designer<br>no developers</div>
+      </div>
+      <div class="ps-meta-divider"></div>
+      <div class="ps-meta-stat">
+        <div class="ps-meta-stat-num">0</div>
+        <div class="ps-meta-stat-label">lines of HTML<br>written by hand</div>
+      </div>
+      <div class="ps-meta-divider"></div>
+      <div class="ps-meta-stat">
+        <div class="ps-meta-stat-num">few days</div>
+        <div class="ps-meta-stat-label">from first outline<br>to live URL</div>
+      </div>
+    </div>
+
+    <p class="ps-meta-text">This guide was itself made using Claude — as a working example of what's possible. Structure planned in a Claude conversation. Sections drafted, critiqued, and refined through dialogue. The interactive wizard, path system, and design <em>built entirely through Claude Code</em> with plain English. Deployed to Vercel via GitHub, also through Claude.</p>
   </div>
-  <div class="hero-pills">
-    <span class="pill">No coding required</span>
-    <span class="pill">Free to start</span>
-    <span class="pill">Works in your browser</span>
-    <span class="pill">~25 min read</span>
+</div>
+
+<!-- ══ WIZARD VIEW ══ -->
+<div id="wizard-view">
+  <!-- Top bar -->
+  <div class="wiz-topbar" role="navigation" aria-label="Guide progress">
+    <button class="wiz-back" onclick="goHome()">← All paths</button>
+    <span class="wiz-path-label" id="wiz-path-label">New to Claude</span>
+    <div class="wiz-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20" aria-label="Progress through current path">
+      <div class="wiz-progress-fill" id="wiz-progress" style="width:20%"></div>
+    </div>
+    <span class="wiz-step-count" id="wiz-step-count">1 / 5</span>
   </div>
-</header>
 
+  <!-- Section content -->
+  <div class="wiz-content" id="wiz-content" role="main" aria-live="polite" aria-label="Guide content"></div>
 
-<!-- ══════════════════════════════════════
+  <!-- Bottom nav -->
+  <div class="wiz-bottom" role="navigation" aria-label="Section navigation">
+    <button class="wiz-btn wiz-btn-prev" id="wiz-prev" onclick="navigate(-1)">← Prev</button>
+    <div class="wiz-dots" id="wiz-dots" role="tablist" aria-label="Sections in this path"></div>
+    <button class="wiz-btn wiz-btn-next" id="wiz-next" onclick="navigate(1)">Next →</button>
+  </div>
+</div>
+
+<!-- ══ ALL SECTIONS VIEW (browse mode) ══ -->
+<div id="all-sections-view" style="display:none;">
+  <nav class="sticky-nav">
+    <span class="nav-brand" onclick="goHome()" style="cursor:pointer;">Process to Pixels.</span>
+    <div class="nav-links">
+      <a class="nav-link" href="#what">What is Claude</a>
+      <a class="nav-link" href="#mindset">The Mindset</a>
+      <a class="nav-link" href="#first30">Start Here</a>
+      <a class="nav-link" href="#access">Where to Use</a>
+      <a class="nav-link" href="#plans">Setup</a>
+      <a class="nav-link" href="#usecases">Use Cases</a>
+      <a class="nav-link" href="#prompts">Prompt Library</a>
+      <a class="nav-link" href="#mistakes">Mistakes</a>
+      <a class="nav-link" href="#limits">Limitations</a>
+      <a class="nav-link" href="#workflow">Workflow</a>
+      <a class="nav-link" href="#uxengineer">The Shift →</a>
+      <a class="nav-link" href="#claudecode">Claude Code</a>
+      
+      <a class="nav-link" href="#planfirst">Plan First</a>
+      <a class="nav-link" href="#claudemd">CLAUDE.md</a>
+      <a class="nav-link" href="#figmaloop">Figma Loop</a>
+      <a class="nav-link" href="#deploy">Deploy</a>
+    </div>
+  </nav>
+  <div id="all-sections-content"></div>
+</div>
+
+<!-- ══ COMPLETION SCREEN ══ -->
+<div id="completion-screen">
+  <div class="cs-check">✦</div>
+  <h2 class="cs-headline" id="cs-headline">You've finished <em>the basics</em>.</h2>
+  <p class="cs-sub" id="cs-sub">That's the foundation. Where do you want to go next?</p>
+  <div class="cs-paths" id="cs-paths"></div>
+  <button class="cs-restart" onclick="goHome()" aria-label="Return to path selector">← Back to path selector</button>
+</div>
+
+<script>
+const SECTIONS = {
+  "what": `<!-- ══════════════════════════════════════
      01 — WHAT IS CLAUDE
 ══════════════════════════════════════ -->
 <section class="section" id="what">
@@ -984,10 +1820,8 @@ footer {
       <p>Doesn't just answer — it creates. Copy, code, strategy, documentation, briefs. Full outputs, not just ideas.</p>
     </div>
   </div>
-</section>
-
-
-<!-- ══════════════════════════════════════
+</section>`,
+  "mindset": `<!-- ══════════════════════════════════════
      02 — THE MINDSET SHIFT
 ══════════════════════════════════════ -->
 <section class="section" id="mindset">
@@ -1032,146 +1866,16 @@ footer {
   <div class="callout">
     <p><strong>The most important thing to internalize:</strong> Claude is not a replacement for your judgment — it's an amplifier of it. Your taste, your experience, your design instinct is still driving. Claude just removes all the friction around execution.</p>
   </div>
-</section>
 
-
-<!-- ══════════════════════════════════════
-     03 — WHERE TO ACCESS
-══════════════════════════════════════ -->
-<section class="section-wide" id="access">
-  <div class="inner">
-  <div class="section-label"><span class="section-num">03</span> Where to Use Claude</div>
-  <h2>Five ways to <span class="italic">access Claude</span></h2>
-  <p>Claude is available across web, desktop, mobile, browser, and terminal. As a designer starting out, you only need one. Start with the web app — the others stack on top as your workflow evolves.</p>
-
-  <div class="access-grid">
-    <div class="access-card featured">
-      <div class="access-label">Start here</div>
-      <h4>Claude.ai</h4>
-      <p>The main web app. Open a browser, go to claude.ai, create an account, start chatting. Nothing to install. This is where most designers spend the majority of their time with Claude — Artifacts let you preview live HTML/code right in the chat.</p>
-      <span class="url-pill">claude.ai</span>
-      <ul class="feat-list">
-        <li>Free tier available</li>
-        <li>Works in any browser, any OS</li>
-        <li>Upload images & files</li>
-        <li>Artifacts — live interactive code preview</li>
-        <li>Projects for persistent context (Pro)</li>
-        <li>Figma connector available</li>
-      </ul>
-    </div>
-
-    <div class="access-card">
-      <div class="access-label">On your desktop</div>
-      <h4>Desktop App</h4>
-      <p>The native Mac and Windows app. Same as the web app but faster to open, works better with keyboard shortcuts, and lets Claude see your screen so it can give feedback on any app you have open — Figma, Notion, your browser, anything.</p>
-      <span class="url-pill">claude.ai/download</span>
-      <ul class="feat-list">
-        <li>Mac + Windows</li>
-        <li>Screen sharing — Claude sees your screen</li>
-        <li>Global keyboard shortcut to open</li>
-        <li>Faster than switching browser tabs</li>
-        <li>Offline access to recent conversations</li>
-      </ul>
-    </div>
-
-    <div class="access-card">
-      <div class="access-label">In your browser</div>
-      <h4>Chrome Extension</h4>
-      <p>Highlight any text on any webpage and ask Claude about it — without leaving the page. Summarize articles, critique competitor copy, get explanations of design patterns, or ask questions about what you're reading, all from a sidebar.</p>
-      <span class="url-pill">Chrome Web Store → "Claude"</span>
-      <ul class="feat-list">
-        <li>Works on any website</li>
-        <li>Highlight text → ask Claude instantly</li>
-        <li>Summarize any article or page</li>
-        <li>Great for competitive research</li>
-        <li>No tab switching needed</li>
-      </ul>
-    </div>
-
-    <div class="access-card">
-      <div class="access-label">On mobile</div>
-      <h4>Mobile App</h4>
-      <p>iOS and Android apps. Full Claude in your pocket — voice input, photo capture, and the same conversation history as the web app. Great for quick questions, taking screenshots of designs in the wild, and thinking through problems on the go.</p>
-      <span class="url-pill">App Store / Google Play → "Claude"</span>
-      <ul class="feat-list">
-        <li>iOS + Android, free</li>
-        <li>Voice input — speak your prompts</li>
-        <li>Camera — photograph anything and ask Claude</li>
-        <li>Synced history with web app</li>
-        <li>Notification support</li>
-      </ul>
-    </div>
-
-    <div class="access-card">
-      <div class="access-label">For building projects</div>
-      <h4>Claude Code</h4>
-      <p>Claude in your terminal. Reads and writes your actual project files, connects to Figma via MCP, deploys to Vercel, and commits to GitHub. This is how designers ship real products — no developer needed. See section 12 for the full guide.</p>
-      <span class="url-pill">Terminal — npm install -g @anthropic-ai/claude-code</span>
-      <ul class="feat-list">
-        <li>Direct file system access</li>
-        <li>Figma MCP integration</li>
-        <li>GitHub + Vercel deployment</li>
-        <li>CLAUDE.md project memory</li>
-        <li>Plan Mode for architect-first workflow</li>
-      </ul>
-    </div>
-
-    <div class="access-card" style="background: var(--surface); display:flex; flex-direction:column; justify-content: center; padding: 2rem;">
-      <div class="access-label" style="margin-bottom:0.8rem;">For builders</div>
-      <h4 style="font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:400; margin-bottom:0.6rem; color:var(--text);">Claude API</h4>
-      <p style="font-size:0.82rem;">The way developers embed Claude into their own products. How Cursor, Notion AI, and others use Claude under the hood. Not relevant for everyday design use — but good to know it exists.</p>
-      <span class="url-pill" style="margin-top:0.8rem;">api.anthropic.com</span>
-    </div>
+  <div class="callout callout-green" style="margin-top:1.5rem;">
+    <p><strong>Use Claude most when you're unsure — not when you're confident.</strong> That's when it's most valuable. If you know exactly what to do, just do it. But when you're stuck, second-guessing a direction, or can't name what feels wrong — that's the moment to open Claude and think out loud. Use it to stress-test your assumptions, explore the alternatives you haven't considered, and articulate what your instinct is already telling you. The conversation itself is part of the design process.</p>
   </div>
-
-  <div class="callout">
-    <p><strong>Recommended order:</strong> Start with <strong>claude.ai</strong> today. Download the <strong>Desktop App</strong> this week — the screen-sharing feature alone is worth it for design feedback. Add the <strong>Chrome Extension</strong> for research. The mobile app, Claude Code, and Figma MCP follow naturally from there.</p>
-  </div>
-  </div>
-</section>
-
-
-<!-- ══════════════════════════════════════
-     04 — PLANS
-══════════════════════════════════════ -->
-<section class="section" id="plans">
-  <div class="section-label"><span class="section-num">04</span> Plans & Pricing</div>
-  <h2>What do you <span class="italic">actually need?</span></h2>
-  <p>Claude.ai has a free tier and paid plans. Here's what actually matters for designers.</p>
-
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>Feature</th>
-          <th>Free</th>
-          <th>Pro — $20/mo</th>
-          <th>Team — $30/user/mo</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Chat with Claude</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td></tr>
-        <tr><td>Upload images & files</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td></tr>
-        <tr><td>Artifacts (live code preview)</td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td></tr>
-        <tr><td>Daily message limit</td><td>Limited</td><td>5× more</td><td>Team pool</td></tr>
-        <tr><td>Access to best models</td><td>Standard</td><td><span class="chk">✓ Priority</span></td><td><span class="chk">✓ Priority</span></td></tr>
-        <tr><td>Projects (persistent context)</td><td><span class="dash">—</span></td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td></tr>
-        <tr><td>Extended thinking mode</td><td><span class="dash">—</span></td><td><span class="chk">✓</span></td><td><span class="chk">✓</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="callout">
-    <p><strong>Honest take:</strong> Start free. You'll feel the limits within a week of daily use. Upgrade to Pro when you hit message limits or want extended thinking for complex problems. For most designers, Pro is the right long-term tier.</p>
-  </div>
-</section>
-
-
-<!-- ══════════════════════════════════════
-     05 — YOUR FIRST 30 MINUTES
+</section>`,
+  "first30": `<!-- ══════════════════════════════════════
+     03 — YOUR FIRST 30 MINUTES
 ══════════════════════════════════════ -->
 <section class="section" id="first30">
-  <div class="section-label"><span class="section-num">05</span> First Session</div>
+  <div class="section-label"><span class="section-num">03</span> First Session</div>
   <h2>Your first <span class="italic">30 minutes</span> with Claude</h2>
   <p>Don't read about Claude. Do this. Open claude.ai in another tab right now and follow these five exercises in order. Each one reveals a different dimension of what's possible.</p>
 
@@ -1251,10 +1955,224 @@ footer {
   <div class="callout">
     <p>After these five exercises, you'll have a real feel for what Claude can do. The rest of this guide gives you the vocabulary, prompts, and patterns to go further.</p>
   </div>
-</section>
+</section>`,
+  "access": `<!-- ══════════════════════════════════════
+     04 — WHERE TO USE CLAUDE
+══════════════════════════════════════ -->
+<section class="section-wide" id="access">
+  <div class="inner">
+  <div class="section-label"><span class="section-num">04</span> Where to Use Claude</div>
+  <h2>Four ways designers are <span class="italic">actually using Claude</span></h2>
+  <p>Claude lives in four different places — each one fits a different moment in how you work. Start with the desktop app. Everything else can wait until you need it.</p>
 
+  <div class="callout callout-stone">
+    <p><strong>New to these terms?</strong> As you read this section you'll see words like <em>Artifacts</em>, <em>Projects</em>, <em>MCP</em>, and <em>terminal</em>. Don't worry about them yet — here's a quick translation:<br><br>
+    <strong>Artifacts</strong> — interactive mini-apps Claude builds live in the chat window (like a working prototype or calculator).<br>
+    <strong>Projects</strong> — a way to give Claude a permanent memory of your brand, tone, or design system so you don't re-explain yourself every conversation.<br>
+    <strong>MCP</strong> — a connection that lets Claude talk directly to other tools like Figma or Notion, so it can read and write your actual files.<br>
+    <strong>Terminal</strong> — a text-based window on your computer (like a command line). It looks intimidating but you'll only ever type one or two things into it, exactly as written. Think of it as a very basic app launcher.
+    </p>
+  </div>
 
-<!-- ══════════════════════════════════════
+  <div class="access-grid">
+    <div class="access-card featured">
+      <div class="access-label">Start here</div>
+      <h4>Desktop App</h4>
+      <p>Download it. Open it. Sign up. That's it — you're ready. The desktop app lives in your dock and opens instantly from anywhere with a keyboard shortcut, so you never have to break your flow to get to Claude.</p>
+      <p>Once you're comfortable, you'll discover Artifacts (live interactive prototypes built from your Figma specs), Projects (persistent memory for brand guidelines and research), and screen sharing so Claude can see exactly what you're working on. But none of that matters on day one. Just download it and start a conversation.</p>
+      <span class="url-pill">claude.ai/download — free to start</span>
+      <ul class="feat-list">
+        <li>Free tier — same account as claude.ai</li>
+        <li>Global keyboard shortcut from any app</li>
+        <li>Screen sharing — Claude sees your screen</li>
+        <li>Artifacts — interactive live prototypes</li>
+        <li>Projects — persistent context across sessions</li>
+      </ul>
+    </div>
+
+    <div class="access-card">
+      <div class="access-label">In your browser · Claude on any webpage</div>
+      <h4>Chrome Extension</h4>
+      <p>The extension puts Claude on whatever site you're currently looking at — Claude sees exactly what you see. Quietly excellent for competitive analysis: you're on a competitor's site and can just ask what's working about their navigation or how their onboarding compares to yours.</p>
+      <p>Designers also use it for live QA during design review: open the staging build, ask Claude to spot inconsistencies or accessibility issues, get a plain-language report without leaving the browser.</p>
+      <span class="url-pill">Chrome Web Store → "Claude"</span>
+      <ul class="feat-list">
+        <li>Claude sees exactly what you see</li>
+        <li>Live competitive teardowns on any site</li>
+        <li>Design QA on staging builds</li>
+        <li>Highlight text → ask Claude instantly</li>
+        <li>No tab switching needed</li>
+      </ul>
+    </div>
+
+    <div class="access-card">
+      <div class="access-label">In your code editor</div>
+      <h4>Claude Extension <span style="font-weight:400; color:var(--stone);">in VS Code / Cursor</span></h4>
+      <p>If you're already working in VS Code or Cursor, you don't need to switch apps. Install the official Claude extension and Claude lives directly inside your editor — it sees your entire project, can edit files directly, and understands the full context of what you're building. No copy-pasting between a chat window and your code.</p>
+      <p>Cursor users: the Claude extension brings the same direct file editing and project awareness without replacing your editor. It's the most seamless way to work with code if you're already there.</p>
+      <span class="url-pill">VS Code Marketplace → "Claude"</span>
+      <ul class="feat-list">
+        <li>Works inside VS Code and Cursor</li>
+        <li>Claude sees your entire project at once</li>
+        <li>Edits files directly — no copy-pasting</li>
+        <li>Inline suggestions as you type</li>
+        <li>No context switching needed</li>
+      </ul>
+    </div>
+
+    <div class="access-card">
+      <div class="access-label">For connecting everything</div>
+      <h4>Claude Code</h4>
+      <p>Let's clear something up: designers aren't flocking to Claude Code to write code. They're using it because of MCP — Model Context Protocol — a standard that lets Claude plug directly into your tools. Put a few together and Claude stops being a chat window you switch to. It becomes something that understands your entire design project at once.</p>
+      <p>The MCPs designers are actually running: <strong>Figma</strong> — Claude reads your real frames, components, and design tokens, not a screenshot. <strong>Notion</strong> — your research docs and interview notes. <strong>Slack</strong> — team feedback threads and design decisions. <strong>Linear</strong> — open design tickets. <strong>GitHub</strong> — the actual codebase so generated components match what your team has built.</p>
+      <span class="url-pill">Terminal — npm install -g @anthropic-ai/claude-code</span>
+      <ul class="feat-list">
+        <li>Figma MCP — reads real frames, tokens, components</li>
+        <li>Notion, Slack, Linear, GitHub MCPs</li>
+        <li>The loop: Figma → Claude → code → back to Figma</li>
+        <li>CLAUDE.md project memory</li>
+        <li>GitHub + Vercel deployment</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><strong>The honest path:</strong> Start with the desktop app — it's what most designers use every day. The Chrome extension is great for research once you're in the habit. The VS Code/Cursor extension is for when you start building. Claude Code and MCPs are for later — when you've familiarised yourself with MCPs and used Claude for a few days for your practice. You'll know when you're ready.</p>
+  </div>
+  </div>
+</section>`,
+  "plans": `<!-- ══════════════════════════════════════
+     05 — SETUP
+══════════════════════════════════════ -->
+<section class="section" id="plans">
+  <div class="section-label"><span class="section-num">05</span> Setup</div>
+  <h2>What to <span class="italic">actually install</span></h2>
+  <p>Almost nothing. Three of these are zero-setup. Only Claude Code needs an installer — and that's for much later, when you're ready. Here's the right order.</p>
+
+  <div class="install-steps">
+
+    <div class="install-step" style="border-left: 3px solid var(--green);">
+      <span class="i-num" style="background:var(--green); color:white;">1</span>
+      <div class="i-body">
+        <h4>Create a Claude account + download the desktop app <em style="color:var(--green); font-style:normal; font-size:0.8rem;">— do this today, free</em></h4>
+        <p>Go to claude.ai, sign up with your email or Google account, and download the desktop app. This is the only thing you need to do right now. Everything else can wait weeks.</p>
+        <span class="chip">claude.ai/download</span>
+      </div>
+    </div>
+
+    <div class="install-step">
+      <span class="i-num">2</span>
+      <div class="i-body">
+        <h4>Chrome extension <em style="color:var(--text-muted); font-style:normal; font-size:0.8rem;">— optional, this week</em></h4>
+        <p>Puts Claude on any webpage you're looking at — useful for competitive research and QA on staging builds. Highlight anything on any page and ask Claude about it without switching tabs.</p>
+        <span class="chip">Chrome Web Store → "Claude"</span>
+      </div>
+    </div>
+
+    <div class="install-step">
+      <span class="i-num">3</span>
+      <div class="i-body">
+        <h4>Claude Projects <em style="color:var(--text-muted); font-style:normal; font-size:0.8rem;">— set up when you have a real project</em></h4>
+        <p>Projects give Claude persistent memory: your brand guidelines, design system docs, tone of voice. Load it once and every conversation after that starts with Claude already knowing your context. Pro feature, but worth it for ongoing client work.</p>
+        <span class="chip">claude.ai → Projects → New Project</span>
+      </div>
+    </div>
+
+    <div class="install-step">
+      <span class="i-num">4</span>
+      <div class="i-body">
+        <h4>Claude extension in VS Code or Cursor <em style="color:var(--text-muted); font-style:normal; font-size:0.8rem;">— when you start building</em></h4>
+        <p>If you're already working in VS Code or Cursor, install the Claude extension. Claude sees your whole project and edits files directly — no copy-pasting. Pair it with a CLAUDE.md file containing your design system rules and it never needs re-briefing.</p>
+        <span class="chip">VS Code Marketplace → "Claude"</span>
+      </div>
+    </div>
+
+    <div class="install-step install-step--advanced">
+      <span class="i-num">5</span>
+      <div class="i-body">
+        <h4>Claude Code + MCPs <em style="color:var(--text-muted); font-style:normal; font-size:0.8rem;">— when you're ready to go deep</em></h4>
+        <p>Claude Code connects to your tools via MCP — Figma, Notion, GitHub, and more — and understands your entire project at once. This is the advanced tier. Get comfortable with the desktop app first. You'll know when you're ready because you'll feel the ceiling.</p>
+
+        <div class="setup-guide">
+          <div class="setup-guide-header">
+            <span class="setup-guide-eyebrow">Prerequisites · one-time setup</span>
+            <p class="setup-guide-note">Node.js is a free background tool that Claude Code runs on top of. You don't need to understand it — just install it once and forget it's there.</p>
+          </div>
+
+          <div class="setup-steps">
+
+            <div class="setup-step">
+              <div class="setup-step-marker">
+                <span class="setup-step-num">1</span>
+                <div class="setup-step-line"></div>
+              </div>
+              <div class="setup-step-content">
+                <div class="setup-step-title">Install Node.js</div>
+                <p class="setup-step-desc">Download the LTS version — the button says "Recommended for most users". Open the installer, click through. No Xcode, no Homebrew, no terminal yet.</p>
+                <a href="https://nodejs.org" target="_blank" class="setup-chip setup-chip--link">nodejs.org → download LTS ↗</a>
+              </div>
+            </div>
+
+            <div class="setup-step">
+              <div class="setup-step-marker">
+                <span class="setup-step-num">2</span>
+                <div class="setup-step-line"></div>
+              </div>
+              <div class="setup-step-content">
+                <div class="setup-step-title">Install Claude Code</div>
+                <p class="setup-step-desc">Open Terminal <kbd>⌘ Space</kbd> → type <code>Terminal</code> → Enter. Then paste this and press Enter:</p>
+                <div class="terminal-mini">
+                  <div class="terminal-mini-bar">
+                    <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+                    <span class="terminal-mini-label">Terminal</span>
+                  </div>
+                  <div class="terminal-mini-body">
+                    <span class="terminal-mini-prompt">$</span>
+                    <code class="terminal-mini-cmd">npm install -g @anthropic-ai/claude-code</code>
+                    <button class="terminal-mini-copy" onclick="navigator.clipboard.writeText('npm install -g @anthropic-ai/claude-code').then(()=>{this.textContent='✓';setTimeout(()=>this.textContent='copy',1200)})" title="Copy command">copy</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="setup-step">
+              <div class="setup-step-marker">
+                <span class="setup-step-num">3</span>
+              </div>
+              <div class="setup-step-content">
+                <div class="setup-step-title">Start Claude Code</div>
+                <p class="setup-step-desc">In Terminal, navigate into your project folder, then type:</p>
+                <div class="terminal-mini">
+                  <div class="terminal-mini-bar">
+                    <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+                    <span class="terminal-mini-label">Terminal</span>
+                  </div>
+                  <div class="terminal-mini-body">
+                    <span class="terminal-mini-prompt">$</span>
+                    <code class="terminal-mini-cmd">cd Desktop/my-project</code>
+                  </div>
+                  <div class="terminal-mini-body" style="border-top: 1px solid rgba(255,255,255,0.06);">
+                    <span class="terminal-mini-prompt">$</span>
+                    <code class="terminal-mini-cmd">claude</code>
+                    <button class="terminal-mini-copy" onclick="navigator.clipboard.writeText('claude').then(()=>{this.textContent='✓';setTimeout(()=>this.textContent='copy',1200)})" title="Copy command">copy</button>
+                  </div>
+                </div>
+                <p class="setup-step-result">Claude Code opens, reads your folder, and waits for plain-English instructions. Full walkthrough in <strong>§12</strong>.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="callout">
+    <p><strong>Honest advice:</strong> Do step 1 today. Do step 2 this week if you're curious. Steps 3–5 will happen naturally when the need arises — don't force it. The most powerful thing isn't the right setup, it's using Claude every single day until it becomes instinct.</p>
+  </div>
+</section>`,
+  "usecases": `<!-- ══════════════════════════════════════
      06 — USE CASES
 ══════════════════════════════════════ -->
 <section class="section-wide" id="usecases">
@@ -1378,10 +2296,8 @@ footer {
   </div>
 
   </div>
-</section>
-
-
-<!-- ══════════════════════════════════════
+</section>`,
+  "prompts": `<!-- ══════════════════════════════════════
      07 — PROMPT LIBRARY
 ══════════════════════════════════════ -->
 <section class="section" id="prompts">
@@ -1456,11 +2372,35 @@ footer {
       </div>
     </div>
 
+    <div class="pl-category">
+      <div class="pl-header">
+        <span class="pl-icon">💬</span>
+        <h4>Clarity &amp; Feedback</h4>
+      </div>
+      <div class="pl-prompts">
+        <div class="pl-prompt">I need to collect feedback on <span class="var">[design or feature]</span> from <span class="var">[stakeholders / users]</span>. Write 5 questions that will get specific, actionable responses — not vague opinions.<span class="copy-hint">hover to copy</span></div>
+        <div class="pl-prompt">I received this feedback: "<span class="var">[paste feedback]</span>". Help me identify what the real concern is underneath it, and suggest how I should respond or address it in the design.<span class="copy-hint">hover to copy</span></div>
+        <div class="pl-prompt">I'm about to present this design decision to <span class="var">[stakeholder type]</span>. Help me write a one-paragraph explanation that leads with the business outcome, not the design rationale.<span class="copy-hint">hover to copy</span></div>
+        <div class="pl-prompt">What's unclear about this design? I've been looking at it too long to see it fresh: <span class="var">[paste design description or attach screenshot]</span><span class="copy-hint">hover to copy</span></div>
+      </div>
+    </div>
+
+    <div class="pl-category">
+      <div class="pl-header">
+        <span class="pl-icon">🎨</span>
+        <h4>Design System Thinking</h4>
+      </div>
+      <div class="pl-prompts">
+        <div class="pl-prompt">I'm naming tokens for <span class="var">[spacing / colour / typography]</span> in my design system. Suggest a naming convention that scales, is intuitive for both designers and developers, and avoids ambiguity.<span class="copy-hint">hover to copy</span></div>
+        <div class="pl-prompt">Write a decision log for this component: <span class="var">[describe component]</span>. Include: what problem it solves, what alternatives were considered, and why this approach was chosen.<span class="copy-hint">hover to copy</span></div>
+        <div class="pl-prompt">Review these component names and flag any that are inconsistent, too generic, or will cause confusion as the system scales: <span class="var">[paste component list]</span><span class="copy-hint">hover to copy</span></div>
+        <div class="pl-prompt">I'm designing a <span class="var">[component]</span>. Before I start, what are all the states, variants, and edge cases I need to account for? Think like an engineer who has to implement this.<span class="copy-hint">hover to copy</span></div>
+      </div>
+    </div>
+
   </div>
-</section>
-
-
-<!-- ══════════════════════════════════════
+</section>`,
+  "mistakes": `<!-- ══════════════════════════════════════
      08 — COMMON MISTAKES
 ══════════════════════════════════════ -->
 <section class="section" id="mistakes">
@@ -1522,10 +2462,8 @@ footer {
       <div class="fix">Bring Claude a decision you've already made, not a blank slate. "I've decided to build X for Y users. Help me [write copy / review this design / build this component]." Your judgment drives; Claude accelerates.</div>
     </div>
   </div>
-</section>
-
-
-<!-- ══════════════════════════════════════
+</section>`,
+  "limits": `<!-- ══════════════════════════════════════
      09 — LIMITATIONS
 ══════════════════════════════════════ -->
 <section class="section" id="limits">
@@ -1560,13 +2498,15 @@ footer {
     </div>
   </div>
 
-  <div class="callout callout-red">
+  <div class="callout callout-stone">
     <p><strong>The golden rule:</strong> Never publish copy, ship code, or present findings from Claude without reading and editing them yourself first. Claude removes the grunt work — it doesn't replace your professional judgment.</p>
   </div>
-</section>
 
-
-<!-- ══════════════════════════════════════
+  <div class="callout" style="margin-top:1.5rem;">
+    <p><strong>AI gives you the structure. Taste is still 100% human.</strong> Claude is excellent at enforcing consistency — it will apply your rules faithfully, at scale, without getting tired. But knowing <em>when</em> to break those rules, what makes something feel right, and what makes a design genuinely great — that's yours. It matters more than ever. As AI handles more of the execution, the designers who thrive will be the ones with the sharpest eye and the clearest point of view.</p>
+  </div>
+</section>`,
+  "workflow": `<!-- ══════════════════════════════════════
      10 — THE FULL WORKFLOW
 ══════════════════════════════════════ -->
 <section class="section" id="workflow">
@@ -1575,9 +2515,14 @@ footer {
   <p>Claude isn't a standalone tool — it's most powerful when it's woven into how you already work. Here's the full loop, from brief to delivery.</p>
 
   <div class="workflow">
+    <div class="wf-step" style="border-left: 3px solid var(--green); background: var(--green-pale);">
+      <div class="wf-num" style="color:var(--green);">00</div>
+      <h4>Before Figma — Define intent first</h4>
+      <p>Open Claude before you open Figma. Describe the problem, the user, the constraint. Ask Claude to map the decision paths and user intent. Let it surface what you haven't considered yet. Screens are just the output — this is where the real design happens. Skipping this step is the most expensive shortcut in the workflow.</p>
+    </div>
     <div class="wf-step">
       <div class="wf-num">01</div>
-      <h4>Brief & Research</h4>
+      <h4>Brief &amp; Research</h4>
       <p>Use Claude to generate interview questions, synthesize competitor patterns, and write the first draft of your design brief.</p>
     </div>
     <div class="wf-step">
@@ -1602,93 +2547,52 @@ footer {
     </div>
   </div>
 
-  <div class="callout callout-blue">
+  <div class="callout callout-green">
     <p><strong>The deeper unlock:</strong> Once you start using Claude throughout your process — not just for one-off tasks — your output quality goes up and your turnaround time drops dramatically. The loop above takes weeks with a traditional workflow. With Claude integrated, it takes days.</p>
   </div>
-</section>
-
-
-<!-- ══════════════════════════════════════
-     11 — SETUP & INSTALL
+</section>`,
+  "uxengineer": `<!-- ══════════════════════════════════════
+     11 — THE UX ENGINEER ERA
 ══════════════════════════════════════ -->
-<section class="section" id="install">
-  <div class="section-label"><span class="section-num">11</span> Setup</div>
-  <h2>What to <span class="italic">install</span></h2>
-  <p>Here's exactly what to set up, in the right order — with honest notes on what's essential vs. optional.</p>
+<section class="section" id="uxengineer">
+  <div class="section-label"><span class="section-num">11</span> The Bigger Picture</div>
+  <h2>Where this is all <span class="italic">heading</span></h2>
+  <p>This section steps back from the day-to-day prompts and looks at the bigger picture — what this shift means for your role as a designer, and what's now possible that wasn't before.</p>
+  <p>Something is shifting — and it's worth understanding, because it changes what it means to be a good designer in 2026.</p>
 
-  <div class="install-steps">
-
-    <div class="install-step">
-      <span class="i-num">1</span>
-      <div class="i-body">
-        <h4>Create a Claude account <em style="color:var(--green); font-style:normal; font-size:0.8rem;">— required, free</em></h4>
-        <p>Go to claude.ai in any modern browser. Sign up with your email or Google account. This is the only thing you <em>must</em> do today. Everything else can wait.</p>
-        <span class="chip">claude.ai → Sign up</span>
-      </div>
-    </div>
-
-    <div class="install-step">
-      <span class="i-num">2</span>
-      <div class="i-body">
-        <h4>Download the mobile app <em style="color:var(--text-muted); font-style:normal; font-size:0.8rem;">— optional, free</em></h4>
-        <p>Claude has iOS and Android apps. Great for quick questions, voice input, and thinking-on-the-go. Your conversations sync between web and mobile automatically.</p>
-        <span class="chip">App Store / Google Play → "Claude by Anthropic"</span>
-      </div>
-    </div>
-
-    <div class="install-step">
-      <span class="i-num">3</span>
-      <div class="i-body">
-        <h4>Install the Claude Chrome extension <em style="color:var(--text-muted); font-style:normal; font-size:0.8rem;">— optional, useful</em></h4>
-        <p>Highlight any text on any webpage and ask Claude about it without switching tabs. Excellent for competitive research — highlight a competitor's copy and ask "how would I write this better for [your context]?"</p>
-        <span class="chip">Chrome Web Store → search "Claude"</span>
-      </div>
-    </div>
-
-    <div class="install-step">
-      <span class="i-num">4</span>
-      <div class="i-body">
-        <h4>Download Cursor <em style="color:var(--text-muted); font-style:normal; font-size:0.8rem;">— optional, for building</em></h4>
-        <p>Cursor is a code editor with Claude built in. When you're ready to build real projects — portfolio sites, internal design tools, interactive prototypes — this is where you do it. You describe what you want, Cursor writes and edits the files. Claude.ai's Artifacts panel handles simple one-file things; Cursor handles real multi-file projects.</p>
-        <span class="chip">cursor.com → Download free</span>
-      </div>
-    </div>
-
-    <div class="install-step">
-      <span class="i-num">5</span>
-      <div class="i-body">
-        <h4>Set up Claude Projects <em style="color:var(--green); font-style:normal; font-size:0.8rem;">— Pro feature, very useful</em></h4>
-        <p>Projects let you give Claude persistent context: your brand guidelines, design system documentation, tone of voice notes. Once set up, every conversation in that Project starts with Claude already knowing your context. This is a significant productivity unlock for ongoing client work.</p>
-        <span class="chip">claude.ai → Projects → New Project</span>
-      </div>
-    </div>
-
-    <div class="install-step">
-      <span class="i-num">6</span>
-      <div class="i-body">
-        <h4>Explore the Figma MCP <em style="color:var(--text-muted); font-style:normal; font-size:0.8rem;">— advanced, for later</em></h4>
-        <p>MCP (Model Context Protocol) is a way to connect Claude to external apps. The Figma MCP lets Claude read your actual Figma files — component names, design tokens, layer structure — so the code it generates matches your real design system. This is transformative, but save it for once you're comfortable with the basics.</p>
-        <span class="chip">Search: "Figma MCP Claude setup" when you're ready</span>
-      </div>
-    </div>
-
+  <div class="callout callout-stone">
+    <p><strong>A quick note on vocabulary.</strong> This section uses terms like <em>design systems</em>, <em>tokens</em>, and <em>constraints</em>. If those are new to you: a <strong>design system</strong> is just a set of reusable rules for how your product looks and behaves (colours, spacing, button styles). <strong>Tokens</strong> are the named values in that system — like <code>color-primary: #296832</code> instead of hard-coding the hex everywhere. These aren't advanced concepts — they're just how design at scale is organised. Claude makes them easier to work with.</p>
   </div>
 
-  <div class="callout">
-    <p><strong>Honest advice:</strong> Do step 1 today. Do step 2 this week. The rest can wait until the use case becomes obvious. The most powerful thing is not having the right setup — it's using Claude every single day until it becomes instinct.</p>
+  <div class="mindset-grid">
+    <div class="mindset-card wrong">
+      <div class="mindset-head">Then</div>
+      <h4>Designers design screens.</h4>
+      <p>Hand off to developers. Wait. Review. Repeat. The gap between intention and implementation is where quality dies.</p>
+    </div>
+    <div class="mindset-card right">
+      <div class="mindset-head">Now</div>
+      <h4>Designers design systems.</h4>
+      <p>Tokens, constraints, states, logic — these are design concepts now. You don't need to write production code. You need to think like someone who does.</p>
+    </div>
   </div>
-</section>
 
+  <p style="margin-top:2rem;">This isn't about code. It's about ownership. The designers who thrive will be the ones who start with logic, build flows, shape components, and understand implementation well enough to make decisions confidently. Claude is the tool that makes that possible without a Computer Science degree.</p>
 
-<!-- ══════════════════════════════════════
+  <div class="callout callout-green">
+    <p><strong>You don't need to code to think like an engineer.</strong> Tokens, constraints, states, logic — these have always been design concepts. What's new is that Claude lets you act on that thinking directly: build the prototype, write the spec, deploy the thing. The gap between designing and shipping has never been smaller. Close it.</p>
+  </div>
+</section>`,
+  "claudecode": `<!-- ══════════════════════════════════════
      12 — CLAUDE CODE FOR DESIGNERS
 ══════════════════════════════════════ -->
 <section class="section-wide" id="claudecode">
   <div class="inner">
   <div class="section-label"><span class="section-num">12</span> Going Deeper</div>
   <h2>Claude Code — <span class="italic">the next level</span></h2>
-  <p>Claude.ai is where you start. Claude Code is where you build. It's a version of Claude that lives in your computer's terminal and has direct access to your files — it doesn't just suggest code, it writes it, edits it, runs it, and watches the result. All through a conversation in plain English.</p>
-  <p>As a designer, this is how you go from making <em>mockups</em> to shipping <em>things</em>. A working portfolio site. An internal design tool. A growth analyzer. A client-facing prototype with real interactions and real data. Felix Lee — a designer with no development background — built three apps and deployed them live within two weeks of using Claude Code.</p>
+  <p>If you've arrived here without spending time in claude.ai first, pause. Go back to §01–§05, use Claude for a few days, and return when it feels natural. Claude Code is a different tool for a different stage — it's designed for when you're already comfortable with Claude and want to connect it directly to your files, Figma, and codebase.</p>
+  <p>Claude.ai is where you start. Claude Code is where you go deeper — but not necessarily to write code. The reason designers are genuinely excited about Claude Code is <strong>MCP</strong> (Model Context Protocol): a standard that lets Claude plug directly into Figma, Notion, Slack, Linear, GitHub, and more. Claude stops being a chat window and becomes something that understands your entire project at once.</p>
+  <p>It's also a version of Claude that lives in your terminal — <em>a text-based window on your computer where you type short commands. It looks like a hacker movie but you'll only type a few things into it, exactly as shown in this guide. No coding knowledge needed.</em> Claude Code has direct access to your files — it writes, edits, and runs code, then watches the result. All through plain English. As a designer, this is how you go from making <em>mockups</em> to shipping <em>things</em>: a working portfolio site, an internal design tool, a client-facing prototype with real interactions and real data.</p>
 
   <div class="callout">
     <p><strong>The key insight:</strong> You don't need to understand the code. You need to understand what you're building. That's what designers are already trained to do — understand users, goals, and outcomes. Claude Code handles the implementation. You direct the vision.</p>
@@ -1718,23 +2622,28 @@ footer {
     </div>
   </div>
 
-  <h3>How to install Claude Code (Mac)</h3>
-  <p>Claude Code runs in your Mac's Terminal app. Here are the four commands you need — total setup time: about 5 minutes.</p>
+  <h3>How to install Claude Code (Mac &amp; Windows)</h3>
+  <p>The only thing Claude Code needs is <strong>Node.js</strong> — a small runtime that runs JavaScript outside a browser. No Xcode. No Homebrew. No developer environment. Just Node, then one command. Total setup time: about 3 minutes.</p>
+
+  <div class="callout" style="margin-bottom:1.5rem;">
+    <p><strong>Do you need to be technical?</strong> No. You need to be comfortable opening Terminal (Mac) or Command Prompt (Windows) and typing one line. That's it. Everything after that is plain English.</p>
+  </div>
 
   <div class="terminal">
     <div class="terminal-bar">
       <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
-      <span class="terminal-label">Terminal — Mac</span>
+      <span class="terminal-label">Terminal — Mac &amp; Windows</span>
     </div>
     <div class="terminal-body">
-      <span class="comment"># Step 1: Install Node.js first (if you don't have it)</span><br>
-      <span class="comment"># Go to nodejs.org and download the LTS version — no Terminal needed</span><br><br>
-      <span class="comment"># Step 2: Install Claude Code</span><br>
+      <span class="comment"># Before you start: install Node.js (one-time, no Terminal needed)</span><br>
+      <span class="comment"># Go to nodejs.org → download the LTS version → run the installer → done</span><br>
+      <span class="comment"># That's the only prerequisite. No Xcode, no Homebrew, nothing else.</span><br><br>
+      <span class="comment"># Install Claude Code</span><br>
       <span class="cmd">npm install -g @anthropic-ai/claude-code</span><br><br>
-      <span class="comment"># Step 3: Verify it worked</span><br>
+      <span class="comment"># Check it worked</span><br>
       <span class="cmd">claude --version</span><br>
       <span class="out">Claude Code 1.x.x</span><br><br>
-      <span class="comment"># Step 4: Start Claude Code</span><br>
+      <span class="comment"># Start Claude Code in any project folder</span><br>
       <span class="cmd">claude</span><br>
       <span class="out">✓ Claude Code is ready. What would you like to build?</span>
     </div>
@@ -1773,11 +2682,403 @@ footer {
     </div>
   </div>
 
-  <div class="callout callout-blue">
-    <p><strong>Windows users:</strong> The process is identical — open Command Prompt or PowerShell and use the same commands. Use <code style="font-family:'Cabinet Grotesk',sans-serif; font-size:0.8em; color:var(--blue)">dir</code> instead of <code style="font-family:'Cabinet Grotesk',sans-serif; font-size:0.8em; color:var(--blue)">ls</code> to list files.</p>
+  <div class="callout callout-green">
+    <p><strong>Windows users:</strong> Same process — install Node.js from nodejs.org (Windows installer), then open Command Prompt or PowerShell and run the same <code style="font-family:'Cabinet Grotesk',sans-serif; font-size:0.8em; color:var(--green)">npm install</code> command. Use <code style="font-family:'Cabinet Grotesk',sans-serif; font-size:0.8em; color:var(--green)">dir</code> instead of <code style="font-family:'Cabinet Grotesk',sans-serif; font-size:0.8em; color:var(--green)">ls</code> to list files. Everything else is identical.</p>
   </div>
 
-  <h3>Three tools — choose your level</h3>
+  <!-- ── MCP SETUP ── -->
+  <h3 style="margin-top:3rem;">How to connect each MCP</h3>
+  <p>MCPs are what make Claude Code worth using as a designer. Each one is a single terminal command — you run it once and it's connected permanently. Here's exactly how to connect each one, step by step, including what you'll see on screen.</p>
+
+  <div class="callout" style="margin-bottom:2rem;">
+    <p><strong>How it works:</strong> Each <code style="font-size:0.82em;">claude mcp add</code> command registers a connection between Claude Code and that tool. Run it once from any folder — it's saved to your user account globally. The next time you start Claude Code anywhere, that MCP is already live. Check what's connected at any time with <code style="font-size:0.82em;">claude mcp list</code>.</p>
+  </div>
+
+  <!-- FIGMA -->
+  <div style="border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:1.5rem;">
+    <div style="background:var(--surface2); padding:1rem 1.5rem; display:flex; align-items:center; gap:0.75rem; border-bottom:1px solid var(--border);">
+      <span style="font-size:1.4rem;">🎨</span>
+      <div>
+        <strong style="font-size:1rem;">Figma MCP</strong>
+        <span style="margin-left:0.75rem; font-size:0.75rem; background:var(--green-pale); color:var(--green); padding:2px 8px; border-radius:20px; font-weight:600;">Read-only</span>
+      </div>
+      <span style="margin-left:auto; font-size:0.82rem; color:var(--text-muted);">Claude reads real frames, tokens, layers</span>
+    </div>
+    <div style="padding:1.5rem;">
+      <p style="margin-top:0;"><strong>What you need beforehand:</strong> A Figma account (any plan). Dev Mode must be enabled on your file.</p>
+      <ol style="padding-left:1.2rem; line-height:2;">
+        <li>Open Figma Desktop → top menu → <strong>Figma → Preferences</strong></li>
+        <li>Scroll to <strong>"Enable Dev Mode MCP Server"</strong> and toggle it on</li>
+        <li>You'll see a confirmation: "MCP server running on port 3845"</li>
+        <li>Open any file you want Claude to read, switch to <strong>Dev Mode</strong> (bottom toolbar)</li>
+        <li>Run this once in terminal — you'll never need to run it again:</li>
+      </ol>
+      <div class="terminal" style="margin:1rem 0;">
+        <div class="terminal-bar">
+          <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+          <span class="terminal-label">Terminal</span>
+        </div>
+        <div class="terminal-body">
+          <span class="cmd">claude mcp add --transport http figma https://mcp.figma.com/v1/claude</span><br>
+          <span class="out">✓ MCP server "figma" added</span><br><br>
+          <span class="comment"># Verify it's registered</span><br>
+          <span class="cmd">claude mcp list</span><br>
+          <span class="out">figma — https://mcp.figma.com/v1/claude (http)</span>
+        </div>
+      </div>
+      <ol start="6" style="padding-left:1.2rem; line-height:2;">
+        <li>Start Claude Code in any project: <code style="font-size:0.85em;">claude</code></li>
+        <li>Claude will automatically detect the open Figma file. You'll see: <em style="color:var(--green);">"Connected to Figma Dev Mode MCP"</em></li>
+        <li>If Claude says it can't see Figma — check that Figma Desktop is open and you're in Dev Mode on the file</li>
+      </ol>
+      <div style="background:var(--green-pale); border-radius:8px; padding:1rem; margin-top:1rem; font-size:0.88rem;">
+        <strong>✅ You're connected when:</strong> Claude describes specific component names, spacing values, or token names from your actual file — not generic descriptions.
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTION -->
+  <div style="border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:1.5rem;">
+    <div style="background:var(--surface2); padding:1rem 1.5rem; display:flex; align-items:center; gap:0.75rem; border-bottom:1px solid var(--border);">
+      <span style="font-size:1.4rem;">📝</span>
+      <div>
+        <strong style="font-size:1rem;">Notion MCP</strong>
+        <span style="margin-left:0.75rem; font-size:0.75rem; background:var(--green-pale); color:var(--green); padding:2px 8px; border-radius:20px; font-weight:600;">Read + Write</span>
+      </div>
+      <span style="margin-left:auto; font-size:0.82rem; color:var(--text-muted);">Reads docs, briefs, research — writes back</span>
+    </div>
+    <div style="padding:1.5rem;">
+      <p style="margin-top:0;"><strong>What you need beforehand:</strong> A Notion account. You'll authorise access via browser OAuth — no API key needed.</p>
+      <ol style="padding-left:1.2rem; line-height:2;">
+        <li>Run this in terminal:</li>
+      </ol>
+      <div class="terminal" style="margin:1rem 0;">
+        <div class="terminal-bar">
+          <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+          <span class="terminal-label">Terminal</span>
+        </div>
+        <div class="terminal-body">
+          <span class="cmd">claude mcp add --transport http notion https://mcp.notion.com/mcp</span><br>
+          <span class="out">✓ MCP server "notion" added</span><br><br>
+          <span class="comment"># Start Claude Code — first use will trigger browser auth</span><br>
+          <span class="cmd">claude</span><br>
+          <span class="out">→ Opening browser for Notion authorisation...</span><br>
+          <span class="out">✓ Notion connected. Pages accessible to Claude.</span>
+        </div>
+      </div>
+      <ol start="2" style="padding-left:1.2rem; line-height:2;">
+        <li>A browser tab will open at <strong>notion.so</strong> — click <strong>"Allow access"</strong></li>
+        <li>Choose which pages Claude can read. <em>Tip: give it access to your full workspace, not individual pages — it won't read anything until you ask it to.</em></li>
+        <li>Switch back to terminal — you'll see a confirmation and Claude Code will be ready</li>
+      </ol>
+      <div style="background:var(--green-pale); border-radius:8px; padding:1rem; margin-top:1rem; font-size:0.88rem;">
+        <strong>✅ You're connected when:</strong> You ask "What pages do I have in Notion?" and Claude lists actual page titles from your workspace.
+      </div>
+    </div>
+  </div>
+
+  <!-- GITHUB -->
+  <div style="border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:1.5rem;">
+    <div style="background:var(--surface2); padding:1rem 1.5rem; display:flex; align-items:center; gap:0.75rem; border-bottom:1px solid var(--border);">
+      <span style="font-size:1.4rem;">🚀</span>
+      <div>
+        <strong style="font-size:1rem;">GitHub MCP</strong>
+        <span style="margin-left:0.75rem; font-size:0.75rem; background:var(--green-pale); color:var(--green); padding:2px 8px; border-radius:20px; font-weight:600;">Read + Write</span>
+      </div>
+      <span style="margin-left:auto; font-size:0.82rem; color:var(--text-muted);">Reads issues, PRs, code — commits back</span>
+    </div>
+    <div style="padding:1.5rem;">
+      <p style="margin-top:0;"><strong>What you need beforehand:</strong> A GitHub account and a personal access token (classic). Takes about 2 minutes to create.</p>
+      <ol style="padding-left:1.2rem; line-height:2;">
+        <li>Go to <strong>github.com → Settings → Developer settings → Personal access tokens → Tokens (classic)</strong></li>
+        <li>Click <strong>"Generate new token (classic)"</strong></li>
+        <li>Give it a name like "Claude Code MCP"</li>
+        <li>Check these scopes: <strong>repo</strong>, <strong>read:org</strong>, <strong>read:user</strong></li>
+        <li>Click Generate — <strong>copy the token immediately</strong> (you won't see it again)</li>
+        <li>Run this in terminal — paste your token when prompted:</li>
+      </ol>
+      <div class="terminal" style="margin:1rem 0;">
+        <div class="terminal-bar">
+          <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+          <span class="terminal-label">Terminal</span>
+        </div>
+        <div class="terminal-body">
+          <span class="cmd">claude mcp add --transport http github https://api.githubcopilot.com/mcp/v1</span><br>
+          <span class="out">Enter GitHub token: ****************************</span><br>
+          <span class="out">✓ MCP server "github" added</span><br><br>
+          <span class="comment"># Test the connection</span><br>
+          <span class="cmd">claude</span><br>
+          <span class="dim">You: </span>List the open issues in my most recent repo.<br>
+          <span class="out">✓ Found 3 open issues in your-username/your-repo...</span>
+        </div>
+      </div>
+      <div style="background:var(--green-pale); border-radius:8px; padding:1rem; margin-top:1rem; font-size:0.88rem;">
+        <strong>✅ You're connected when:</strong> Claude can list your actual repos and describe real issues — not generic examples.
+      </div>
+    </div>
+  </div>
+
+  <!-- PAPER -->
+  <div style="border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:1.5rem;">
+    <div style="background:var(--surface2); padding:1rem 1.5rem; display:flex; align-items:center; gap:0.75rem; border-bottom:1px solid var(--border);">
+      <span style="font-size:1.4rem;">✏️</span>
+      <div>
+        <strong style="font-size:1rem;">Paper.design MCP</strong>
+        <span style="margin-left:0.75rem; font-size:0.75rem; background:var(--green-pale); color:#3d8f4a; padding:2px 8px; border-radius:20px; font-weight:600;">Bidirectional — agent writes to canvas</span>
+      </div>
+      <span style="margin-left:auto; font-size:0.82rem; color:var(--text-muted);">Most powerful design MCP available</span>
+    </div>
+    <div style="padding:1.5rem;">
+      <p style="margin-top:0;"><strong>What you need beforehand:</strong> Paper Desktop installed from <strong>paper.design</strong>. Free tier: 100 MCP calls/week. Pro: $20/mo for unlimited.</p>
+      <ol style="padding-left:1.2rem; line-height:2;">
+        <li>Download and install <strong>Paper Desktop</strong> from paper.design</li>
+        <li><strong>Open Paper Desktop</strong> — this starts a local MCP server on port 29979 automatically</li>
+        <li>You must have Paper running <em>before</em> you start Claude Code — it's a local server, not a remote one</li>
+        <li>Run this in terminal:</li>
+      </ol>
+      <div class="terminal" style="margin:1rem 0;">
+        <div class="terminal-bar">
+          <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+          <span class="terminal-label">Terminal</span>
+        </div>
+        <div class="terminal-body">
+          <span class="cmd">claude mcp add paper --transport http http://127.0.0.1:29979/mcp --scope user</span><br>
+          <span class="out">✓ MCP server "paper" added (local)</span><br><br>
+          <span class="comment"># Always open Paper Desktop FIRST, then start Claude Code</span><br>
+          <span class="cmd">claude</span><br>
+          <span class="out">✓ Connected to Paper Design MCP — 24 tools available</span>
+        </div>
+      </div>
+      <ol start="5" style="padding-left:1.2rem; line-height:2;">
+        <li>If Claude says Paper isn't available — quit and reopen Paper Desktop, then restart <code style="font-size:0.85em;">claude</code></li>
+        <li>The <code style="font-size:0.85em;">--scope user</code> flag saves it globally to your account, not just the current project</li>
+      </ol>
+      <div style="background:var(--green-pale); border-radius:8px; padding:1rem; margin-top:1rem; font-size:0.88rem;">
+        <strong>✅ You're connected when:</strong> You ask Claude to create an element and it appears live in your Paper canvas — not in the terminal.
+      </div>
+    </div>
+  </div>
+
+  <!-- MANAGEMENT -->
+  <div class="terminal" style="margin-bottom:1.5rem;">
+    <div class="terminal-bar">
+      <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+      <span class="terminal-label">🔧 MCP management — the commands you'll actually use</span>
+    </div>
+    <div class="terminal-body">
+      <span class="comment"># See every MCP currently registered</span><br>
+      <span class="cmd">claude mcp list</span><br>
+      <span class="out">figma — https://mcp.figma.com/v1/claude (http)</span><br>
+      <span class="out">notion — https://mcp.notion.com/mcp (http)</span><br>
+      <span class="out">github — https://api.githubcopilot.com/mcp/v1 (http)</span><br>
+      <span class="out">paper — http://127.0.0.1:29979/mcp (http, local)</span><br><br>
+      <span class="comment"># Remove one you no longer want</span><br>
+      <span class="cmd">claude mcp remove paper</span><br>
+      <span class="out">✓ MCP server "paper" removed</span><br><br>
+      <span class="comment"># Ask Claude which MCPs it can see right now (inside a session)</span><br>
+      <span class="dim">You: </span>What tools and MCPs do you have access to in this session?<br>
+      <span class="out">I have access to: figma (read Figma files), notion (read/write Notion), github (read/write repos)</span><br><br>
+      <span class="comment"># If an MCP isn't responding — re-add it fresh</span><br>
+      <span class="cmd">claude mcp remove figma && claude mcp add --transport http figma https://mcp.figma.com/v1/claude</span>
+    </div>
+  </div>
+
+  <div class="callout callout-green">
+    <p><strong>Start with two.</strong> Add Figma + Notion first — design context plus research context covers most of the real value. Add GitHub when you're ready to ship. Add Paper when you want Claude to design directly in a canvas.</p>
+  </div>
+
+  <!-- ── HANDS-ON TASKS ── -->
+  <h3 style="margin-top:3.5rem;" id="tasks">Try it yourself — <span style="font-style:italic; color:var(--green);">hands-on tasks</span></h3>
+  <p>Three tracks, three skill levels. Each task is self-contained — pick the one that matches where you are right now. They get progressively more ambitious, but none of them require you to do the previous one first.</p>
+
+  <!-- TRACK 1 -->
+  <div style="border-left:4px solid var(--sage); padding-left:1.5rem; margin:2rem 0 1rem;">
+    <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.5rem;">
+      <span style="background:var(--sage); color:white; font-size:0.8rem; font-weight:700; letter-spacing:0.08em; padding:3px 10px; border-radius:20px; text-transform:uppercase;">Track 1 — Design</span>
+      <span style="font-size:0.82rem; color:var(--text-muted);">Just Claude.ai or the desktop app. No install needed.</span>
+    </div>
+    <h4 style="margin:0 0 0.25rem; font-size:1.1rem;">Design a real screen. Get real critique. Ship a real asset.</h4>
+    <p style="margin:0; color:var(--text-muted); font-size:0.88rem;">For: designers at any level who haven't used Claude seriously for design work yet.</p>
+  </div>
+
+  <div class="session-steps" style="margin-bottom:2rem;">
+
+    <div class="session-step">
+      <div class="session-num">1</div>
+      <div class="session-content">
+        <span class="time-badge">15 min</span>
+        <h4>Deep-dive critique of something you're currently designing</h4>
+        <p>Take a screenshot of the hardest screen in your current project — the one you've been second-guessing. Upload it. Ask Claude for a critique that actually hurts a little.</p>
+        <div class="prompt">
+          <span class="prompt-label">Try this</span>
+          <span class="hi">[attach screenshot]</span><br>
+          I've been designing this screen for <span class="hi">[X days/weeks]</span>. Be brutally honest — what are the three most significant problems with it? Then: what would a senior product designer at <span class="hi">[Stripe / Linear / Notion — pick one you respect]</span> think needs to change first?
+        </div>
+        <p>Follow up by asking Claude to describe exactly how <em>it</em> would solve the top issue — not just what's wrong, but what it would do differently and why.</p>
+      </div>
+    </div>
+
+    <div class="session-step">
+      <div class="session-num">2</div>
+      <div class="session-content">
+        <span class="time-badge">20 min</span>
+        <h4>Write an entire component's UX copy in one session</h4>
+        <p>Pick a component that has more than one state — an empty state, a loading state, an error state, a success state. Write all of them with Claude in a single conversation, iterating until every string feels right.</p>
+        <div class="prompt">
+          <span class="prompt-label">Try this</span>
+          I'm designing a <span class="hi">[notifications panel / file upload component / search results / onboarding step]</span> for <span class="hi">[describe your app and user]</span>.<br><br>
+          Write microcopy for all four states: empty, loading, error, and success. Tone: <span class="hi">[warm and direct / minimal and technical / friendly but not cute]</span>. Max 12 words per string. Then give me 2 alternatives for the state I mark as weakest.
+        </div>
+      </div>
+    </div>
+
+    <div class="session-step">
+      <div class="session-num">3</div>
+      <div class="session-content">
+        <span class="time-badge">25 min</span>
+        <h4>Turn a vague client brief into a sharp design direction</h4>
+        <p>Take the most ambiguous brief you've received recently — or make one up. Give it to Claude and extract a clear direction from it, including what the client probably meant, what they're actually worried about, and what the design needs to accomplish.</p>
+        <div class="prompt">
+          <span class="prompt-label">Try this</span>
+          Here's a brief I received: <span class="hi">[paste brief, even if it's just a Slack message or a few bullet points]</span><br><br>
+          Do three things: 1) What's the actual design problem underneath this brief? 2) What are they NOT saying but probably worried about? 3) Write me a one-paragraph design direction I could present back to them that shows I understand the real problem — not just the surface ask.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TRACK 2 -->
+  <div style="border-left:4px solid var(--green); padding-left:1.5rem; margin:2rem 0 1rem;">
+    <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.5rem;">
+      <span style="background:var(--green); color:white; font-size:0.8rem; font-weight:700; letter-spacing:0.08em; padding:3px 10px; border-radius:20px; text-transform:uppercase;">Track 2 — Vibe Design</span>
+      <span style="font-size:0.82rem; color:var(--text-muted);">Claude.ai Artifacts. Browser only. No code knowledge needed.</span>
+    </div>
+    <h4 style="margin:0 0 0.25rem; font-size:1.1rem;">Build interactive things without writing a single line of code.</h4>
+    <p style="margin:0; color:var(--text-muted); font-size:0.88rem;">For: designers who want to go beyond static mockups and ship clickable, shareable things.</p>
+  </div>
+
+  <div class="session-steps" style="margin-bottom:2rem;">
+
+    <div class="session-step">
+      <div class="session-num">1</div>
+      <div class="session-content">
+        <span class="time-badge">20 min</span>
+        <h4>Build a shareable interactive prototype — from description alone</h4>
+        <p>No Figma. No screenshots. Describe a UI from scratch and have Claude build it as a live, clickable Artifact. Iterate until it's something you'd actually send to a client.</p>
+        <div class="prompt">
+          <span class="prompt-label">Try this</span>
+          Build a <span class="hi">[mobile app screen / dashboard / landing page section]</span> for <span class="hi">[describe product and user]</span>.<br><br>
+          Design direction: <span class="hi">[clean and minimal / bold and editorial / warm and approachable]</span>. Include: <span class="hi">[list 3-5 specific UI elements you want]</span>. Make it interactive — buttons should respond, states should change. Use only HTML and CSS, no external libraries.
+        </div>
+        <p>When Claude gives you the first version, respond like a creative director: "The hierarchy is off — the CTA is getting lost. Increase its weight and move it above the fold." Keep iterating with plain-English direction until you'd actually show it to someone.</p>
+      </div>
+    </div>
+
+    <div class="session-step">
+      <div class="session-num">2</div>
+      <div class="session-content">
+        <span class="time-badge">30 min</span>
+        <h4>Rebuild a screen you admire — then make it yours</h4>
+        <p>Pick a UI you genuinely like from any app. Screenshot it. Ask Claude to rebuild it as a working Artifact. Then systematically redesign it: different brand, different personality, different use case. End up with something original.</p>
+        <div class="prompt">
+          <span class="prompt-label">Try this — Step 1</span>
+          <span class="hi">[attach screenshot of UI you admire]</span><br>
+          Recreate this UI as a working HTML/CSS component — match the layout, spacing, and interaction patterns as closely as possible. Don't copy the content, just the structure.
+        </div>
+        <div class="prompt" style="margin-top:1rem;">
+          <span class="prompt-label">Try this — Step 2 (after Claude builds it)</span>
+          Now rethink this for a completely different context: <span class="hi">[your new brand / use case / user]</span>. Keep the structural logic but change everything visual — colour, typography, tone, spacing rhythm. I want to end up with something that feels original, not like a reskin.
+        </div>
+      </div>
+    </div>
+
+    <div class="session-step">
+      <div class="session-num">3</div>
+      <div class="session-content">
+        <span class="time-badge">30 min</span>
+        <h4>Design a full component library — then document it</h4>
+        <p>Pick one component type: cards, buttons, form inputs, navigation, whatever. Ask Claude to design five variations of it in a single Artifact — all on one page, labelled, with states shown. Then ask it to write usage documentation for each variant.</p>
+        <div class="prompt">
+          <span class="prompt-label">Try this</span>
+          Create a component showcase page for <span class="hi">[button / card / form input / navigation]</span> components. Show 5 variants side by side: <span class="hi">[describe the variants you want — e.g. primary, secondary, destructive, ghost, disabled]</span>.<br><br>
+          Design system rules: <span class="hi">[describe your brand colours and font if you have them, or say "Figma-inspired dark theme"]</span>. Show all interactive states (hover, active, disabled). Include usage labels under each variant. Make it look like something from a real design system documentation page.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TRACK 3 -->
+  <div style="border-left:4px solid var(--ink); padding-left:1.5rem; margin:2rem 0 1rem;">
+    <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.5rem;">
+      <span style="background:var(--ink); color:white; font-size:0.8rem; font-weight:700; letter-spacing:0.08em; padding:3px 10px; border-radius:20px; text-transform:uppercase;">Track 3 — Design Engineering</span>
+      <span style="font-size:0.82rem; color:var(--text-muted);">Claude Code + MCPs. Requires setup from earlier in this section.</span>
+    </div>
+    <h4 style="margin:0 0 0.25rem; font-size:1.1rem;">Build real things. Connect your tools. Ship to a URL.</h4>
+    <p style="margin:0; color:var(--text-muted); font-size:0.88rem;">For: designers who have Claude Code installed and want to start doing things that were previously engineer-only.</p>
+  </div>
+
+  <div class="session-steps" style="margin-bottom:2rem;">
+
+    <div class="session-step">
+      <div class="session-num">1</div>
+      <div class="session-content">
+        <span class="time-badge">45 min</span>
+        <h4>Build and deploy a portfolio page — from terminal to live URL</h4>
+        <p>The full loop. Claude Code builds the site, you direct it like a creative director, it deploys to Vercel. No code written by you. End result: a real URL you can share.</p>
+        <div class="prompt">
+          <span class="prompt-label">Terminal — in a new folder</span>
+          <code style="font-size:0.85em; display:block; margin-bottom:0.5rem;">mkdir my-portfolio && cd my-portfolio && claude</code>
+        </div>
+        <div class="prompt" style="margin-top:0.75rem;">
+          <span class="prompt-label">First prompt</span>
+          Before writing any code, create a plan.md file with: recommended tech stack, file structure, and a step-by-step build plan for a portfolio site. Design direction: <span class="hi">[describe your aesthetic — e.g. "editorial, dark, type-led — think Are.na meets a design studio"]</span>. Target user: someone deciding whether to hire me as a designer. Research what makes great designer portfolios first.
+        </div>
+        <p>Review the plan. Reply "looks good, build it". When it's built, ask Claude to deploy to Vercel: <em>"Connect to Vercel and deploy this to a preview URL."</em></p>
+      </div>
+    </div>
+
+    <div class="session-step">
+      <div class="session-num">2</div>
+      <div class="session-content">
+        <span class="time-badge">30 min</span>
+        <h4>Figma → Code: build a component directly from your design file</h4>
+        <p>Requires Figma MCP connected. Open a Figma file in Dev Mode. Ask Claude to build the selected component as production-ready code — matching your actual tokens, spacing, and variant states.</p>
+        <div class="prompt">
+          <span class="prompt-label">With Figma MCP active</span>
+          I have a <span class="hi">[component name]</span> selected in Figma. Build it as a React component — match the exact spacing values, colour tokens, font sizes, and variant states from the Figma file. Check the design system for existing patterns before writing anything new. Show me the component, then list any tokens you used that weren't defined in the design system.
+        </div>
+        <p>When Claude returns the code, push back like you would in a design review: "The hover state doesn't match what I have in Figma — can you check the interactive variant?" Watch it read the file and correct itself.</p>
+      </div>
+    </div>
+
+    <div class="session-step">
+      <div class="session-num">3</div>
+      <div class="session-content">
+        <span class="time-badge">45 min</span>
+        <h4>Research → Design → Ship: the connected workflow</h4>
+        <p>Requires Figma MCP + Notion MCP connected. The real payoff of the MCP stack: use your actual research and your actual designs together, in a single Claude session.</p>
+        <div class="prompt">
+          <span class="prompt-label">With Figma + Notion MCPs active</span>
+          Do this in order:<br><br>
+          1. Read the <span class="hi">[user research / design brief / product spec]</span> doc in my Notion workspace<br>
+          2. Open my Figma file and look at the <span class="hi">[specific flow or screen]</span><br>
+          3. Tell me: where does the current design fail to address what the research says users actually need?<br>
+          4. Propose three specific changes with reasoning<br>
+          5. Build the highest-priority change as a working component
+        </div>
+        <p>This is the prompt that makes the whole guide worth reading. One session. Your actual research. Your actual designs. Changes that are grounded in evidence, not instinct alone.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="callout callout-green" style="margin-top:1rem;">
+    <p><strong>The point of these tasks isn't to complete them.</strong> It's to feel the difference between Claude as a chatbot and Claude as a tool you've actually connected to your work. Once you've done one task from Track 3 with live MCPs, you'll feel immediately what was missing before — and you won't go back.</p>
+  </div>
+
+  <h3 style="margin-top:3rem;">Three tools — choose your level</h3>
   <p>There are multiple ways to build with Claude as a designer. Pick the one that matches where you are right now.</p>
 
   <div class="tier-ladder">
@@ -1797,13 +3098,13 @@ footer {
     <div class="tier">
       <span class="tier-badge tier-2">Level 2</span>
       <div class="tier-content">
-        <h4>Cursor</h4>
-        <p>A code editor with Claude built in. Great for multi-file projects in a familiar visual interface. More approachable than the terminal — you can see your files in a sidebar and get a visual IDE experience while Claude edits them.</p>
+        <h4>Claude Extension <span style="font-weight:400; color:var(--stone); font-size:0.95em;">in VS Code / Cursor</span></h4>
+        <p>Install the Claude extension into your existing VS Code or Cursor setup — no new editor needed. Claude sees your whole project, edits files directly, and works inline without copy-pasting. More approachable than the terminal, and you stay in the environment you already know.</p>
         <div class="tier-tools">
-          <span class="tier-tool">cursor.com</span>
-          <span class="tier-tool">visual IDE</span>
+          <span class="tier-tool">VS Code Marketplace</span>
+          <span class="tier-tool">works in Cursor too</span>
           <span class="tier-tool">multi-file</span>
-          <span class="tier-tool">free tier</span>
+          <span class="tier-tool">inline suggestions</span>
         </div>
       </div>
     </div>
@@ -1814,7 +3115,7 @@ footer {
         <p>The most powerful option. Lives in your terminal. Has full access to your file system, can run code, connect to external services via MCP, commit to GitHub, and deploy to Vercel. Described by designers who've used it as the highest-leverage skill available right now.</p>
         <div class="tier-tools">
           <span class="tier-tool">Terminal / CLI</span>
-          <span class="tier-tool">Node.js required</span>
+          <span class="tier-tool">Node.js (one-click install)</span>
           <span class="tier-tool">Figma MCP</span>
           <span class="tier-tool">GitHub + Vercel</span>
         </div>
@@ -1823,17 +3124,16 @@ footer {
   </div>
 
   </div>
-</section>
-
-
-<!-- ══════════════════════════════════════
+</section>`,
+  "planfirst": `<!-- ══════════════════════════════════════
      13 — PLAN FIRST, ALWAYS
 ══════════════════════════════════════ -->
 <section class="section" id="planfirst">
   <div class="section-label"><span class="section-num">13</span> The Most Important Habit</div>
   <h2>Always <span class="italic">plan before</span> you build</h2>
+  <p><em>New to building things with Claude? Quick context: "building" here means asking Claude Code to create files, write code, and assemble a working project — like a portfolio site or a design tool. You direct it in plain English; it does the actual work. This section is about making sure you both start in the right direction.</em></p>
   <p>This is the single most important thing experienced vibe designers have learned — and it's the thing beginners skip. <strong>Never ask Claude to start building immediately.</strong> Ask it to make a plan first.</p>
-  <p>Every source agrees on this. Design thinkers who've shipped real products describe it as the difference between a clean build and debugging spaghetti at 2am. When you give Claude a vague instruction and say "go", it will — but it might go in the wrong direction for a long time before you notice.</p>
+  <p>Every source agrees on this. Designers who've shipped real products describe it as the difference between a clean build and debugging spaghetti at 2am. When you give Claude a vague instruction and say "go", it will — but it might go in the wrong direction for a long time before you notice.</p>
 
   <div class="mindset-grid">
     <div class="mindset-card wrong">
@@ -1911,17 +3211,15 @@ footer {
       <p>Small loops beat big bangs. Build one thing at a time, confirm it works, move forward.</p>
     </div>
   </div>
-</section>
-
-
-<!-- ══════════════════════════════════════
+</section>`,
+  "claudemd": `<!-- ══════════════════════════════════════
      14 — CLAUDE.MD — YOUR PROJECT MEMORY
 ══════════════════════════════════════ -->
 <section class="section" id="claudemd">
   <div class="section-label"><span class="section-num">14</span> Project Memory</div>
   <h2>CLAUDE.md — <span class="italic">teach Claude your project</span></h2>
   <p>By default, every Claude Code session starts fresh. It doesn't remember your project structure, your design decisions, or your preferences from last time. CLAUDE.md fixes this.</p>
-  <p>CLAUDE.md is a plain text file you put in your project folder. Claude Code reads it automatically at the start of every session — so it always arrives knowing your project, your rules, and your design principles. Think of it as onboarding a new team member, written down once and reused forever.</p>
+  <p>CLAUDE.md is a plain text file you put in your <em>project folder</em> — <em>just a regular folder on your computer where your project's files live. When you start building something with Claude Code, all its files go into one folder. That's your project folder. You can name it anything.</em> Claude Code reads CLAUDE.md automatically at the start of every session — so it always arrives knowing your project, your rules, and your design principles. Think of it as onboarding a new team member, written down once and reused forever.</p>
 
   <div class="callout">
     <p><strong>For designers:</strong> This is where your design philosophy lives. Your color system, your spacing rules, your tone of voice, your brand constraints. Write it once, and every session Claude Code already knows how your project thinks.</p>
@@ -1972,13 +3270,11 @@ footer {
     </div>
   </div>
 
-  <div class="callout callout-blue">
+  <div class="callout callout-green">
     <p><strong>Best practice:</strong> Start simple. A 10-line CLAUDE.md beats a 100-line one. Every line competes for Claude's attention — keep it short, specific, and add to it only when you hit a real friction point (like Claude ignoring your spacing rules or picking the wrong colors).</p>
   </div>
-</section>
-
-
-<!-- ══════════════════════════════════════
+</section>`,
+  "figmaloop": `<!-- ══════════════════════════════════════
      15 — THE FIGMA ↔ CLAUDE LOOP
 ══════════════════════════════════════ -->
 <section class="section-wide" id="figmaloop">
@@ -1990,7 +3286,7 @@ footer {
 
   <div class="loop-diagram">
     <div class="loop-row-header">
-      <div class="loop-cell head" style="border-right: 1px solid var(--border); padding: 0.6rem 0.7rem; font-size:0.55rem;"></div>
+      <div class="loop-cell head" style="border-right: 1px solid var(--border); padding: 0.6rem 0.7rem; font-size:0.75rem;"></div>
       <div class="loop-cell head">What it does</div>
       <div class="loop-cell head">How to use it</div>
     </div>
@@ -2093,10 +3389,8 @@ footer {
   </div>
 
   </div>
-</section>
-
-
-<!-- ══════════════════════════════════════
+</section>`,
+  "deploy": `<!-- ══════════════════════════════════════
      16 — DEPLOY YOUR WORK
 ══════════════════════════════════════ -->
 <section class="section" id="deploy">
@@ -2176,36 +3470,205 @@ footer {
   <div class="callout">
     <p><strong>One key safety rule:</strong> Never commit a file called <code style="font-family:'Cabinet Grotesk',sans-serif; font-size:0.82em;">.env</code> to GitHub. This file contains your API keys. Always ask Claude Code to create a <code style="font-family:'Cabinet Grotesk',sans-serif; font-size:0.82em;">.gitignore</code> file that excludes it — and it will handle this automatically if you ask.</p>
   </div>
-</section>
+</section>`
+};
 
+const PATHS = {
+  new: {
+    label: 'New to Claude',
+    badge: 'new',
+    sections: ['what','mindset','first30','access','plans'],
+    completion: {
+      headline: "You've got the <em>foundation</em>.",
+      sub: "You now know what Claude is, how to think about it, and how to set it up. The Design path is the natural next step — it's built for exactly where you are now.",
+      nextPaths: ['design','build']
+    }
+  },
+  design: {
+    label: 'Design with Claude',
+    badge: 'design',
+    sections: ['usecases','prompts','mistakes','limits','workflow','uxengineer'],
+    completion: {
+      headline: "Your toolkit is <em>fully loaded</em>.",
+      sub: "You've got the use cases, prompts, and mental models. When you're ready to connect Claude to Figma and your codebase directly, the Build path shows you how.",
+      nextPaths: ['build','new']
+    }
+  },
+  build: {
+    label: 'Build with Claude',
+    badge: 'build',
+    sections: ['claudecode','planfirst','claudemd','figmaloop','deploy'],
+    completion: {
+      headline: "You're ready to <em>ship</em>.",
+      sub: "You have everything you need to go from Figma to a live URL with Claude Code and MCPs. The only thing left is to actually start a project.",
+      nextPaths: ['design','new']
+    }
+  }
+};
 
+const SECTION_TITLES = {
+  what: 'What is Claude',
+  mindset: 'The Mindset',
+  first30: 'First 30 Minutes',
+  access: 'Where to Use',
+  plans: 'Setup',
+  usecases: 'Use Cases',
+  prompts: 'Prompt Library',
+  mistakes: 'Common Mistakes',
+  limits: 'Limitations',
+  workflow: 'Workflow',
+  uxengineer: 'The Shift',
+  claudecode: 'Claude Code & MCPs',
+  planfirst: 'Plan First',
+  claudemd: 'CLAUDE.md',
+  figmaloop: 'Figma Loop',
+  deploy: 'Deploy'
+};
 
+let currentPath = null;
+let currentStep = 0;
 
-<!-- FOOTER -->
-<footer>
-  <p>Process to Pixels. — Claude for Designers · A Field Guide · 2026</p>
-  <p style="margin-top:0.5rem; opacity:0.5; font-size:0.75rem; font-family:'Cabinet Grotesk',sans-serif; font-style:normal; letter-spacing:0.06em; text-transform:uppercase;">processtopixels.studio · Lisa Demchenko</p>
-</footer>
+function startPath(pathKey) {
+  currentPath = pathKey;
+  currentStep = 0;
+  showWizard();
+}
 
-<script>
-// Copy prompts on click
-document.querySelectorAll('.pl-prompt').forEach(el => {
-  el.addEventListener('click', () => {
-    const text = el.innerText.replace('hover to copy', '').trim();
-    navigator.clipboard.writeText(text).then(() => {
-      const hint = el.querySelector('.copy-hint');
-      const orig = hint.textContent;
-      hint.textContent = 'copied!';
-      hint.style.opacity = '1';
-      hint.style.color = 'var(--green)';
-      setTimeout(() => {
-        hint.textContent = orig;
-        hint.style.color = '';
-      }, 1500);
-    });
-  });
-});
+function showWizard() {
+  document.getElementById('path-selector').style.display = 'none';
+  document.getElementById('all-sections-view').style.display = 'none';
+  document.getElementById('completion-screen').style.display = 'none';
+  const wizView = document.getElementById('wizard-view');
+  wizView.style.display = 'flex';
+  renderStep();
+}
+
+function renderStep() {
+  const path = PATHS[currentPath];
+  const sectionIds = path.sections;
+  const total = sectionIds.length;
+  const sid = sectionIds[currentStep];
+  
+  // Progress
+  const pct = ((currentStep + 1) / total) * 100;
+  const progEl = document.getElementById('wiz-progress'); progEl.style.width = pct + '%'; progEl.parentElement.setAttribute('aria-valuenow', Math.round(pct)); progEl.parentElement.setAttribute('aria-label', `Step ${currentStep+1} of ${total}`);
+  document.getElementById('wiz-step-count').textContent = (currentStep+1) + ' / ' + total;
+  
+  // Path label
+  const lbl = document.getElementById('wiz-path-label');
+  lbl.textContent = path.label;
+  lbl.className = 'wiz-path-label ' + path.badge;
+  
+  // Content — animate out then in
+  const content = document.getElementById('wiz-content');
+  content.style.opacity = '0';
+  content.style.transform = 'translateY(10px)';
+  content.style.transition = 'none';
+  
+  setTimeout(() => {
+    content.innerHTML = SECTIONS[sid] || '<div class="section"><p>Section not found: ' + sid + '</p></div>';
+    content.scrollTop = 0;
+    window.scrollTo(0,0);
+    content.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+    content.style.opacity = '1';
+    content.style.transform = 'translateY(0)';
+  }, 80);
+  
+  // Dots
+  const dotsEl = document.getElementById('wiz-dots');
+  dotsEl.innerHTML = sectionIds.map((s, i) => {
+    const cls = i === currentStep ? 'active' : (i < currentStep ? 'done' : '');
+    return `<button class="wiz-dot ${cls}" onclick="jumpTo(${i})" title="${SECTION_TITLES[s] || s}" aria-label="Go to step ${i+1}: ${SECTION_TITLES[s] || s}"></button>`;
+  }).join('');
+  
+  // Prev button
+  const prev = document.getElementById('wiz-prev');
+  prev.disabled = currentStep === 0;
+  
+  // Next button
+  const next = document.getElementById('wiz-next');
+  if (currentStep === total - 1) {
+    next.textContent = 'Finish ✦';
+    next.className = 'wiz-btn wiz-btn-next is-finish';
+  } else {
+    next.textContent = 'Next →';
+    next.className = 'wiz-btn wiz-btn-next';
+  }
+}
+
+function navigate(dir) {
+  const path = PATHS[currentPath];
+  const newStep = currentStep + dir;
+  if (newStep < 0) return;
+  if (newStep >= path.sections.length) {
+    showCompletion();
+    return;
+  }
+  currentStep = newStep;
+  renderStep();
+}
+
+function jumpTo(idx) {
+  currentStep = idx;
+  renderStep();
+}
+
+function showCompletion() {
+  document.getElementById('wizard-view').style.display = 'none';
+  const cs = document.getElementById('completion-screen');
+  cs.style.display = 'flex';
+  
+  const path = PATHS[currentPath];
+  const c = path.completion;
+  document.getElementById('cs-headline').innerHTML = c.headline;
+  document.getElementById('cs-sub').textContent = c.sub;
+  
+  const pathMeta = {
+    new: { emoji: '🌱', label: 'New to Claude', steps: '5 sections' },
+    design: { emoji: '✏️', label: 'Design with Claude', steps: '6 sections' },
+    build: { emoji: '⚡', label: 'Build with Claude', steps: '5 sections' }
+  };
+  
+  const pathsEl = document.getElementById('cs-paths');
+  const [first, ...rest] = c.nextPaths;
+  const firstMeta = pathMeta[first];
+  pathsEl.innerHTML = `
+    <div class="cs-next-group">
+      <span class="cs-next-label">Recommended next</span>
+      <button class="cs-path-btn highlighted" onclick="startPath('${first}')">${firstMeta.emoji} ${firstMeta.label} → ${firstMeta.steps}</button>
+    </div>
+    <div class="cs-next-group">
+      <span class="cs-next-label">Or</span>
+      ${rest.map(p => { const m = pathMeta[p]; return `<button class="cs-path-btn" onclick="startPath('${p}')">${m.emoji} ${m.label} → ${m.steps}</button>`; }).join('')}
+      <button class="cs-path-btn" onclick="showAllSections()">📚 Browse everything</button>
+    </div>
+  `;
+}
+
+function showAllSections() {
+  document.getElementById('path-selector').style.display = 'none';
+  document.getElementById('wizard-view').style.display = 'none';
+  document.getElementById('completion-screen').style.display = 'none';
+  
+  const allView = document.getElementById('all-sections-view');
+  allView.style.display = 'block';
+  
+  // Populate all sections if not done yet
+  const container = document.getElementById('all-sections-content');
+  if (!container.children.length) {
+    const order = ['what','mindset','first30','access','plans','usecases','prompts','mistakes','limits','workflow','uxengineer','claudecode','planfirst','claudemd','figmaloop','deploy'];
+    container.innerHTML = order.map(sid => SECTIONS[sid] || '').join('\n');
+  }
+}
+
+function goHome() {
+  document.getElementById('wizard-view').style.display = 'none';
+  document.getElementById('all-sections-view').style.display = 'none';
+  document.getElementById('completion-screen').style.display = 'none';
+  document.getElementById('path-selector').style.display = 'flex';
+  currentPath = null;
+  currentStep = 0;
+}
 </script>
-
 </body>
 </html>
