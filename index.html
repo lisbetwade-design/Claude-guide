@@ -1760,14 +1760,14 @@ body { overflow-x: hidden; }
       <div class="pc-emoji">✏️</div>
       <div class="pc-label">Design with Claude</div>
       <div class="pc-desc">You know the basics and want real, practical prompts and workflows for your daily design work.</div>
-      <div class="pc-steps">6 sections · ~25 min</div>
+      <div class="pc-steps">7 sections · ~30 min</div>
       <div class="pc-cta">Go deeper →</div>
     </button>
     <button class="path-card" data-path="build" onclick="startPath('build')" aria-label="Start path: Build with Claude" role="button">
       <div class="pc-emoji">⚡</div>
       <div class="pc-label">Build with Claude</div>
       <div class="pc-desc">You're comfortable with Claude and ready to connect it to Figma, Notion, and your codebase.</div>
-      <div class="pc-steps">7 sections · ~40 min</div>
+      <div class="pc-steps">6 sections · ~35 min</div>
       <div class="pc-cta">Start building →</div>
     </button>
   </div>
@@ -3792,17 +3792,17 @@ const PATHS = {
   design: {
     label: 'Design with Claude',
     badge: 'design',
-    sections: ['usecases','prompts','mistakes','limits','workflow','uxengineer'],
+    sections: ['usecases','prompts','mistakes','limits','workflow','uxengineer','claudedesign'],
     completion: {
       headline: "Your toolkit is <em>fully loaded</em>.",
-      sub: "You've got the use cases, prompts, and mental models. When you're ready to connect Claude to Figma and your codebase directly, the Build path shows you how.",
+      sub: "You've got the use cases, prompts, and mental models — and a first look at Claude Design. When you're ready to connect Claude to Figma and your codebase directly, the Build path shows you how.",
       nextPaths: ['build','new']
     }
   },
   build: {
     label: 'Build with Claude',
     badge: 'build',
-    sections: ['claudecode','planfirst','claudemd','figmaloop','claudedesign','deploy','whatnext'],
+    sections: ['claudecode','planfirst','claudemd','figmaloop','deploy','whatnext'],
     completion: {
       headline: "You're ready to <em>ship</em>.",
       sub: "You have everything you need to go from Figma to a live URL with Claude Code and MCPs. The only thing left is to actually start a project.",
