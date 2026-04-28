@@ -1767,7 +1767,7 @@ body { overflow-x: hidden; }
       <div class="pc-emoji">⚡</div>
       <div class="pc-label">Build with Claude</div>
       <div class="pc-desc">You're comfortable with Claude and ready to connect it to Figma, Notion, and your codebase.</div>
-      <div class="pc-steps">6 sections · ~35 min</div>
+      <div class="pc-steps">7 sections · ~40 min</div>
       <div class="pc-cta">Start building →</div>
     </button>
   </div>
@@ -1848,6 +1848,7 @@ body { overflow-x: hidden; }
       <a class="nav-link" href="#planfirst">Plan First</a>
       <a class="nav-link" href="#claudemd">CLAUDE.md</a>
       <a class="nav-link" href="#figmaloop">Figma Loop</a>
+      <a class="nav-link" href="#claudedesign">Claude Design</a>
       <a class="nav-link" href="#deploy">Deploy</a>
       <a class="nav-link" href="#glossary">Glossary</a>
       <a class="nav-link" href="#whatnext">What to Build</a>
@@ -3479,11 +3480,96 @@ const SECTIONS = {
 
   </div>
 </section>`,
+  "claudedesign": `<!-- ══════════════════════════════════════
+     16 — CLAUDE DESIGN
+══════════════════════════════════════ -->
+<section class="section" id="claudedesign">
+  <div class="section-label"><span class="section-num">16</span> Anthropic Labs · April 2026</div>
+  <h2>Claude Design — <span class="italic">explore and prototype</span></h2>
+  <p>One of the persistent frustrations of design work is the gap between ideas and tangible outputs. You have ten directions worth exploring, but time and resources mean you commit to two or three — often before you really know which ones are worth pursuing. Claude Design is Anthropic's attempt to close that gap.</p>
+  <p>Launched in April 2026 as part of Anthropic Labs, Claude Design is a conversational design environment where you describe what you need and Claude builds a working visual artifact on a canvas beside the chat. The result isn't a mood board or a rough sketch — it's a functional prototype you can share, test, and iterate on, all without touching a design tool or writing a line of code.</p>
+
+  <h3>The workflow</h3>
+  <p>Create a project, add context — existing screenshots, a linked codebase, competitor references, uploaded documents — then describe what you want to build. Claude generates a first version on the canvas. From there, refinement is conversational, using two distinct modes.</p>
+
+  <div class="card-grid" style="margin-bottom: 2rem;">
+    <div class="card">
+      <div class="card-icon">💬</div>
+      <h4>Chat feedback</h4>
+      <p>For structural decisions — new sections, layout shifts, requesting two or three alternative directions side by side. Chat triggers broader rethinking.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📌</div>
+      <h4>Inline comments</h4>
+      <p>For targeted, component-level changes. "Tighten the spacing between these form fields," "swap to the outlined button variant." Comments trigger precise edits.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎨</div>
+      <h4>Your design system</h4>
+      <p>Claude reads your codebase and design files on onboarding. Every project then applies your colors, typography, and component patterns automatically — output starts from your system, not a generic baseline.</p>
+    </div>
+  </div>
+
+  <h3>Where it changes the practice</h3>
+  <p>The most immediate shift is in exploration. Claude Design makes it genuinely practical to prototype a dozen directions in the time it used to take to build two. You can show stakeholders real options rather than talking through hypotheticals, and pressure-test a concept interactively before committing design system resources to it.</p>
+  <p>For prototyping and user testing, it sidesteps the usual bottleneck: getting a static mockup into something testable normally requires engineering time or a dedicated prototyping tool. Here, you can convert a mockup into an interactive prototype directly, share it with a link, and gather feedback — without a code review or a PR in sight.</p>
+  <p>It also opens up design work to people who aren't designers. Product managers can sketch feature flows. Founders can produce on-brand pitch decks and export to PPTX or Canva. For practitioners, the question isn't whether non-designers will use it — they will — but how that changes where a designer's expertise is most valuable.</p>
+
+  <h3>The handoff</h3>
+  <div class="callout">
+    <p><strong>The loop closes with Claude Code:</strong> When a design is ready to build, Claude Design packages everything into a handoff bundle you can pass to Claude Code with a single click — from conversational exploration, to working prototype, to production-ready code, all within the same ecosystem. Whether that loop holds up at scale across complex codebases is still being tested, but the architecture is meaningful for design-engineering workflows that have historically broken down at the handoff stage.</p>
+  </div>
+
+  <h3>Practical tips</h3>
+
+  <div class="install-steps">
+    <div class="install-step">
+      <span class="i-num">1</span>
+      <div class="i-body">
+        <h4>Start simple, then layer</h4>
+        <p>Prompt for the core layout and content first. Add interactions, edge cases, and polish in subsequent rounds — trying to specify everything upfront tends to produce something detailed in the wrong ways.</p>
+      </div>
+    </div>
+    <div class="install-step">
+      <span class="i-num">2</span>
+      <div class="i-body">
+        <h4>Ask for variations</h4>
+        <p>"Show me two or three alternatives to this layout." Requesting options rather than a single direction is one of the fastest ways to make exploration feel genuinely exploratory.</p>
+      </div>
+    </div>
+    <div class="install-step">
+      <span class="i-num">3</span>
+      <div class="i-body">
+        <h4>Be specific in feedback</h4>
+        <p>"This doesn't feel right" produces generic adjustments. "Increase the type size on the section header to 24px and add more vertical breathing room above the CTA" produces exactly what you asked for.</p>
+      </div>
+    </div>
+    <div class="install-step">
+      <span class="i-num">4</span>
+      <div class="i-body">
+        <h4>Link a subdirectory, not a full monorepo</h4>
+        <p>If you're pointing Claude at your codebase for context, large codebases can slow things down. Link to the relevant component or style subdirectory instead.</p>
+      </div>
+    </div>
+    <div class="install-step">
+      <span class="i-num">5</span>
+      <div class="i-body">
+        <h4>Use inline comments for spot fixes</h4>
+        <p>If a comment disappears before Claude reads it — a known occasional bug in the research preview — paste the feedback into chat as a fallback.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout-stone">
+    <p><strong>Currently in research preview.</strong> Available at claude.ai/design for Pro, Max, Team, and Enterprise plans.</p>
+  </div>
+
+</section>`,
   "deploy": `<!-- ══════════════════════════════════════
-     16 — DEPLOY YOUR WORK
+     17 — DEPLOY YOUR WORK
 ══════════════════════════════════════ -->
 <section class="section" id="deploy">
-  <div class="section-label"><span class="section-num">16</span> Going Live</div>
+  <div class="section-label"><span class="section-num">17</span> Going Live</div>
   <h2>Deploy your work — <span class="italic">free, in minutes</span></h2>
   <p>Building something is one thing. Having a live URL you can send to a client, put in your portfolio, or share on social media is another. The deployment stack used by virtually every designer who vibe codes is GitHub + Vercel — both free, both connect together in minutes.</p>
 
@@ -3716,7 +3802,7 @@ const PATHS = {
   build: {
     label: 'Build with Claude',
     badge: 'build',
-    sections: ['claudecode','planfirst','claudemd','figmaloop','deploy','whatnext'],
+    sections: ['claudecode','planfirst','claudemd','figmaloop','claudedesign','deploy','whatnext'],
     completion: {
       headline: "You're ready to <em>ship</em>.",
       sub: "You have everything you need to go from Figma to a live URL with Claude Code and MCPs. The only thing left is to actually start a project.",
@@ -3741,6 +3827,7 @@ const SECTION_TITLES = {
   planfirst: 'Plan First',
   claudemd: 'CLAUDE.md',
   figmaloop: 'Figma Loop',
+  claudedesign: 'Claude Design',
   deploy: 'Deploy',
   glossary: 'Glossary',
   whatnext: 'What to Build'
@@ -3877,7 +3964,7 @@ function showAllSections() {
   // Populate all sections if not done yet
   const container = document.getElementById('all-sections-content');
   if (!container.children.length) {
-    const order = ['what','mindset','first30','access','plans','usecases','prompts','mistakes','limits','workflow','uxengineer','claudecode','planfirst','claudemd','figmaloop','deploy'];
+    const order = ['what','mindset','first30','access','plans','usecases','prompts','mistakes','limits','workflow','uxengineer','claudecode','planfirst','claudemd','figmaloop','claudedesign','deploy'];
     container.innerHTML = order.map(sid => SECTIONS[sid] || '').join('\n');
   }
 }
